@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>About Dr. Sunny Ezhumattoor - Narrow Path Ministries</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #e67e22;
+            --light-accent: #f39c12;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-light: #ecf0f1;
+            --bg-white: #ffffff;
+            --border-light: #bdc3c7;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        /* Navigation - Same as homepage */
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .navigation.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .logo-main {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+            font-family: 'Georgia', serif;
+        }
+
+        .logo-divider {
+            color: var(--accent);
+            font-weight: 300;
+            opacity: 0.5;
+        }
+
+        .logo-sub {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 2000;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--bg-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: background 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-nav-links a:hover {
+            background: var(--bg-light);
+            border-left-color: var(--accent);
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 10rem 2rem 5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(230, 126, 34, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(52, 73, 94, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: -2px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-light);
+            font-style: italic;
+            animation: fadeInUp 1s ease 0.2s both;
+            position: relative;
+            z-index: 1;
+            font-family: 'Georgia', serif;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            padding: 5rem 1rem;
+            background: white;
+        }
+
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-light);
+            aspect-ratio: 4/5;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        .profile-image-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .profile-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--accent), var(--light-accent));
+            opacity: 0.1;
+            z-index: 0;
+            border-radius: 22px;
+        }
+
+        .profile-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            border-radius: 20px;
+        }
+
+        .profile-content {
+            padding: 2rem 0;
+        }
+
+        .profile-header {
+            margin-bottom: 2rem;
+        }
+
+        .profile-name {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary);
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-intro {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--bg-light);
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 300;
+            display: block;
+            font-family: 'Georgia', serif;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 4rem 1rem;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .content-section:nth-child(even) {
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: var(--bg-light);
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            color: var(--primary);
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Timeline */
+        .timeline {
+            max-width: 800px;
+            margin: 3rem auto;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border-light);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 1.5rem 2rem;
+            background: white;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            text-align: right;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Books Grid */
+        .books-showcase {
+            padding: 4rem 1rem;
+            background: white;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .book-card {
+            background: white;
+            border: 1px solid var(--bg-light);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--light-accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .book-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .book-card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-5px);
+        }
+
+        .book-year {
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+
+        .book-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Achievements Section */
+        .achievements-section {
+            padding: 4rem 1rem;
+            background: var(--bg-light);
+        }
+
+        .achievements-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .achievement-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .achievement-icon {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            background: var(--bg-light);
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-family: 'Georgia', serif;
+            font-weight: 300;
+        }
+
+        .achievement-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            margin: 0 0.5rem;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-white:hover {
+            background: var(--bg-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 1rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .logo-main {
+                font-size: 1.2rem;
+            }
+
+            .logo-sub {
+                display: none;
+            }
+
+            .page-hero {
+                padding: 8rem 1rem 3rem;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                margin-left: 60px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content {
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .books-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .profile-container {
+                grid-template-columns: 1fr 2fr;
+                gap: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-section">
+                <span class="logo-main">Narrow Path Ministries</span>
+                <span class="logo-divider">|</span>
+                <span class="logo-sub">Dr. John Mathew</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-page-redesign.html">About</a></li>
+                <li><a href="articles-page-redesign.html">Articles</a></li>
+                <li><a href="bible-college-redesign.html">Bible College</a></li>
+                <li><a href="resources-page-redesign.html">Resources</a></li>
+                <li><a href="sermons-redesigned.html">Sermons</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span style="font-weight: 500; color: var(--primary);">Menu</span>
+            <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-page-redesign.html">About</a></li>
+            <li><a href="articles-page-redesign.html">Articles</a></li>
+            <li><a href="bible-college-redesign.html">Bible College</a></li>
+            <li><a href="resources-page-redesign.html">Resources</a></li>
+            <li><a href="sermons-redesigned.html">Sermons</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Dr. Sunny Ezhumattoor</h1>
+        <p class="page-subtitle">Distinguished Theologian, Author & Biblical Scholar</p>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="profile-container">
+            <div class="profile-image-wrapper fade-in">
+                <img src="Images/about/johnmathew.jpg" alt="Dr. John Mathew" 
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="profile-content fade-in">
+                <div class="profile-header">
+                    <h2 class="profile-name">Dr. John Mathew</h2>
+                    <p class="profile-title">Founder of Narrow Path Ministries & Thekkel Home Bible College</p>
+                </div>
+                <p class="profile-intro">
+                    A distinguished evangelical author and theologian who has dedicated over five decades to conservative Christian scholarship and biblical education. With an extraordinary interdisciplinary background spanning economics, sociology, political science, philosophy, and jurisprudence, Dr. Ezhumattoor brings unparalleled depth and perspective to theological discourse.
+                </p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">57+</span>
+                        <span class="stat-label">Books Published</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">350+</span>
+                        <span class="stat-label">Essays Written</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Years of Ministry</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">1973</span>
+                        <span class="stat-label">Established in Houston</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Background -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">01</div>
+                <h2 class="section-title">Academic Excellence</h2>
+                <p class="section-subtitle">A foundation built on rigorous scholarship and diverse disciplines</p>
+            </div>
+            
+            <p class="content-text fade-in">
+                Dr. Ezhumattoor's educational journey reflects a commitment to comprehensive understanding. Holding post-graduate degrees in Economics and History from Mar Thoma College, along with a Bachelor of Laws degree, his academic foundation bridges secular scholarship with theological wisdom.
+            </p>
+            
+            <p class="content-text fade-in">
+                His extensive knowledge encompasses economics, sociology, political science, philosophy, scientific humanism, and jurisprudence. This remarkable breadth of learning enables him to address contemporary Christian challenges through multiple intellectual lenses, offering insights that are both spiritually profound and academically rigorous.
+            </p>
+        </div>
+    </section>
+
+    <!-- Professional Journey -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">02</div>
+                <h2 class="section-title">Professional Journey</h2>
+                <p class="section-subtitle">From corporate excellence to ministry leadership</p>
+            </div>
+            
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">1973</div>
+                        <h3 class="timeline-title">Relocation to Houston</h3>
+                        <p class="timeline-description">Established residence in Houston, Texas, beginning a new chapter of life and ministry in America</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">1973-2013</div>
+                        <h3 class="timeline-title">Corporate Leadership</h3>
+                        <p class="timeline-description">Four decades of distinguished service in the corporate sector, including senior positions at JP Morgan Chase Bank</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2013</div>
+                        <h3 class="timeline-title">Full-Time Ministry</h3>
+                        <p class="timeline-description">Retired from banking to dedicate entirely to ministry, writing, mentoring, and theological education</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Present</div>
+                        <h3 class="timeline-title">Continuing Legacy</h3>
+                        <p class="timeline-description">Leading Narrow Path Ministries and Thekkel Home Bible College while authoring influential theological works</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Literary Works -->
+    <section class="books-showcase">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">03</div>
+                <h2 class="section-title">Literary Accomplishments</h2>
+                <p class="section-subtitle">Over five decades of influential theological writing</p>
+            </div>
+            
+            <div class="books-grid">
+                <div class="book-card fade-in">
+                    <div class="book-year">Prophetic Studies</div>
+                    <h3 class="book-title">The Book of Revelation</h3>
+                    <p class="book-description">A comprehensive 432-page exploration connecting biblical prophecy with contemporary world events and their spiritual significance</p>
+                </div>
+                
+                <div class="book-card fade-in">
+                    <div class="book-year">Theological Doctrine</div>
+                    <h3 class="book-title">The Mystery of the Trinity</h3>
+                    <p class="book-description">An in-depth theological examination of Christianity's most fundamental doctrine, exploring its biblical foundations and practical implications</p>
+                </div>
+                
+                <div class="book-card fade-in">
+                    <div class="book-year">Historical Analysis</div>
+                    <h3 class="book-title">The Brethren Movement</h3>
+                    <p class="book-description">A scholarly examination of Plymouth Brethren history, distinctive practices, and theological contributions to evangelical Christianity</p>
+                </div>
+                
+                <div class="book-card fade-in">
+                    <div class="book-year">Biblical Prophecy</div>
+                    <h3 class="book-title">Daniel Reveals the History</h3>
+                    <p class="book-description">Prophetic and historical analysis examining how biblical prophecy intersects with world history and future events</p>
+                </div>
+                
+                <div class="book-card fade-in">
+                    <div class="book-year">Contemporary Issues</div>
+                    <h3 class="book-title">Christians and Politics</h3>
+                    <p class="book-description">Addressing the complex relationship between faith and political engagement in modern society</p>
+                </div>
+                
+                <div class="book-card fade-in">
+                    <div class="book-year">Theological Study</div>
+                    <h3 class="book-title">Fallen Angels Vol. 2</h3>
+                    <p class="book-description">A scholarly examination of different interpretations of Genesis 6:1-4 and their theological implications</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educational Ministry -->
+    <section class="achievements-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-number">04</div>
+                <h2 class="section-title">Thekkel Home Bible College</h2>
+                <p class="section-subtitle">Equipping the Church for the twenty-first century</p>
+            </div>
+            
+            <div class="achievements-list">
+                <div class="achievement-item fade-in">
+                    <div class="achievement-icon">A</div>
+                    <h3 class="achievement-title">Biblical Interpretation</h3>
+                    <p class="achievement-desc">Advanced skills in Old and New Testament exegesis and hermeneutics</p>
+                </div>
+                
+                <div class="achievement-item fade-in">
+                    <div class="achievement-icon">B</div>
+                    <h3 class="achievement-title">Theological Foundation</h3>
+                    <p class="achievement-desc">Comprehensive understanding of systematic and dispensational theology</p>
+                </div>
+                
+                <div class="achievement-item fade-in">
+                    <div class="achievement-icon">C</div>
+                    <h3 class="achievement-title">Academic Excellence</h3>
+                    <p class="achievement-desc">Philosophy, history, sociology, and psychology integrated with biblical truth</p>
+                </div>
+                
+                <div class="achievement-item fade-in">
+                    <div class="achievement-icon">D</div>
+                    <h3 class="achievement-title">Practical Ministry</h3>
+                    <p class="achievement-desc">World missions, apologetics, and contemporary Christian engagement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Connect with Dr. Sunny's Ministry</h2>
+            <p>Explore decades of theological wisdom and biblical scholarship that continues to impact lives worldwide.</p>
+            <div>
+                <a href="books.html" class="btn btn-white">Explore Books</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Narrow Path Ministries</h3>
+                <p>A ministry dedicated to biblical teaching, theological education, and spiritual growth. We guide believers on the narrow path that leads to life through Jesus Christ our Lord.</p>
+                <p style="font-style: italic; opacity: 0.7; margin-top: 1rem;">
+                    "The gift of God is eternal life through Jesus Christ our Lord" - Romans 6:23
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about-page-redesign.html">About Us</a></li>
+                    <li><a href="articles-page-redesign.html">Articles</a></li>
+                    <li><a href="bible-college-redesign.html">Bible College</a></li>
+                    <li><a href="resources-page-redesign.html">Resources</a></li>
+                    <li><a href="sermons-redesigned.html">Sermons</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p>Houston, TX 77040</p>
+                <p>Email: <a href="mailto:thekkel45@gmail.com">thekkel45@gmail.com</a></p>
+                <p>Phone: <a href="tel:+18326518048">+1 (832) 651-8048</a></p>
+                <p style="margin-top: 1rem;">Website: <a href="http://www.thekkel.com" style="color: var(--accent);">www.thekkel.com</a></p>
+                <p style="margin-top: 1rem;">Follow us on <a href="https://www.facebook.com/thekkel45/" target="_blank" style="color: #1877f2; text-decoration: none; font-weight: 500;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Narrow Path Ministries, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

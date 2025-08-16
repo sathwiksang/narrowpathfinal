@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Resources - Narrow Path Ministries</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #e67e22;
+            --light-accent: #f39c12;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-light: #ecf0f1;
+            --bg-white: #ffffff;
+            --border-light: #bdc3c7;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        /* Navigation - Same as homepage */
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .navigation.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .logo-main {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+            font-family: 'Georgia', serif;
+        }
+
+        .logo-divider {
+            color: var(--accent);
+            font-weight: 300;
+            opacity: 0.5;
+        }
+
+        .logo-sub {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 2000;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--bg-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: background 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-nav-links a:hover {
+            background: var(--bg-light);
+            border-left-color: var(--accent);
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 10rem 2rem 5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(230, 126, 34, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 85% 80%, rgba(52, 73, 94, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: -2px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-light);
+            font-style: italic;
+            animation: fadeInUp 1s ease 0.2s both;
+            position: relative;
+            z-index: 1;
+            font-family: 'Georgia', serif;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 4rem 1rem 2rem;
+            background: white;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 3rem 1.2rem 1.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--bg-light);
+            background: var(--bg-light);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            pointer-events: none;
+            width: 20px;
+            height: 20px;
+        }
+
+        .search-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        /* Category Tabs */
+        .tabs-section {
+            padding: 2rem 1rem;
+            background: white;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 2rem;
+            background: white;
+            border: 1px solid var(--bg-light);
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 400;
+            position: relative;
+            font-family: inherit;
+        }
+
+        .tab-btn:hover {
+            background: var(--bg-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Disclaimer */
+        .disclaimer-section {
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--bg-light) 0%, white 100%);
+        }
+
+        .disclaimer-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 2.5rem;
+            background: white;
+            border-left: 4px solid var(--accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        .disclaimer-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+
+        .disclaimer-text {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            padding: 4rem 1rem 5rem;
+            background: white;
+        }
+
+        .resource-category {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .resource-category.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            background: rgba(255,255,255,0.05);
+            transform: skewX(-20deg);
+        }
+
+        .category-info {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .category-title-wrapper {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .category-number {
+            font-size: 2.5rem;
+            color: rgba(255,255,255,0.2);
+            font-weight: 700;
+            font-family: 'Georgia', serif;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: white;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .category-count {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--bg-light);
+        }
+
+        .resource-card {
+            background: white;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border-left: 3px solid transparent;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-left-color: var(--accent);
+        }
+
+        .resource-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+
+        .resource-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .resource-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .resource-link:hover {
+            gap: 1rem;
+            text-decoration: underline;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 5rem 1rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 1rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .logo-main {
+                font-size: 1.2rem;
+            }
+
+            .logo-sub {
+                display: none;
+            }
+
+            .page-hero {
+                padding: 8rem 1rem 3rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .category-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .category-tabs {
+                gap: 0.5rem;
+            }
+
+            .tab-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-section">
+                <span class="logo-main">Narrow Path Ministries</span>
+                <span class="logo-divider">|</span>
+                <span class="logo-sub">Dr. Sunny Ezhumattoor</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-page-redesign.html">About</a></li>
+                <li><a href="articles-page-redesign.html">Articles</a></li>
+                <li><a href="bible-college-redesign.html">Bible College</a></li>
+                <li><a href="resources-page-redesign.html">Resources</a></li>
+                <li><a href="sermons-redesigned.html">Sermons</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span style="font-weight: 500; color: var(--primary);">Menu</span>
+            <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-page-redesign.html">About</a></li>
+            <li><a href="articles-page-redesign.html">Articles</a></li>
+            <li><a href="bible-college-redesign.html">Bible College</a></li>
+            <li><a href="resources-page-redesign.html">Resources</a></li>
+            <li><a href="sermons-redesigned.html">Sermons</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Christian Resources</h1>
+        <p class="page-subtitle">A curated collection of valuable Christian websites and ministries</p>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search resources by name or description...">
+                <span class="search-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Tabs -->
+    <section class="tabs-section">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">All Resources</button>
+                <button class="tab-btn" data-category="brethren">Brethren Assemblies</button>
+                <button class="tab-btn" data-category="bible">Bible Study</button>
+                <button class="tab-btn" data-category="ministries">Ministries</button>
+                <button class="tab-btn" data-category="educational">Educational</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="disclaimer-section">
+        <div class="container">
+            <div class="disclaimer-content">
+                <h2 class="disclaimer-title">External Links Disclaimer</h2>
+                <p class="disclaimer-text">
+                    The only domain covered by our privacy policy is narrowpathministries.net. We provide these links as a service but are not responsible for the content or practices of external sites. Please glean with care, remembering there are sometimes treasures hidden where you least expect them.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources-section">
+        <div class="container">
+            <!-- Brethren Assemblies -->
+            <div class="resource-category visible" data-category="brethren">
+                <div class="category-header">
+                    <div class="category-info">
+                        <div class="category-title-wrapper">
+                            <span class="category-number">01</span>
+                            <h2 class="category-title">Brethren Assemblies</h2>
+                        </div>
+                        <span class="category-count">35 Resources</span>
+                    </div>
+                </div>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h3 class="resource-title">Bethesda Bible Chapel</h3>
+                        <p class="resource-description">A Plymouth Brethren assembly dedicated to biblical teaching and fellowship</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Chicago Believer's Assembly</h3>
+                        <p class="resource-description">Serving the Chicago area with sound biblical exposition</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Dallas Brethren Assembly</h3>
+                        <p class="resource-description">Fellowship and worship in the Dallas metropolitan area</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Doha Brethren Assembly</h3>
+                        <p class="resource-description">Christian fellowship for believers in Qatar</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Houston Kerala Brethren</h3>
+                        <p class="resource-description">Malayalam-speaking assembly in Houston, Texas</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Philadelphia Brethren Assembly</h3>
+                        <p class="resource-description">Historic assembly serving the Philadelphia region</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Toronto Brethren Assembly</h3>
+                        <p class="resource-description">Canadian assembly focused on biblical truth</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Brethren Assembly Muscat</h3>
+                        <p class="resource-description">Christian fellowship in Oman's capital city</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Long Island Assembly New York</h3>
+                        <p class="resource-description">Serving believers in the Long Island area</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Oklahoma Brethren Assembly</h3>
+                        <p class="resource-description">Fellowship and ministry in Oklahoma</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Mesquite Brethren Assembly</h3>
+                        <p class="resource-description">Local assembly serving the Mesquite community</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Edmonds Lane Bible Chapel</h3>
+                        <p class="resource-description">Traditional Plymouth Brethren assembly</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bible Study Resources -->
+            <div class="resource-category visible" data-category="bible">
+                <div class="category-header">
+                    <div class="category-info">
+                        <div class="category-title-wrapper">
+                            <span class="category-number">02</span>
+                            <h2 class="category-title">Bible Study Resources</h2>
+                        </div>
+                        <span class="category-count">20 Resources</span>
+                    </div>
+                </div>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h3 class="resource-title">Bible Gateway</h3>
+                        <p class="resource-description">Comprehensive online Bible in multiple versions and languages</p>
+                        <a href="https://www.biblegateway.com" class="resource-link">Visit BibleGateway.com →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">KJV Bible PDF Format</h3>
+                        <p class="resource-description">Downloadable King James Version in PDF format</p>
+                        <a href="#" class="resource-link">Download Resource →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Malayalam Bible</h3>
+                        <p class="resource-description">Scripture resources in Malayalam language</p>
+                        <a href="#" class="resource-link">Access Resource →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Bible Reading Schedule</h3>
+                        <p class="resource-description">One-year Bible reading plan and schedule</p>
+                        <a href="#" class="resource-link">View Schedule →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Nave's Topical Bible</h3>
+                        <p class="resource-description">Comprehensive topical Bible reference tool</p>
+                        <a href="#" class="resource-link">Access Tool →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Scripture Memory System</h3>
+                        <p class="resource-description">Tools and methods for memorizing Scripture</p>
+                        <a href="#" class="resource-link">Learn More →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Bible.org Links</h3>
+                        <p class="resource-description">Extensive collection of biblical study resources</p>
+                        <a href="#" class="resource-link">Browse Resources →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">The Bible Answers</h3>
+                        <p class="resource-description">Answers to common biblical questions</p>
+                        <a href="#" class="resource-link">Find Answers →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Christian Ministries -->
+            <div class="resource-category visible" data-category="ministries">
+                <div class="category-header">
+                    <div class="category-info">
+                        <div class="category-title-wrapper">
+                            <span class="category-number">03</span>
+                            <h2 class="category-title">Christian Ministries</h2>
+                        </div>
+                        <span class="category-count">25 Resources</span>
+                    </div>
+                </div>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h3 class="resource-title">Billy Graham Evangelistic Association</h3>
+                        <p class="resource-description">Continuing the legacy of evangelism worldwide</p>
+                        <a href="#" class="resource-link">Visit Ministry →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Focus on the Family</h3>
+                        <p class="resource-description">Supporting families with biblical principles</p>
+                        <a href="#" class="resource-link">Visit Ministry →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">In Touch Ministries</h3>
+                        <p class="resource-description">Dr. Charles Stanley's teaching ministry</p>
+                        <a href="#" class="resource-link">Visit Ministry →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Promise Keepers</h3>
+                        <p class="resource-description">Men's ministry focused on biblical manhood</p>
+                        <a href="#" class="resource-link">Visit Ministry →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Prison Fellowship International</h3>
+                        <p class="resource-description">Ministry to prisoners and their families</p>
+                        <a href="#" class="resource-link">Visit Ministry →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">The Berean Call</h3>
+                        <p class="resource-description">Biblical discernment ministry</p>
+                        <a href="#" class="resource-link">Visit Ministry →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Good Shepherd Ministry</h3>
+                        <p class="resource-description">Caring for the spiritual needs of believers</p>
+                        <a href="#" class="resource-link">Visit Ministry →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Peace Ministry</h3>
+                        <p class="resource-description">Promoting reconciliation through Christ</p>
+                        <a href="#" class="resource-link">Visit Ministry →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Educational Resources -->
+            <div class="resource-category visible" data-category="educational">
+                <div class="category-header">
+                    <div class="category-info">
+                        <div class="category-title-wrapper">
+                            <span class="category-number">04</span>
+                            <h2 class="category-title">Educational Resources</h2>
+                        </div>
+                        <span class="category-count">15 Resources</span>
+                    </div>
+                </div>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h3 class="resource-title">Thekkel.com</h3>
+                        <p class="resource-description">Dr. Sunny's theological education platform</p>
+                        <a href="http://www.thekkel.com" class="resource-link">Visit Thekkel.com →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Dallas Theological Seminary</h3>
+                        <p class="resource-description">Premier evangelical seminary education</p>
+                        <a href="#" class="resource-link">Visit Website →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Emmaus Bible Studies</h3>
+                        <p class="resource-description">Correspondence courses for biblical education</p>
+                        <a href="#" class="resource-link">Learn More →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Precept Ministries</h3>
+                        <p class="resource-description">Inductive Bible study resources</p>
+                        <a href="#" class="resource-link">Access Resources →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Gospel Folio Press</h3>
+                        <p class="resource-description">Christian literature and publications</p>
+                        <a href="#" class="resource-link">Browse Publications →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Believer Bookshelf</h3>
+                        <p class="resource-description">Quality Christian books and resources</p>
+                        <a href="#" class="resource-link">Shop Books →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plymouth Brethren Specific -->
+            <div class="resource-category visible" data-category="brethren">
+                <div class="category-header">
+                    <div class="category-info">
+                        <div class="category-title-wrapper">
+                            <span class="category-number">05</span>
+                            <h2 class="category-title">Plymouth Brethren Resources</h2>
+                        </div>
+                        <span class="category-count">18 Resources</span>
+                    </div>
+                </div>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h3 class="resource-title">John Nelson Darby Archives</h3>
+                        <p class="resource-description">Writings and teachings of J.N. Darby</p>
+                        <a href="#" class="resource-link">Access Archives →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">F.W. Grant Resources</h3>
+                        <p class="resource-description">Biblical expositions and theological works</p>
+                        <a href="#" class="resource-link">Browse Works →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">The Plymouth Brethren</h3>
+                        <p class="resource-description">Historical and doctrinal information</p>
+                        <a href="#" class="resource-link">Learn More →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Brethren Online</h3>
+                        <p class="resource-description">Connecting brethren assemblies worldwide</p>
+                        <a href="#" class="resource-link">Connect →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Assembly Reflections</h3>
+                        <p class="resource-description">Thoughts on assembly principles and practice</p>
+                        <a href="#" class="resource-link">Read Articles →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">"Chief Men" Among the Brethren</h3>
+                        <p class="resource-description">Biographical sketches of brethren leaders</p>
+                        <a href="#" class="resource-link">Read Biographies →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Milk & Honey</h3>
+                        <p class="resource-description">Ministry magazine for assemblies</p>
+                        <a href="#" class="resource-link">Subscribe →</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3 class="resource-title">Precious Seed</h3>
+                        <p class="resource-description">Magazine promoting biblical truth</p>
+                        <a href="#" class="resource-link">Read Magazine →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Narrow Path Ministries</h3>
+                <p>A ministry dedicated to biblical teaching, theological education, and spiritual growth. We guide believers on the narrow path that leads to life through Jesus Christ our Lord.</p>
+                <p style="font-style: italic; opacity: 0.7; margin-top: 1rem;">
+                    "The gift of God is eternal life through Jesus Christ our Lord" - Romans 6:23
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about-page-redesign.html">About Us</a></li>
+                    <li><a href="sermons-redesigned.html">Sermons</a></li>
+                    <li><a href="articles-page-redesign.html">Articles</a></li>
+                    <li><a href="resources-page-redesign.html">Resources</a></li>
+                    <li><a href="bible-college-redesign.html">Bible College</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p>Houston, TX 77040</p>
+                <p>Email: <a href="mailto:thekkel45@gmail.com">thekkel45@gmail.com</a></p>
+                <p>Phone: <a href="tel:+18326518048">+1 (832) 651-8048</a></p>
+                <p style="margin-top: 1rem;">Website: <a href="http://www.thekkel.com" style="color: var(--accent);">www.thekkel.com</a></p>
+                <p style="margin-top: 1rem;">Follow us on <a href="https://www.facebook.com/thekkel45/" target="_blank" style="color: #1877f2; text-decoration: none; font-weight: 500;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Narrow Path Ministries, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Category filtering
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const categories = document.querySelectorAll('.resource-category');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                const selectedCategory = this.dataset.category;
+
+                categories.forEach(category => {
+                    if (selectedCategory === 'all' || category.dataset.category === selectedCategory) {
+                        category.style.display = 'block';
+                        category.classList.add('visible');
+                    } else {
+                        category.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const resourceCards = document.querySelectorAll('.resource-card');
+
+            resourceCards.forEach(card => {
+                const title = card.querySelector('.resource-title').textContent.toLowerCase();
+                const description = card.querySelector('.resource-description').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update category visibility
+            categories.forEach(category => {
+                const visibleCards = category.querySelectorAll('.resource-card[style="display: block;"], .resource-card:not([style*="display: none"])');
+                if (visibleCards.length === 0 && searchTerm !== '') {
+                    category.style.display = 'none';
+                } else if (searchTerm === '') {
+                    const activeTab = document.querySelector('.tab-btn.active');
+                    const selectedCategory = activeTab.dataset.category;
+                    if (selectedCategory === 'all' || category.dataset.category === selectedCategory) {
+                        category.style.display = 'block';
+                    }
+                } else {
+                    category.style.display = 'block';
+                }
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize visibility
+        document.querySelectorAll('.resource-category').forEach(category => {
+            category.classList.add('visible');
+        });
+    </script>
+</body>
+</html>

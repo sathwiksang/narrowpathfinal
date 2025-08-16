@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Narrow Path Ministries - Walking in Truth</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #e67e22;
+            --light-accent: #f39c12;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-light: #ecf0f1;
+            --bg-white: #ffffff;
+            --border-light: #bdc3c7;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .navigation.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .logo-main {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+            font-family: 'Georgia', serif;
+        }
+
+        .logo-divider {
+            color: var(--accent);
+            font-weight: 300;
+            opacity: 0.5;
+        }
+
+        .logo-sub {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 2000;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--bg-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: background 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-nav-links a:hover {
+            background: var(--bg-light);
+            border-left-color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 100px 20px 50px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(230, 126, 34, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(52, 73, 94, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            z-index: 1;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -2px;
+            color: var(--primary);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .scripture-quote {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .scripture-reference {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-style: normal;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 5rem 1rem;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary);
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlight {
+            padding: 2rem;
+            background: var(--bg-light);
+            border-left: 3px solid var(--accent);
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-light);
+            aspect-ratio: 4/5;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        .about-image-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .about-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--accent), var(--light-accent));
+            opacity: 0.1;
+            z-index: 0;
+            border-radius: 22px;
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            border-radius: 20px;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 5rem 1rem;
+            background: var(--bg-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--light-accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-5px);
+            border-color: var(--bg-light);
+        }
+
+        .feature-number {
+            font-size: 3rem;
+            color: var(--bg-light);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1rem;
+            font-family: -apple-system, system-ui, sans-serif;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 400;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 5rem 1rem;
+            background: white;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: white;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--bg-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-5px);
+        }
+
+        .blog-header {
+            padding: 2rem;
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .blog-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .blog-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        .blog-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-white:hover {
+            background: var(--bg-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 1rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .logo-main {
+                font-size: 1.2rem;
+            }
+
+            .logo-sub {
+                display: none;
+            }
+
+            .hero {
+                padding: 80px 15px 40px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .about-content {
+                grid-template-columns: 1.5fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo-section">
+                <span class="logo-main">Narrow Path Ministries</span>
+                <span class="logo-divider">|</span>
+                <span class="logo-sub">Dr. Sunny Ezhumattoor</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="about-page-redesign.html">About</a></li>
+                <li><a href="articles-page-redesign.html">Articles</a></li>
+                <li><a href="bible-college-redesign.html">Bible College</a></li>
+                <li><a href="resources-page-redesign.html">Resources</a></li>
+                <li><a href="sermons-redesigned.html">Sermons</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span style="font-weight: 500; color: var(--primary);">Menu</span>
+            <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="about-page-redesign.html">About</a></li>
+            <li><a href="articles-page-redesign.html">Articles</a></li>
+            <li><a href="bible-college-redesign.html">Bible College</a></li>
+            <li><a href="resources-page-redesign.html">Resources</a></li>
+            <li><a href="sermons-redesigned.html">Sermons</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Walking the <span>Narrow Path</span></h1>
+            <p class="scripture-quote">
+                "Enter through the narrow gate. For wide is the gate and broad is the road that leads to destruction, and many enter through it. But small is the gate and narrow the road that leads to life, and only a few find it."
+                <span class="scripture-reference">Matthew 7:13-14</span>
+            </p>
+            <div class="hero-buttons">
+                <a href="#books" class="btn btn-primary">Explore Our Books</a>
+                <a href="#sermons" class="btn btn-secondary">Listen to Sermons</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Welcome</span>
+                <h2 class="section-title">About Our Ministry</h2>
+                <p class="section-subtitle">Dedicated to proclaiming God's truth and equipping believers for a life of faith</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <p>Welcome to Narrow Path Ministries, where we are committed to helping believers navigate the profound journey of faith with wisdom, understanding, and biblical truth. Founded by Dr. Sunny Ezhumattoor, our ministry has been a beacon of spiritual guidance since 2010.</p>
+                    
+                    <div class="about-highlight">
+                        "Our mission is to guide seekers and believers alike onto the narrow path that leads to eternal life, through deep biblical teaching and practical application of God's Word."
+                    </div>
+                    
+                    <p>Through our comprehensive programs including Thekkel Home Bible College, published resources, and digital teachings, we strive to make disciples who will transform their communities for Christ. We believe in the transformative power of Scripture and its ability to change lives when properly understood and applied.</p>
+                    
+                    <p>Join us as we explore the depths of God's Word together, growing in faith, wisdom, and spiritual maturity. Our commitment is to provide solid biblical teaching that equips you for every good work.</p>
+                </div>
+                
+                <div class="about-image fade-in">
+                    <div class="about-image-wrapper">
+                        <img src="Images/about/johnmathew.jpg" alt="Dr. John Mathew" 
+                             onerror="this.style.display='none'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="ministries">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">What We Offer</span>
+                <h2 class="section-title">Our Core Ministries</h2>
+                <p class="section-subtitle">Serving the Body of Christ through multiple channels of biblical education and spiritual growth</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-number">01</div>
+                    <h3 class="feature-title">Biblical Teaching</h3>
+                    <p class="feature-description">In-depth verse-by-verse exposition of Scripture, helping believers understand God's Word in its full context and practical application for daily living.</p>
+                </div>
+                
+                <div class="feature-card fade-in" style="cursor: pointer;" onclick="window.location.href='bible-college-redesign.html'">
+                    <div class="feature-number">02</div>
+                    <h3 class="feature-title">Thekkel Home Bible College</h3>
+                    <p class="feature-description">Comprehensive theological education preparing students for ministry and deepening their understanding of biblical truth, doctrine, and practical ministry skills.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-number">03</div>
+                    <h3 class="feature-title">Published Resources</h3>
+                    <p class="feature-description">Carefully crafted books, study guides, and written materials designed to support your spiritual journey and provide lasting reference for biblical truths.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-number">04</div>
+                    <h3 class="feature-title">Digital Sermons</h3>
+                    <p class="feature-description">Access our extensive library of recorded sermons and teachings, available anytime to feed your soul and strengthen your faith wherever you are.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Latest Insights</span>
+                <h2 class="section-title">Recent Articles & Teachings</h2>
+                <p class="section-subtitle">Fresh perspectives on timeless biblical truths</p>
+            </div>
+            
+            <div class="blog-grid">
+                <article class="blog-card fade-in">
+                    <div class="blog-header">
+                        <span class="blog-category">New Release</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">July 6, 2016</div>
+                        <h3 class="blog-title">New Darby Book Released</h3>
+                        <p class="blog-excerpt">Exciting news about our latest publication exploring the theological insights and historical context of Darby's influential work on biblical interpretation...</p>
+                        <a href="#" class="read-more">Continue Reading →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card fade-in">
+                    <div class="blog-header">
+                        <span class="blog-category">Theology</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">May 28, 2015</div>
+                        <h3 class="blog-title">The Law of Moses and the Law of Christ</h3>
+                        <p class="blog-excerpt">An in-depth exploration of the relationship between the Old and New Covenants and their application for believers living under grace today...</p>
+                        <a href="#" class="read-more">Continue Reading →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-card fade-in">
+                    <div class="blog-header">
+                        <span class="blog-category">Doctrine</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">February 16, 2015</div>
+                        <h3 class="blog-title">Understanding Roman Catholicism</h3>
+                        <p class="blog-excerpt">A biblical perspective on Catholic doctrine and practice, examining key differences and similarities with Protestant faith through a scriptural lens...</p>
+                        <a href="#" class="read-more">Continue Reading →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Begin Your Journey on the Narrow Path</h2>
+            <p>Join us in discovering the transformative power of God's Word and walking in His truth with purpose and clarity.</p>
+            <div class="hero-buttons">
+                <a href="mailto:thekkel45@gmail.com" class="btn btn-white">Connect With Us</a>
+                <a href="articles-page-redesign.html" class="btn btn-secondary" style="border-color: white; color: white;">Explore Resources</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Narrow Path Ministries</h3>
+                <p>A ministry dedicated to biblical teaching, theological education, and spiritual growth. We guide believers on the narrow path that leads to life through Jesus Christ our Lord.</p>
+                <p style="font-style: italic; opacity: 0.7; margin-top: 1rem;">
+                    "The gift of God is eternal life through Jesus Christ our Lord" - Romans 6:23
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about-page-redesign.html">About Us</a></li>
+                    <li><a href="articles-page-redesign.html">Articles</a></li>
+                    <li><a href="bible-college-redesign.html">Bible College</a></li>
+                    <li><a href="resources-page-redesign.html">Resources</a></li>
+                    <li><a href="sermons-redesigned.html">Sermons</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p>Houston, TX 77040</p>
+                <p>Email: <a href="mailto:thekkel45@gmail.com">thekkel45@gmail.com</a></p>
+                <p>Phone: <a href="tel:+18326518048">+1 (832) 651-8048</a></p>
+                <p style="margin-top: 1rem;">Website: <a href="http://www.thekkel.com" style="color: var(--accent);">www.thekkel.com</a></p>
+                <p style="margin-top: 1rem;">Follow us on <a href="https://www.facebook.com/thekkel45/" target="_blank" style="color: #1877f2; text-decoration: none; font-weight: 500;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Narrow Path Ministries, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

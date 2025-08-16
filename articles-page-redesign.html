@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Articles - Narrow Path Ministries</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #e67e22;
+            --light-accent: #f39c12;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-light: #ecf0f1;
+            --bg-white: #ffffff;
+            --border-light: #bdc3c7;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        /* Navigation - Same as homepage */
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .navigation.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .logo-main {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+            font-family: 'Georgia', serif;
+        }
+
+        .logo-divider {
+            color: var(--accent);
+            font-weight: 300;
+            opacity: 0.5;
+        }
+
+        .logo-sub {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 2000;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--bg-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: background 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-nav-links a:hover {
+            background: var(--bg-light);
+            border-left-color: var(--accent);
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 10rem 2rem 5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(230, 126, 34, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(52, 73, 94, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: -2px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-light);
+            font-style: italic;
+            animation: fadeInUp 1s ease 0.2s both;
+            position: relative;
+            z-index: 1;
+            font-family: 'Georgia', serif;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            margin-top: -3rem;
+            position: relative;
+        }
+
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 300;
+            font-family: 'Georgia', serif;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 4rem 1rem 2rem;
+            background: white;
+        }
+
+        .filter-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .filter-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--bg-light);
+            background: var(--bg-light);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            pointer-events: none;
+            width: 20px;
+            height: 20px;
+        }
+
+        .search-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        .language-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 2rem;
+            background: white;
+            border: 1px solid var(--bg-light);
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 400;
+            position: relative;
+            font-family: inherit;
+        }
+
+        .tab-btn:hover {
+            background: var(--bg-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .tab-count {
+            display: inline-block;
+            margin-left: 0.5rem;
+            padding: 0.1rem 0.5rem;
+            background: rgba(0,0,0,0.1);
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        /* Articles Grid */
+        .articles-section {
+            padding: 3rem 1rem 5rem;
+            background: var(--bg-light);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .article-card {
+            background: white;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .article-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .article-number {
+            font-size: 3rem;
+            color: rgba(255,255,255,0.1);
+            font-weight: 700;
+            position: absolute;
+            font-family: 'Georgia', serif;
+        }
+
+        .language-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .article-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+            line-height: 1.4;
+        }
+
+        .article-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .article-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .view-btn {
+            background: var(--accent);
+            color: white;
+        }
+
+        .view-btn:hover {
+            background: var(--light-accent);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .download-btn {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .download-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* PDF Modal */
+        .pdf-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pdf-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 90%;
+            height: 90%;
+            max-width: 1200px;
+            background: white;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+
+        .close-modal {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .pdf-viewer {
+            flex: 1;
+            width: 100%;
+            border: none;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 5rem 1rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 1rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .logo-main {
+                font-size: 1.2rem;
+            }
+
+            .logo-sub {
+                display: none;
+            }
+
+            .page-hero {
+                padding: 8rem 1rem 3rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modal-content {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-section">
+                <span class="logo-main">Narrow Path Ministries</span>
+                <span class="logo-divider">|</span>
+                <span class="logo-sub">Dr. Sunny Ezhumattoor</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-page-redesign.html">About</a></li>
+                <li><a href="articles-page-redesign.html">Articles</a></li>
+                <li><a href="bible-college-redesign.html">Bible College</a></li>
+                <li><a href="resources-page-redesign.html">Resources</a></li>
+                <li><a href="sermons-redesigned.html">Sermons</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span style="font-weight: 500; color: var(--primary);">Menu</span>
+            <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-page-redesign.html">About</a></li>
+            <li><a href="articles-page-redesign.html">Articles</a></li>
+            <li><a href="bible-college-redesign.html">Bible College</a></li>
+            <li><a href="resources-page-redesign.html">Resources</a></li>
+            <li><a href="sermons-redesigned.html">Sermons</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Theological Articles & Essays</h1>
+        <p class="page-subtitle">Exploring Biblical Truth Through Scholarly Writings</p>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card fade-in">
+                <span class="stat-number">44</span>
+                <span class="stat-label">Total Articles</span>
+            </div>
+            <div class="stat-card fade-in">
+                <span class="stat-number">28</span>
+                <span class="stat-label">English</span>
+            </div>
+            <div class="stat-card fade-in">
+                <span class="stat-number">15</span>
+                <span class="stat-label">Malayalam</span>
+            </div>
+            <div class="stat-card fade-in">
+                <span class="stat-number">1</span>
+                <span class="stat-label">Spanish</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-header">
+                <span class="filter-label">Browse Collection</span>
+                <div class="search-container">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search articles by title or topic...">
+                    <span class="search-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="language-tabs">
+                    <button class="tab-btn active" data-lang="all">
+                        All Languages <span class="tab-count">45</span>
+                    </button>
+                    <button class="tab-btn" data-lang="english">
+                        English <span class="tab-count">28</span>
+                    </button>
+                    <button class="tab-btn" data-lang="malayalam">
+                        Malayalam <span class="tab-count">16</span>
+                    </button>
+                    <button class="tab-btn" data-lang="spanish">
+                        Spanish <span class="tab-count">1</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="articles-section">
+        <div class="articles-grid" id="articlesGrid">
+            <!-- English Articles -->
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">01</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Spiritual Warfare</h3>
+                    <p class="article-description">An in-depth exploration of biblical principles regarding spiritual battles and Christian victory.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Spiritual Warfare', 'https://drive.google.com/file/d/1MZmGeNxPA4ZiuZ9tWz1EHPDBVLwIhyXg/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1MZmGeNxPA4ZiuZ9tWz1EHPDBVLwIhyXg/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">02</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Rapture and Universal Socialism of the Anti-Christ</h3>
+                    <p class="article-description">Prophetic study examining end-times events and the rise of global governance.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Rapture and Universal Socialism', 'https://drive.google.com/file/d/1N88E_GyblcOxaARzS7L29dk-BIcGVT9l/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1N88E_GyblcOxaARzS7L29dk-BIcGVT9l/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">03</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">John Nelson Darby Biography</h3>
+                    <p class="article-description">The life and ministry of J.N. Darby, influential figure in dispensational theology.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('John Nelson Darby Biography', 'https://drive.google.com/file/d/0B2zA0MHcCXBYUkFJRUtnZjBBXzQ/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYUkFJRUtnZjBBXzQ/view?resourcekey=0-0NddBTPz6jrxEKrwmNmBXg" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">04</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">An Overview of Charismatic Experiences</h3>
+                    <p class="article-description">Biblical analysis of charismatic movements and spiritual gifts in contemporary Christianity.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Charismatic Experiences', 'https://drive.google.com/file/d/0B2zA0MHcCXBYYnQwMUoteHQ2YUk/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYYnQwMUoteHQ2YUk/view?resourcekey=0-F1IiLfvfljtzuTPMqsAjxQ" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">05</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Baptism and the Lord's Supper</h3>
+                    <p class="article-description">Theological study on the ordinances of baptism and communion in Christian practice.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Baptism and Lords Supper', 'https://drive.google.com/file/d/0B2zA0MHcCXBYNHhuZlpQT1U2NXM/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYNHhuZlpQT1U2NXM/view?resourcekey=0-xqhAPPgRBnRXCPO94Xo9UA" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">06</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Biography of Charles Wingate</h3>
+                    <p class="article-description">The life and ministry of Charles Wingate, a significant figure in Christian history.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Charles Wingate Biography', 'https://drive.google.com/file/d/0B2zA0MHcCXBYcGtIb1JZZE9CLVU/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYcGtIb1JZZE9CLVU/view?resourcekey=0-ulIGdGxblrzinUH2pcfGZQ" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">07</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Revelation Simplified</h3>
+                    <p class="article-description">A clear and accessible guide to understanding the Book of Revelation.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Revelation Simplified', 'https://drive.google.com/file/d/0B2zA0MHcCXBYTEhSeUwtTWhPakE/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYTEhSeUwtTWhPakE/view?resourcekey=0-B9-x1HLpP2owS_vZX-qZiQ" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">08</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Dispensational Truths</h3>
+                    <p class="article-description">Comprehensive study on dispensational theology and God's plan through the ages.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Dispensational Truths', 'https://drive.google.com/file/d/0B2zA0MHcCXBYSnRlemhYYWZtTjQ/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYSnRlemhYYWZtTjQ/view?resourcekey=0-rF8NmReC6Au8cEbgUcQ6Eg" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">09</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Family And Marriage Third Millenium</h3>
+                    <p class="article-description">Biblical perspectives on family and marriage in the modern era.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Family And Marriage Third Millenium', 'https://drive.google.com/file/d/0B2zA0MHcCXBYVHlwdFJIWGpURjQ/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYVHlwdFJIWGpURjQ/view?resourcekey=0-H-xPvMhhxp-umOEfjVwGAw" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">10</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Music and Worship</h3>
+                    <p class="article-description">Biblical principles for music and worship in the Christian life.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Music and Worship', 'https://drive.google.com/file/d/0B2zA0MHcCXBYcVZqdkxNUjR2d28/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYcVZqdkxNUjR2d28/view?resourcekey=0-ELu_iwYqzlMMNR7JkCZBlw" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">11</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">The Covenants</h3>
+                    <p class="article-description">Examination of biblical covenants and their significance in God's redemptive plan.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('The Covenants', 'https://drive.google.com/file/d/0B2zA0MHcCXBYWXdGVExSMERWdDg/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYWXdGVExSMERWdDg/view?resourcekey=0-lBQA_hb0KbPOvpYMIzWaCQ" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">12</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Wingate</h3>
+                    <p class="article-description">Study on the life and teachings of Wingate.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Wingate', 'https://drive.google.com/file/d/0B2zA0MHcCXBYemJkY1pkUHRJdlE/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYemJkY1pkUHRJdlE/view?resourcekey=0-57UkIojguezIUHPfYhowLw" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">13</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Calvinism</h3>
+                    <p class="article-description">Analysis of Calvinist theology and the doctrines of grace from a biblical perspective.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Calvinism', 'https://drive.google.com/file/d/0B2zA0MHcCXBYWm8wZnFBMkxOV28/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYWm8wZnFBMkxOV28/view?resourcekey=0-zmT9pCeQoqBZn0OZcWA5mA" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">14</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Fallen Angels</h3>
+                    <p class="article-description">Biblical study on fallen angels and their role in spiritual warfare.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Fallen Angels', 'https://drive.google.com/file/d/0B2zA0MHcCXBYQ040TUtFYTNOYTg/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYQ040TUtFYTNOYTg/view?resourcekey=0-aoX5PQBZ8OStKPttkBddXQ" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">15</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">World Religion</h3>
+                    <p class="article-description">Comparative study of world religions from a Christian perspective.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('World Religion', 'https://drive.google.com/file/d/1CY3UwJ8b6-1QT3p2WWr0FrJZFiZuR4GK/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1CY3UwJ8b6-1QT3p2WWr0FrJZFiZuR4GK/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">16</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Daniel reveals the history of the world</h3>
+                    <p class="article-description">Prophetic insights from the Book of Daniel regarding world history.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Daniel reveals the history of the world', 'https://drive.google.com/file/d/1O0asPhicpLKofcFlCFyxvg0EtC2yIx-4/preview')">View PDF</button>
+                        <a href="#" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">17</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Socialism</h3>
+                    <p class="article-description">Biblical analysis of socialism and its implications for society.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Socialism', 'https://drive.google.com/file/d/1vtYNi2l04AvJLxTbHg_jBfb_o4qldDS6/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1vtYNi2l04AvJLxTbHg_jBfb_o4qldDS6/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">18</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Romans 3:24-26 An Exegetical Study</h3>
+                    <p class="article-description">Detailed exegetical analysis of Romans 3:24-26 and its theological significance.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Romans 3:24-26 An Exegetical Study', 'https://drive.google.com/file/d/1a1WrgHWQUI0Bq8bxvZM8uB7dNJhccvUO/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1a1WrgHWQUI0Bq8bxvZM8uB7dNJhccvUO/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">19</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Social, Economic and Historical Essays</h3>
+                    <p class="article-description">Collection of essays on social, economic, and historical topics from a biblical perspective.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Social, Economic and Historical Essays', 'https://drive.google.com/file/d/12bn-8yDsisoWsqQTz0aXvv1y6Z-Z_uD1/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/12bn-8yDsisoWsqQTz0aXvv1y6Z-Z_uD1/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">20</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Christian Moderation</h3>
+                    <p class="article-description">Biblical principles of moderation and balance in the Christian life.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Christian Moderation', 'https://drive.google.com/file/d/1zJMCBCOgYNhjGUcKgOKccRVNRL91SRKE/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1zJMCBCOgYNhjGUcKgOKccRVNRL91SRKE/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">21</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Success An Article From 1988</h3>
+                    <p class="article-description">Timeless insights on success from a 1988 article with biblical wisdom.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Success An Article From 1988', 'https://drive.google.com/file/d/1EfarKS2H49rVCuqH1yDFnSF3X5sfBDTw/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1EfarKS2H49rVCuqH1yDFnSF3X5sfBDTw/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">22</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">A Contentious Woman</h3>
+                    <p class="article-description">Biblical wisdom on dealing with contentious relationships and character.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('A Contentious Woman', 'https://drive.google.com/file/d/1P06SIet5CrjWpObDp29y1P1EgMQEpWoR/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1P06SIet5CrjWpObDp29y1P1EgMQEpWoR/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">23</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">The Enigma of the Holy Spirit</h3>
+                    <p class="article-description">Exploration of the Holy Spirit's role and work in the Christian life.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('The Enigma of the Holy Spirit', 'https://drive.google.com/file/d/1vuTFfzgy6cKN6zKtTt77BhA1wCvNKadN/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1vuTFfzgy6cKN6zKtTt77BhA1wCvNKadN/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">24</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Brethern Movement</h3>
+                    <p class="article-description">Historical study of the Brethren movement and its impact on Christianity.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Brethern Movement', 'https://drive.google.com/file/d/1KnlHX9UIO0roLFUvILAWvlZ89u6lJ83W/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1KnlHX9UIO0roLFUvILAWvlZ89u6lJ83W/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">25</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Parables of Christ</h3>
+                    <p class="article-description">In-depth study of the parables of Jesus and their spiritual lessons.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Parables of Christ', 'https://drive.google.com/file/d/1yoP-GbU4XFGrM-YoAoTcjwhS3VhvNxn8/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1yoP-GbU4XFGrM-YoAoTcjwhS3VhvNxn8/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">26</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Sovereignty and Limited Free Will</h3>
+                    <p class="article-description">Theological exploration of God's sovereignty and human free will.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Sovereignty and Limited Free Will', 'https://drive.google.com/file/d/1cSOrJKOmnDQqkOTw3Tc01qvb524i7bcu/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1cSOrJKOmnDQqkOTw3Tc01qvb524i7bcu/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">27</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Conspiracy Theories</h3>
+                    <p class="article-description">Biblical perspective on conspiracy theories and discernment.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Conspiracy Theories', 'https://drive.google.com/file/d/1ys5BDFM3zGWY7jDHjWGfLBSG3bErOHPs/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1ys5BDFM3zGWY7jDHjWGfLBSG3bErOHPs/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">28</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Marriage and Morality</h3>
+                    <p class="article-description">Biblical principles for marriage and moral living in today's world.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Marriage and Morality', 'https://drive.google.com/file/d/1YZcH4VZnxnJBPRfQtL5IZVzs28OHaCkA/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1YZcH4VZnxnJBPRfQtL5IZVzs28OHaCkA/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Malayalam Articles -->
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">29</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Conspiracy (Malayalam Book)</h3>
+                    <p class="article-description">ഗൂഢാലോചന സിദ്ധാന്തങ്ങളെക്കുറിച്ചുള്ള ബൈബിൾ വീക്ഷണം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Conspiracy Malayalam Book', 'https://drive.google.com/file/d/1csd8NM7pwRVP83plOtg9axeGw8BWaFog/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1csd8NM7pwRVP83plOtg9axeGw8BWaFog/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">30</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Krishnamenon Syndrum (Malayalam Essay)</h3>
+                    <p class="article-description">കൃഷ്ണമേനോൻ സിന്ദ്രം എന്ന വിഷയത്തെക്കുറിച്ചുള്ള മലയാളം ലേഖനം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Krishnamenon Syndrum Malayalam Essay', 'https://drive.google.com/file/d/1vBPTsOdz1AcFt0Ei6soVbRWXUAvG75ao/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1vBPTsOdz1AcFt0Ei6soVbRWXUAvG75ao/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">31</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Christian-Hindu Culture (Malayalam Essay)</h3>
+                    <p class="article-description">ക്രിസ്ത്യൻ-ഹിന്ദു സംസ്കാരത്തെക്കുറിച്ചുള്ള മലയാളം ലേഖനം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Christian-Hindu Culture Malayalam Essay', 'https://drive.google.com/file/d/1Dp2CETqqK7vN-I35d0yYPp1bT4YIcxiU/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1Dp2CETqqK7vN-I35d0yYPp1bT4YIcxiU/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">32</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">John Nelson Darby (Malayalam Book)</h3>
+                    <p class="article-description">ജോൺ നെൽസൺ ഡാർബിയുടെ ജീവിതവും ശുശ്രൂഷയും.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('John Nelson Darby Malayalam Book', 'https://drive.google.com/file/d/0B2zA0MHcCXBYY2pKOEZ3WG00LWc/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYY2pKOEZ3WG00LWc/view?resourcekey=0-g-p8yk4eMkm8r5GUddorLw" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">33</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">John Munroe (Malayalam Article)</h3>
+                    <p class="article-description">ജോൺ മൺറോയെക്കുറിച്ചുള്ള മലയാളം ലേഖനം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('John Munroe Malayalam Article', 'https://drive.google.com/file/d/0B2zA0MHcCXBYRU5LTHlzS3l5bzg/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYRU5LTHlzS3l5bzg/view?resourcekey=0-eNkx64FJj1mGW0GWRmVBbA" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">34</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Family (Malayalam Article)</h3>
+                    <p class="article-description">കുടുംബത്തെക്കുറിച്ചുള്ള മലയാളം ലേഖനം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Family Malayalam Article', 'https://drive.google.com/file/d/0B2zA0MHcCXBYRGVBeFhUZ0tmVFU/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYRGVBeFhUZ0tmVFU/view?resourcekey=0-49GXY2SSdUj5vBps8_FKKg" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">35</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">K V Simon (Malayalam Article)</h3>
+                    <p class="article-description">കെ വി സൈമണിനെക്കുറിച്ചുള്ള മലയാളം ലേഖനം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('K V Simon Malayalam Article', 'https://drive.google.com/file/d/0B2zA0MHcCXBYbUQ5U0NrclRDVkU/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYbUQ5U0NrclRDVkU/view?resourcekey=0-qguQ0CbD-Jdf7AnRgDjPdA" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">36</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Malayalagadyam (Malayalam Article)</h3>
+                    <p class="article-description">മലയാളഗദ്യത്തെക്കുറിച്ചുള്ള മലയാളം ലേഖനം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Malayalagadyam Malayalam Article', 'https://drive.google.com/file/d/0B2zA0MHcCXBYcWh4bzJJNEdFVFk/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYcWh4bzJJNEdFVFk/view?resourcekey=0-j2W7uZPTArHnw9hlGir4Ug" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">37</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Snanam - Baptism (Malayalam Book)</h3>
+                    <p class="article-description">സ്നാനത്തെക്കുറിച്ചുള്ള മലയാളം പുസ്തകം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Snanam Baptism Malayalam Book', 'https://drive.google.com/file/d/0B2zA0MHcCXBYUENMUEpmUEZnb00/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYUENMUEpmUEZnb00/view?resourcekey=0-AyOhRabhoLiMxdTQHb5a6w" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">38</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Story (Malayalam Article)</h3>
+                    <p class="article-description">കഥയെക്കുറിച്ചുള്ള മലയാളം ലേഖനം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Story Malayalam Article', 'https://drive.google.com/file/d/0B2zA0MHcCXBYQW9fcDlSRE5HZkk/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYQW9fcDlSRE5HZkk/view?resourcekey=0-VoMQAi14d7Pjpkkt0pYeqw" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">39</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Upakarana Sangeethavum Aradhanayum (Malayalam Book)</h3>
+                    <p class="article-description">ഉപകരണ സംഗീതവും ആരാധനയും എന്ന വിഷയത്തെക്കുറിച്ചുള്ള മലയാളം പുസ്തകം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Upakarana Sangeethavum Aradhanayum Malayalam Book', 'https://drive.google.com/file/d/0B2zA0MHcCXBYT1U1dnltcG42RU0/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYT1U1dnltcG42RU0/view?resourcekey=0-Kx9VHdvn9FmDxeNXgTA0ZQ" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">40</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Revelation (Malayalam Book)</h3>
+                    <p class="article-description">വെളിപാടു പുസ്തകത്തിന്റെ വ്യാഖ്യാനം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Revelation Malayalam Book', 'https://drive.google.com/file/d/0B2zA0MHcCXBYaUdMMGxSU2k5SXc/preview?pli=1&resourcekey=0-ypquk9Cw8kRWlcX13ZvkMQ')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYaUdMMGxSU2k5SXc/view?usp=sharing&resourcekey=0-ypquk9Cw8kRWlcX13ZvkMQ" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">41</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Fallen Angels (Malayalam Book)</h3>
+                    <p class="article-description">വീണുപോയ ദൂതന്മാരെക്കുറിച്ചുള്ള മലയാളം പുസ്തകം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Fallen Angels Malayalam Book', 'https://drive.google.com/file/d/0B2zA0MHcCXBYVnFXSnFzUnIzYWc/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYVnFXSnFzUnIzYWc/view?resourcekey=0-RgEBi9lfY1aMxC3gAHGqYw" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">42</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">How to Pray (Malayalam Article)</h3>
+                    <p class="article-description">എങ്ങനെ പ്രാർത്ഥിക്കണമെന്നതിനെക്കുറിച്ചുള്ള മലയാളം ലേഖനം.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('How to Pray Malayalam Article', 'https://drive.google.com/file/d/1-9WVsL_LY2DERuijM8ONX37MFNWhzSic/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1-9WVsL_LY2DERuijM8ONX37MFNWhzSic/view" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card fade-in" data-lang="malayalam">
+                <div class="article-header">
+                    <span class="article-number">43</span>
+                    <span class="language-badge">Malayalam</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Daniel reveals the history of the world (Malayalam)</h3>
+                    <p class="article-description">ലോക ചരിത്രത്തെക്കുറിച്ച് ദാനിയേൽ പുസ്തകത്തിൽ നിന്നുള്ള പ്രവചന ഉൾക്കാഴ്ചകൾ.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Daniel reveals the history of the world Malayalam', 'https://drive.google.com/file/d/1J8zpklqGirWJaZx6OYzL8Ru7MB1pdE1H/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1J8zpklqGirWJaZx6OYzL8Ru7MB1pdE1H/view?usp=sharing" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spanish Article -->
+            <div class="article-card fade-in" data-lang="spanish">
+                <div class="article-header">
+                    <span class="article-number">45</span>
+                    <span class="language-badge">Spanish</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Brethren History (Spanish)</h3>
+                    <p class="article-description">Historia del movimiento de los Hermanos de Plymouth.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Brethren History Spanish', 'https://drive.google.com/file/d/0B2zA0MHcCXBYcnJqdlJWZGIzVmM/preview?pli=1&resourcekey=0-5QrehPPvvZi2aVgT54s_eg')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/0B2zA0MHcCXBYaUdMMGxSU2k5SXc/view?resourcekey=0-ypquk9Cw8kRWlcX13ZvkMQ" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Results Message -->
+        <div class="no-results" id="noResults" style="display: none;">
+            No articles found matching your search criteria.
+        </div>
+    </section>
+
+    <!-- PDF Modal -->
+    <div class="pdf-modal" id="pdfModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">PDF Viewer</h3>
+                <button class="close-modal" onclick="closePDF()">×</button>
+            </div>
+            <iframe class="pdf-viewer" id="pdfViewer" src="" title="PDF Viewer"></iframe>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Narrow Path Ministries</h3>
+                <p>A ministry dedicated to biblical teaching, theological education, and spiritual growth. We guide believers on the narrow path that leads to life through Jesus Christ our Lord.</p>
+                <p style="font-style: italic; opacity: 0.7; margin-top: 1rem;">
+                    "The gift of God is eternal life through Jesus Christ our Lord" - Romans 6:23
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about-page-redesign.html">About Us</a></li>
+                    <li><a href="articles-page-redesign.html">Articles</a></li>
+                    <li><a href="bible-college-redesign.html">Bible College</a></li>
+                    <li><a href="resources-page-redesign.html">Resources</a></li>
+                    <li><a href="sermons-redesigned.html">Sermons</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p>Houston, TX 77040</p>
+                <p>Email: <a href="mailto:thekkel45@gmail.com">thekkel45@gmail.com</a></p>
+                <p>Phone: <a href="tel:+18326518048">+1 (832) 651-8048</a></p>
+                <p style="margin-top: 1rem;">Website: <a href="http://www.thekkel.com" style="color: var(--accent);">www.thekkel.com</a></p>
+                <p style="margin-top: 1rem;">Follow us on <a href="https://www.facebook.com/thekkel45/" target="_blank" style="color: #1877f2; text-decoration: none; font-weight: 500;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                </a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Narrow Path Ministries, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Language filtering
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const articleCards = document.querySelectorAll('.article-card');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                const selectedLang = this.dataset.lang;
+
+                articleCards.forEach(card => {
+                    if (selectedLang === 'all' || card.dataset.lang === selectedLang) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                updateNoResults();
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            articleCards.forEach(card => {
+                const title = card.querySelector('.article-title').textContent.toLowerCase();
+                const description = card.querySelector('.article-description').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            updateNoResults();
+        });
+
+        // Update no results message
+        function updateNoResults() {
+            const visibleCards = Array.from(articleCards).filter(card => card.style.display !== 'none');
+            const noResults = document.getElementById('noResults');
+            
+            if (visibleCards.length === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+
+        // PDF Viewer Functions
+        function openPDF(title, embedUrl) {
+            const modal = document.getElementById('pdfModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const pdfViewer = document.getElementById('pdfViewer');
+
+            modalTitle.textContent = title;
+            pdfViewer.src = embedUrl;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePDF() {
+            const modal = document.getElementById('pdfModal');
+            const pdfViewer = document.getElementById('pdfViewer');
+
+            modal.classList.remove('active');
+            pdfViewer.src = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePDF();
+            }
+        });
+
+        // Close modal on background click
+        document.getElementById('pdfModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePDF();
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
