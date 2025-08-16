@@ -1,0 +1,3071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Articles - Narrow Path Ministries</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #e67e22;
+            --light-accent: #f39c12;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-light: #ecf0f1;
+            --bg-white: #ffffff;
+            --border-light: #bdc3c7;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+            --shadow-2xl: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            overflow-x: hidden;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        /* Premium Loading Animation */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-line {
+            width: 100px;
+            height: 2px;
+            background: var(--bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-line::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            animation: loadingLine 1.5s infinite;
+        }
+
+        @keyframes loadingLine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Navigation */
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .navigation .nav-container {
+            position: relative;
+        }
+
+        .navigation.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .logo-main {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+            font-family: 'Georgia', serif;
+        }
+
+        .logo-divider {
+            color: var(--accent);
+            font-weight: 300;
+            opacity: 0.5;
+        }
+
+        .logo-sub {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Button - Hidden by default */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 2000;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--bg-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: background 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-nav-links a:hover {
+            background: var(--bg-light);
+            border-left-color: var(--accent);
+        }
+
+        /* Premium Hero Section */
+        .articles-hero {
+            padding: 140px 20px 80px;
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .articles-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -25%;
+            width: 150%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(230, 126, 34, 0.02) 0%, transparent 70%);
+            animation: floatGradient 20s ease-in-out infinite;
+        }
+
+        @keyframes floatGradient {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, -30px) rotate(180deg); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease forwards;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-family: 'Georgia', serif;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            padding: 0 1rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: white;
+            border-bottom: 1px solid var(--bg-light);
+            padding: 2rem 0;
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stats-left {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 300;
+            color: var(--primary);
+            font-family: 'Georgia', serif;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-light);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Articles Section */
+        .articles-section {
+            padding: 4rem 1rem 5rem;
+            background: var(--bg-white);
+        }
+
+        /* Premium Article Cards Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .article-card {
+            background: white;
+            border: 1px solid var(--bg-light);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            display: flex;
+            flex-direction: column;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .article-card:nth-child(1) { animation-delay: 0.1s; }
+        .article-card:nth-child(2) { animation-delay: 0.2s; }
+        .article-card:nth-child(3) { animation-delay: 0.3s; }
+        .article-card:nth-child(4) { animation-delay: 0.4s; }
+        .article-card:nth-child(5) { animation-delay: 0.5s; }
+        .article-card:nth-child(6) { animation-delay: 0.6s; }
+        .article-card:nth-child(7) { animation-delay: 0.7s; }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--light-accent) 100%);
+            transition: height 0.4s ease;
+        }
+
+        .article-card:hover::before {
+            height: 100%;
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-2xl);
+            border-color: transparent;
+        }
+
+        .article-header {
+            padding: 2rem 2rem 1rem;
+            position: relative;
+        }
+
+        .article-category {
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .article-category::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.3;
+        }
+
+        .article-title {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .article-card:hover .article-title {
+            color: var(--accent);
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 2rem;
+            padding: 0 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-icon {
+            width: 14px;
+            height: 14px;
+            opacity: 0.5;
+        }
+
+        .article-excerpt {
+            padding: 0 2rem 2rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .article-footer {
+            padding: 1.5rem 2rem;
+            background: var(--bg-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin-top: auto;
+        }
+
+        .read-article-btn {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            min-width: 120px;
+            justify-content: flex-start;
+        }
+
+        .read-article-btn svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover .read-article-btn svg {
+            transform: translateX(5px);
+        }
+
+        .article-length {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+
+        /* Ensure consistent button alignment */
+        .article-footer .read-article-btn {
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        /* Article Reader Modal */
+        .article-reader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            overflow-y: auto;
+            overflow-x: hidden;
+            animation: fadeIn 0.3s ease;
+            width: 100vw;
+            height: 100vh;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .article-reader.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .reader-container {
+            max-width: 1200px;
+            width: 95%;
+            margin: 1rem auto;
+            background: white;
+            min-height: calc(100vh - 2rem);
+            animation: slideUp 0.4s ease;
+            border-radius: 8px;
+            box-shadow: var(--shadow-2xl);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .reader-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid var(--bg-light);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .reader-close {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--bg-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .reader-close:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .reader-close svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .reader-progress {
+            flex: 1;
+            margin: 0 2rem;
+        }
+
+        .progress-bar {
+            height: 3px;
+            background: var(--bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .reader-content {
+            padding: 3rem 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reader-category {
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .reader-title {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            font-weight: 300;
+        }
+
+        .reader-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--bg-light);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .reader-body {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            font-family: 'Georgia', serif;
+            max-width: 900px;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        .reader-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .reader-body h2 {
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem;
+            color: var(--primary);
+            font-weight: 400;
+        }
+
+        .reader-body h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+            font-weight: 400;
+        }
+
+        .reader-body .highlight {
+            background: linear-gradient(transparent 60%, rgba(230, 126, 34, 0.2) 60%);
+            padding: 0 2px;
+        }
+
+        .reader-cta {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .reader-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .reader-cta p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 1rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-menu-toggle:hover {
+                background: var(--bg-light);
+                transform: scale(1.05);
+            }
+
+            .articles-hero {
+                padding: 100px 15px 50px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .stats-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .stats-left {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .filter-buttons {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .reader-container {
+                margin: 0;
+                min-height: 100vh;
+                border-radius: 0;
+                width: 100%;
+                max-width: 100%;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .reader-content {
+                padding: 2rem 1.5rem;
+                max-width: 100%;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+            }
+
+            .reader-title {
+                font-size: 2rem;
+            }
+
+            .reader-body {
+                max-width: 100%;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+            }
+
+            .reader-body h2 {
+                font-size: 1.5rem;
+                margin: 2rem 0 1rem;
+                line-height: 1.3;
+            }
+
+            .reader-body h3 {
+                font-size: 1.3rem;
+                margin: 1.5rem 0 0.75rem;
+                line-height: 1.3;
+            }
+
+            .reader-body p {
+                margin-bottom: 1rem;
+                line-height: 1.6;
+            }
+
+            .reader-body ul, .reader-body ol {
+                margin: 1rem 0;
+                padding-left: 1.5rem;
+            }
+
+            .reader-body li {
+                margin-bottom: 0.5rem;
+                line-height: 1.5;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+        }
+
+        /* Small Mobile Styles */
+        @media (max-width: 480px) {
+            .mobile-menu {
+                max-width: 100%;
+            }
+
+            .container {
+                padding: 0 0.5rem;
+            }
+
+            .articles-hero {
+                padding: 80px 10px 40px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.75rem;
+                letter-spacing: -1px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+                padding: 0 0.5rem;
+            }
+
+            .stats-bar {
+                padding: 1.5rem 0;
+            }
+
+            .stats-container {
+                padding: 0 0.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.75rem;
+            }
+
+            .articles-section {
+                padding: 3rem 0.5rem 4rem;
+            }
+
+            .articles-grid {
+                gap: 1.5rem;
+            }
+
+            .article-header {
+                padding: 1.5rem 1.5rem 1rem;
+            }
+
+            .article-title {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+
+            .article-meta {
+                padding: 0 1.5rem;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .article-excerpt {
+                padding: 0 1.5rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .article-footer {
+                padding: 1rem 1.5rem;
+            }
+
+            .read-article-btn {
+                font-size: 0.8rem;
+                min-width: 100px;
+                letter-spacing: 1px;
+            }
+
+            .reader-container {
+                margin: 0;
+                width: 100vw;
+                max-width: 100vw;
+                min-height: 100vh;
+                border-radius: 0;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .reader-header {
+                padding: 1rem 1rem;
+                position: sticky;
+                top: 0;
+                background: white;
+                z-index: 10;
+                border-bottom: 1px solid var(--bg-light);
+            }
+
+            .reader-content {
+                padding: 1.5rem 1rem;
+                max-width: 100%;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+            }
+
+            .reader-title {
+                font-size: 1.75rem;
+                line-height: 1.3;
+            }
+
+            .reader-meta {
+                flex-direction: column;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .reader-body {
+                font-size: 1.1rem;
+                line-height: 1.7;
+                max-width: 100%;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+            }
+
+            .reader-body h2 {
+                font-size: 1.5rem;
+                margin: 2rem 0 1rem;
+                line-height: 1.3;
+            }
+
+            .reader-body h3 {
+                font-size: 1.3rem;
+                margin: 1.5rem 0 0.75rem;
+                line-height: 1.3;
+            }
+
+            .reader-body p {
+                margin-bottom: 1rem;
+                line-height: 1.6;
+            }
+
+            .reader-body ul, .reader-body ol {
+                margin: 1rem 0;
+                padding-left: 1.5rem;
+            }
+
+            .reader-body li {
+                margin-bottom: 0.5rem;
+                line-height: 1.5;
+            }
+
+            .reader-cta {
+                margin-top: 3rem;
+                padding: 1.5rem 1rem;
+            }
+
+            .cta-button {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Extra Small Mobile Styles */
+        @media (max-width: 360px) {
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .article-title {
+                font-size: 1.4rem;
+            }
+
+            .reader-title {
+                font-size: 1.5rem;
+            }
+
+            .reader-body {
+                font-size: 1rem;
+            }
+
+            .reader-container {
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .reader-content {
+                padding: 1rem 0.75rem;
+            }
+
+            .reader-body h2 {
+                font-size: 1.4rem;
+                margin: 1.5rem 0 0.75rem;
+            }
+
+            .reader-body h3 {
+                font-size: 1.2rem;
+                margin: 1.25rem 0 0.5rem;
+            }
+
+            .reader-body p {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .article-header {
+                padding: 1.5rem 1.5rem 1rem;
+            }
+
+            .article-meta {
+                padding: 0 1.5rem;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .article-excerpt {
+                padding: 0 1.5rem 1.5rem;
+            }
+
+            .article-footer {
+                padding: 1rem 1.5rem;
+            }
+
+            /* Ensure article reader content is properly scrollable on small screens */
+            .article-reader {
+                padding: 0;
+            }
+
+            .reader-container {
+                width: 100%;
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+            }
+
+            .reader-content {
+                padding: 1rem;
+            }
+
+            .reader-body {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .reader-body h2 {
+                font-size: 1.4rem;
+                margin: 1.5rem 0 1rem;
+            }
+
+            .reader-body h3 {
+                font-size: 1.2rem;
+                margin: 1.25rem 0 0.75rem;
+            }
+
+            .reader-body p {
+                margin-bottom: 0.75rem;
+            }
+
+            .reader-body ul, .reader-body ol {
+                margin: 1rem 0;
+                padding-left: 1.25rem;
+            }
+
+            .reader-body li {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-line"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-section">
+                <span class="logo-main">Narrow Path Ministries</span>
+                <span class="logo-divider">|</span>
+                <span class="logo-sub">Dr. Sunny Ezhumattoor</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-page-redesign.html">About</a></li>
+                <li><a href="articles-page-redesign.html">Books</a></li>
+                <li><a href="articles-page.html" class="active">Articles</a></li>
+                <li><a href="bible-college-redesign.html">Bible College</a></li>
+                <li><a href="resources-page-redesign.html">Resources</a></li>
+                <li><a href="sermons-redesigned.html">Sermons</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span style="font-weight: 500; color: var(--primary);">Menu</span>
+            <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-page-redesign.html">About</a></li>
+            <li><a href="articles-page-redesign.html">Books</a></li>
+            <li><a href="articles-page.html">Articles</a></li>
+            <li><a href="bible-college-redesign.html">Bible College</a></li>
+            <li><a href="resources-page-redesign.html">Resources</a></li>
+            <li><a href="sermons-redesigned.html">Sermons</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="articles-hero">
+        <div class="hero-content">
+            <span class="hero-label">Theological Insights</span>
+            <h1>Articles & <span>Teachings</span></h1>
+            <p class="hero-subtitle">
+                Dive deep into biblical scholarship, prophetic understanding, and theological discourse that illuminates the path of faith
+            </p>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-container">
+            <div class="stats-left">
+                <div class="stat-item">
+                    <span class="stat-number">7</span>
+                    <span class="stat-label">Articles</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Years of Study</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1000s</span>
+                    <span class="stat-label">Lives Touched</span>
+                </div>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="theology">Theology</button>
+                <button class="filter-btn" data-filter="prophecy">Prophecy</button>
+                <button class="filter-btn" data-filter="history">History</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Articles Section -->
+    <section class="articles-section">
+        <div class="container">
+            <div class="articles-grid" id="articlesGrid">
+                <!-- Article 1: New Darby Book -->
+                <article class="article-card" data-category="biography" data-article="darby">
+                    <div class="article-header">
+                        <div class="article-category">Biography</div>
+                        <h2 class="article-title">New Darby Book: A Portrait of John Nelson Darby</h2>
+                    </div>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>July 6, 2016</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>7 min read</span>
+                        </div>
+                    </div>
+                    <div class="article-excerpt">
+                        Darby is the first and only theologian who systematically explained the prophetical events in Daniel and Revelation, predicting Israel's founding, Middle East conflicts, and end-time events. This biography offers unprecedented insights into American history and Darby's influence on conservative Christianity.
+                    </div>
+                    <div class="article-footer">
+                        <a href="#" class="read-article-btn">
+                            READ ARTICLE
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <span class="article-length">Full Article</span>
+                    </div>
+                </article>
+
+                <!-- Article 2: Law of Moses -->
+                <article class="article-card" data-category="theology" data-article="moses">
+                    <div class="article-header">
+                        <div class="article-category">Theology</div>
+                        <h2 class="article-title">The Law of Moses and the Law of Christ</h2>
+                    </div>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>May 28, 2015</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>8 min read</span>
+                        </div>
+                    </div>
+                    <div class="article-excerpt">
+                        For most Christians, the Law of Moses is a riddle wrapped in mystery. This comprehensive study examines whether Christians are under the Law, exploring Covenant vs. Dispensational theology, the true meaning of tithing, and why Sunday is not the Christian Sabbath.
+                    </div>
+                    <div class="article-footer">
+                        <a href="#" class="read-article-btn">
+                            READ ARTICLE
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <span class="article-length">Full Article</span>
+                    </div>
+                </article>
+
+                <!-- Article 3: Roman Catholicism -->
+                <article class="article-card" data-category="theology" data-article="catholicism">
+                    <div class="article-header">
+                        <div class="article-category">Doctrine</div>
+                        <h2 class="article-title">Roman Catholicism: A Biblical Examination</h2>
+                    </div>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>February 16, 2015</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>45 min read</span>
+                        </div>
+                    </div>
+                    <div class="article-excerpt">
+                        A comprehensive biblical examination of 31 key Roman Catholic doctrines compared with Scripture. Topics include salvation, Mary, the Pope, sacraments, purgatory, and the historical timeline of when these traditions entered the church.
+                    </div>
+                    <div class="article-footer">
+                        <a href="#" class="read-article-btn">
+                            READ ARTICLE
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <span class="article-length">Full Article</span>
+                    </div>
+                </article>
+
+                <!-- Article 4: Pre-Tribulation Rapture -->
+                <article class="article-card" data-category="prophecy" data-article="rapture">
+                    <div class="article-header">
+                        <div class="article-category">Prophecy</div>
+                        <h2 class="article-title">The Origins of the Pre-Tribulation Rapture</h2>
+                    </div>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>January 10, 2015</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>20 min read</span>
+                        </div>
+                    </div>
+                    <div class="article-excerpt">
+                        A comprehensive historical examination of the Pre-Tribulation Rapture doctrine, addressing various origin theories including Irving, Margaret MacDonald, and the pivotal role of J.N. Darby. Explores biblical foundations and responds to historical criticisms with documented evidence.
+                    </div>
+                    <div class="article-footer">
+                        <a href="#" class="read-article-btn">
+                            READ ARTICLE
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <span class="article-length">Full Article</span>
+                    </div>
+                </article>
+
+                <!-- Article 5: History of India -->
+                <article class="article-card" data-category="history" data-article="india">
+                    <div class="article-header">
+                        <div class="article-category">History</div>
+                        <h2 class="article-title">History of India: A Christian Perspective</h2>
+                    </div>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>November 5, 2014</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>15 min read</span>
+                        </div>
+                    </div>
+                    <div class="article-excerpt">
+                        Exploring the rich tapestry of Indian history through a biblical lens, understanding God's work in the subcontinent and the growth of Christianity in this ancient land.
+                    </div>
+                    <div class="article-footer">
+                        <a href="#" class="read-article-btn">
+                            READ ARTICLE
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <span class="article-length">Full Article</span>
+                    </div>
+                </article>
+
+                <!-- Article 6: Jesus in 66 Books -->
+                <article class="article-card" data-category="theology" data-article="jesus66">
+                    <div class="article-header">
+                        <div class="article-category">Biblical Studies</div>
+                        <h2 class="article-title">Jesus in All 66 Books of the Bible</h2>
+                    </div>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>September 12, 2014</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>20 min read</span>
+                        </div>
+                    </div>
+                    <div class="article-excerpt">
+                        A comprehensive journey through Scripture revealing Christ's presence from Genesis to Revelation, showing how every book points to our Savior and His redemptive work.
+                    </div>
+                    <div class="article-footer">
+                        <a href="#" class="read-article-btn">
+                            READ ARTICLE
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <span class="article-length">Full Article</span>
+                    </div>
+                </article>
+
+                <!-- Article 7: Anti-Christ -->
+                <article class="article-card" data-category="prophecy" data-article="antichrist">
+                    <div class="article-header">
+                        <div class="article-category">End Times</div>
+                        <h2 class="article-title">Anti-Christ and the World Government</h2>
+                    </div>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>June 8, 2014</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>18 min read</span>
+                        </div>
+                    </div>
+                    <div class="article-excerpt">
+                        Understanding biblical prophecy concerning the end times, the rise of the Anti-Christ, and the formation of a one-world government as revealed in Daniel and Revelation.
+                    </div>
+                    <div class="article-footer">
+                        <a href="#" class="read-article-btn">
+                            READ ARTICLE
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <span class="article-length">Full Article</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Reader Modal -->
+    <div class="article-reader" id="articleReader">
+        <div class="reader-container">
+            <div class="reader-header">
+                <button class="reader-close" id="closeReader">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="reader-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                <div style="width: 40px;"></div>
+            </div>
+            <div class="reader-content">
+                <div class="reader-category" id="readerCategory">Biography</div>
+                <h1 class="reader-title" id="readerTitle">Article Title</h1>
+                <div class="reader-meta" id="readerMeta">
+                    <span>July 6, 2016</span>
+                    <span>5 min read</span>
+                </div>
+                <div class="reader-body" id="readerBody">
+                    <!-- Article content will be loaded here -->
+                </div>
+                <div class="reader-cta" id="readerCTA">
+                    <!-- CTA content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Narrow Path Ministries</h3>
+                <p>A ministry dedicated to biblical teaching, theological education, and spiritual growth. We guide believers on the narrow path that leads to life through Jesus Christ our Lord.</p>
+                <p style="font-style: italic; opacity: 0.7; margin-top: 1rem;">
+                    "The gift of God is eternal life through Jesus Christ our Lord" - Romans 6:23
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about-page-redesign.html">About Us</a></li>
+                    <li><a href="articles-page-redesign.html">Books</a></li>
+                    <li><a href="articles-page.html">Articles</a></li>
+                    <li><a href="bible-college-redesign.html">Bible College</a></li>
+                    <li><a href="resources-page-redesign.html">Resources</a></li>
+                    <li><a href="sermons-redesigned.html">Sermons</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p>Houston, TX 77040</p>
+                <p>Email: <a href="mailto:thekkel45@gmail.com">thekkel45@gmail.com</a></p>
+                <p>Phone: <a href="tel:+18326518048">+1 (832) 651-8048</a></p>
+                <p style="margin-top: 1rem;">Website: <a href="http://www.thekkel.com" style="color: var(--accent);">www.thekkel.com</a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Narrow Path Ministries, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Article content database
+        const articles = {
+            darby: {
+                category: 'Biography',
+                title: 'A Portrait of John Nelson Darby',
+                date: 'July 6, 2016',
+                readTime: '7 min read',
+                content: `
+                    <p><span class="highlight">John Nelson Darby stands as the first and only theologian</span> who explained the real prophetical events of the book of Daniel and Revelation with unprecedented clarity and accuracy.</p>
+                    
+                    <h2>Prophetical Pioneer</h2>
+                    <p>From careful study of Biblical prophecy, Darby predicted remarkable world events that seemed impossible in his time:</p>
+                    
+                    <div style="background: rgba(230, 126, 34, 0.05); padding: 1.5rem; border-left: 3px solid var(--accent); margin: 2rem 0;">
+                        <p style="margin: 0; font-weight: 500;">Key Predictions from Scripture:</p>
+                        <ul style="margin: 1rem 0 0 1.5rem; line-height: 2;">
+                            <li>The founding of the state of Israel</li>
+                            <li>Middle East wars and ongoing conflicts</li>
+                            <li>The Rapture of the Church</li>
+                            <li>The rise of the Anti-Christ</li>
+                            <li>The Great Tribulation period</li>
+                            <li>The battle of Armageddon</li>
+                        </ul>
+                    </div>
+                    
+                    <h2>American History Through a Unique Lens</h2>
+                    <p>This biography provides <span class="highlight">a rare peek into American history</span> before and after the Civil War, revealing how one man's theological insights shaped an entire nation's spiritual and political trajectory.</p>
+                    
+                    <h3>Influence on Conservative America</h3>
+                    <p>The book thoroughly explains Darby's profound influence in:</p>
+                    <ul style="line-height: 2; margin: 1rem 0;">
+                        <li><strong>Shaping the conservative movement</strong> in America</li>
+                        <li><strong>Influencing the policies</strong> of American presidents</li>
+                        <li><strong>Impact on the Republican Party</strong> and its ideological foundations</li>
+                        <li><strong>The rise of Christian Zionism</strong> as a political and religious force</li>
+                    </ul>
+                    
+                    <h2>The Brethren Movement Analysis</h2>
+                    <p>Beyond historical biography, this work provides critical analysis of the Brethren Movement. I have carefully diagnosed the reasons for the decline of the Brethren Movement in North America and Great Britain, offering thoughtful remedies for the maladies that have affected this important Christian tradition.</p>
+                    
+                    <div style="background: #fafbfc; padding: 2rem; border-radius: 8px; margin: 2.5rem 0;">
+                        <h3 style="color: var(--accent); margin-bottom: 1rem;">Why This Book Matters Today</h3>
+                        <p>In our current age of geopolitical uncertainty and prophetic fulfillment, understanding Darby's contributions to biblical interpretation has never been more relevant. His systematic approach to prophecy continues to provide clarity for believers seeking to understand God's plan for the end times.</p>
+                    </div>
+                `,
+                cta: {
+                    title: 'Get Your Copy of "A Portrait of John Nelson Darby"',
+                    text: 'Available on Amazon in both paperback and Kindle formats. Search for "A Portrait of John Nelson Darby" on Amazon.com.',
+                    buttonText: 'Order on Amazon - $19.95',
+                    buttonLink: 'https://a.co/d/he7wPNd'
+                }
+            },
+            moses: {
+                category: 'Theology',
+                title: 'The Law of Moses and the Law of Christ',
+                date: 'May 28, 2015',
+                readTime: '15 min read',
+                content: `
+                    <p>For most Christians, <span class="highlight">the Law of Moses is a riddle wrapped in a mystery inside an enigma</span>. Are Christians under the Law? How do we decide which commandments are applicable today?</p>
+                    
+                    <h2>Understanding the 613 Commandments</h2>
+                    <p>Many believe the Law consists of just the Ten Commandments. Actually, the Law of Moses contains <strong>613 commandments</strong> covering everything from sacrifices to men's haircuts, clothing restrictions, sewage disposal, and charging interest on loans. These commandments are found in the first five books of the Bible—the Pentateuch (Torah).</p>
+                    
+                    <h2>Two Theological Systems</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+                        <div style="background: #fafbfc; padding: 1.5rem; border-left: 3px solid var(--accent);">
+                            <h3 style="color: var(--accent); margin-bottom: 1rem;">Covenant Theology</h3>
+                            <p>Teaches continuity between Old and New Testaments. Divides the Law into ceremonial, legal, and moral commandments, believing the Ten Commandments remain valid while the other 603 do not.</p>
+                        </div>
+                        <div style="background: #fafbfc; padding: 1.5rem; border-left: 3px solid var(--primary);">
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">Dispensational Theology</h3>
+                            <p>Teaches that God has dealt differently with people during different ages. The 613 regulations given to Israel are not binding upon New Testament believers.</p>
+                        </div>
+                    </div>
+                    
+                    <h2>The Purpose of the Mosaic Law</h2>
+                    <p>Scripture clearly states the Law was given to Israel, not the church (Deut. 4:7-8, Ps. 147:19-20, Mal. 4:4). The Law served three primary purposes:</p>
+                    <ol style="line-height: 2; margin: 1rem 0;">
+                        <li><strong>To reveal God's holiness</strong> and the standard of righteousness required for relationship with Him</li>
+                        <li><strong>To provide rules of conduct</strong> for Old Testament saints</li>
+                        <li><strong>To reveal sin</strong> (Rom. 3:19-20) and lead us to Christ (Gal. 3:24-25)</li>
+                    </ol>
+                    
+                    <div style="background: rgba(230, 126, 34, 0.05); padding: 1.5rem; margin: 2rem 0; border-radius: 8px;">
+                        <h3 style="color: var(--accent);">The Law of Moses Rendered Inoperative</h3>
+                        <p style="font-weight: 500;">The New Testament is crystal clear that Christians are NOT under the Old Testament Jewish Law:</p>
+                        <p>Romans 6:14 • Romans 7:4, 6 • Galatians 3:24-25, 5:18 • 2 Corinthians 3:11 • Colossians 2:14 • Hebrews 8:13, 10:9</p>
+                    </div>
+                    
+                    <h2>The Christian's Relationship to the Law</h2>
+                    <p>The dispensational truth asserts that <span class="highlight">the Law has never been abrogated, but the Christian is dead to the Law</span> (Rom. 7:4). The Law continues today and has present use (1 Tim. 1:8-11), but the Christian is dead and risen with Christ. Grace is our divinely appointed teacher, not the Law (Titus 2:11-15).</p>
+                    
+                    <h2>The Truth About Tithing</h2>
+                    <p>Most preachers teach that Christians must give ten percent, but this misunderstands both Old and New Testament giving:</p>
+                    
+                    <div style="background: #f8f9fa; padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+                        <h3>Old Testament Tithing = At Least 25% of Income</h3>
+                        <ul style="line-height: 2;">
+                            <li><strong>Levite's Tithe (10%):</strong> Support for the priestly tribe (Lev. 27:30)</li>
+                            <li><strong>Festival Tithe (10%):</strong> National religious worship (Deut. 12:10-11)</li>
+                            <li><strong>Welfare Tithe (3.3%):</strong> Help for the poor and widows (Deut. 14:28-29)</li>
+                            <li><strong>Additional taxes:</strong> Profit-sharing, land Sabbath, temple tax</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-weight: 500;">Total: More than 25% annual income tax to Israel's theocratic government!</p>
+                    </div>
+                    
+                    <h3>New Testament Giving</h3>
+                    <p>Under the Law of Christ, giving is governed by different principles (1 Cor. 16:1-4; 2 Cor. 8:1-8; 2 Cor. 9:6-8):</p>
+                    <ul style="line-height: 2; margin: 1rem 0;">
+                        <li>Give as the Spirit leads, not a mandated percentage</li>
+                        <li>Give cheerfully, not under compulsion</li>
+                        <li>The more given with joy, the more received from the Lord</li>
+                    </ul>
+                    
+                    <p style="background: rgba(52, 73, 94, 0.05); padding: 1rem; border-left: 3px solid var(--primary); margin: 2rem 0;">
+                        <strong>Important:</strong> Church leaders who require a specific percentage are guilty of placing man-made traditions above the Holy Spirit's guidance, running contrary to sound theology.
+                    </p>
+                    
+                    <h2>Is Sunday the Christian Sabbath?</h2>
+                    <p>The Bible does NOT teach that Sunday is the New Sabbath. Consider these New Testament facts:</p>
+                    
+                    <ol style="line-height: 2; margin: 1rem 0;">
+                        <li><strong>Christ's resurrection appearances:</strong> Always on the first day of the week (Matt. 28:1, Mark 16:9, Luke 24:1, John 20:19)</li>
+                        <li><strong>Sabbath in Acts-Revelation:</strong> Only mentioned for evangelizing Jews in synagogues</li>
+                        <li><strong>Clear first-day gatherings:</strong> Acts 20:7 - "On the first day of the week we came together to break bread"</li>
+                        <li><strong>Paul's instruction:</strong> Col. 2:16 - Don't let anyone judge you regarding Sabbaths</li>
+                    </ol>
+                    
+                    <h2>The Sermon on the Mount</h2>
+                    <p>Is the Sermon on the Mount the Christian's rule of life? Understanding its dispensational character is crucial:</p>
+                    
+                    <div style="background: #fafbfc; padding: 1.5rem; margin: 2rem 0; border-radius: 8px;">
+                        <p>The Sermon on the Mount was addressed primarily to Israel, presenting Christ as King and the rules for the kingdom. It represents the quintessence of the Law—dealing with hidden thoughts of the heart, not just acts.</p>
+                        <p style="margin-top: 1rem;"><strong>Key Point:</strong> No one has ever perfectly carried out the Sermon on the Mount. Even Paul didn't turn the other cheek when unjustly smitten (Acts 23:3), nor did Christ Himself before Caiaphas.</p>
+                    </div>
+                    
+                    <h2>The Law as a Mirror</h2>
+                    <p>The Law functions like a mirror or an MRI machine:</p>
+                    <ul style="line-height: 2; margin: 1rem 0;">
+                        <li>A mirror reveals you need fixing but cannot fix you</li>
+                        <li>An MRI detects problems but cannot heal them</li>
+                        <li>The Law reveals God's standard of holiness and our unrighteousness</li>
+                        <li>The Law points us to our need for a Savior</li>
+                    </ul>
+                    
+                    <div style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.05) 0%, rgba(52, 73, 94, 0.05) 100%); padding: 2rem; margin-top: 3rem; border-radius: 8px; text-align: center;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">The Bottom Line</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.8;">
+                            <span class="highlight">Christians are not under the Law of Moses but under the Law of Christ</span>. We are dead to the Law through Christ's body, married to Him who rose from the dead, and now serve in the newness of the Spirit, not the oldness of the letter.
+                        </p>
+                    </div>
+                `,
+                cta: {
+                    title: 'Deepen Your Biblical Understanding',
+                    text: 'Explore more theological insights and dispensational truths in our comprehensive study materials.',
+                    buttonText: 'View More Resources',
+                    buttonLink: 'resources-page-redesign.html'
+                }
+            },
+            catholicism: {
+                category: 'Doctrine',
+                title: 'Roman Catholicism: A Biblical Examination',
+                date: 'February 16, 2015',
+                readTime: '45 min read',
+                content: `
+                    <div style="background: rgba(230, 126, 34, 0.05); padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px;">
+                        <p style="font-weight: 500; margin: 0;">The Catechism is the official source for all Roman Catholic doctrine. This examination compares Catholic teachings with Scripture to help believers understand the differences.</p>
+                    </div>
+
+                    <h2>Who is the Final Authority?</h2>
+                    <p>The Bible maintains it is the one and only final authority, while Catholicism teaches that three final authorities exist: <strong>1) Tradition 2) Scripture 3) The Magisterium</strong>. According to Catholic doctrine, church tradition and magisterium are just as much the word of God (page 26).</p>
+                    
+                    <div style="background: #fafbfc; padding: 1.5rem; border-left: 3px solid var(--primary); margin: 1.5rem 0;">
+                        <p><strong>Scripture Says:</strong></p>
+                        <p>"The entirety of Your word is truth, And every one of Your righteous judgments endures forever." - Psalm 119:160</p>
+                        <p>"The words of the Lord are pure words, Like silver tried in a furnace of earth, Purified seven times." - Psalm 12:6</p>
+                        <p>See also: John 17:17, Rev 22:18-19, Rom 16:17-18, Gal 1:8-9, Prov 30:5-6</p>
+                    </div>
+
+                    <h2>31 Key Doctrinal Examinations</h2>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">1. Salvation Through the Church</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "Through Christ's Catholic church alone...the fullness of the means of salvation can be obtained" (Page 215)</p>
+                        </div>
+                        <p><strong>What God's Word Says:</strong></p>
+                        <ul style="line-height: 1.8;">
+                            <li>"Whoever calls on the name of the Lord shall be saved." - Romans 10:13</li>
+                            <li>"He who believes in the Son has everlasting life" - John 3:36</li>
+                            <li>See also: John 5:24, John 6:47, Rom 10:9-10, Acts 10:43</li>
+                            <li>"The Holy Scriptures...are able to make you wise for salvation through faith which is in Christ Jesus." - 2 Timothy 3:15</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">2. Salvation Through Good Works</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "Even though incorporated into the Church, one who doesn't however persevere in charity is not saved." (Page 222, #837)</p>
+                        </div>
+                        <p><strong>What God's Word Says:</strong></p>
+                        <p><span class="highlight">"For by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast."</span> - Ephesians 2:8-9</p>
+                        <p>"Not by works of righteousness which we have done, but according to His mercy He saved us" - Titus 3:5</p>
+                        <p>See also: Rom 3:28, Gal 3:8, 26</p>
+                        
+                        <h4>The Pharisees and Good Works</h4>
+                        <p>Jesus corrected the Pharisees who believed good works earned salvation: "In vain they worship Me, Teaching as doctrines the commandments of men." - Mark 7:7</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">3. The Church Forgives Sins</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "The Church, who through the Bishop and his priests forgives sins in the name of Jesus Christ." (page 363-364, #1448)</p>
+                        </div>
+                        <p><strong>What Scripture Says:</strong> "Who can forgive sins but God alone?" - Mark 2:7</p>
+                        <p>See also: Eph 4:32, Heb 4:16, Ps 32:5, Ps 51:2-4, Col 3:13</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">4. The One True Church</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "This is the sole church of Christ" (Page 214 #811), based on Matthew 16:18 where they claim Peter is the rock.</p>
+                        </div>
+                        <p><strong>What Scripture Says:</strong></p>
+                        <p>"For they drank of that spiritual Rock that followed them, and <span class="highlight">that Rock was Christ</span>." - 1 Corinthians 10:4</p>
+                        <p>"Jesus Christ Himself being the chief corner stone" - Ephesians 2:20</p>
+                        <p><strong>Who is the Head of the Church?</strong> "He is the head of the body, the church" - Colossians 1:18</p>
+                        <p>See also: Ps 118:22, Acts 4:10-11, 1 Pet 2:7, Deut 32:3-4</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">5. Baptism Saves</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "The Lord himself affirms that Baptism is necessary for Salvation" (page 320, #1257)</p>
+                        </div>
+                        <p><strong>What the Bible Says:</strong></p>
+                        <p>"As many as received Him, to them He gave the right to become children of God, to those who believe in His name" - John 1:12</p>
+                        <p>"In Him we have redemption through His blood, the forgiveness of sins" - Ephesians 1:7</p>
+                        <p>Paul said: "I thank God that I baptized none of you except Crispus and Gaius" - 1 Cor 1:14</p>
+                        <p>True baptism should occur AFTER salvation: Acts 16:30-31, 33; Acts 18:8</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">6. The Pope, Vicar of Christ</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "The Roman pontiff by reason of his office as Vicar of Christ...has full, supreme and universal power" (page 234, #882)</p>
+                        </div>
+                        <p><strong>Who is our Real Teacher?</strong></p>
+                        <p>"The Helper, the Holy Spirit, whom the Father will send in My name, He will teach you all things" - John 14:26</p>
+                        <p>Jesus instructed: "Call no man your Father upon the Earth; for one is your Father, which is in Heaven" - Matt 23:9</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">7. The Pope, Infallible</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "The Roman pontiff enjoys infallibility...when he proclaims by a definitive act a doctrine pertaining to faith or morals" (page 233, #89)</p>
+                        </div>
+                        <p><strong>Scripture declares:</strong> Only God is infallible. All humans are fallible and sinful.</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">8. The Sacraments Save</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "The sacraments of the new covenant are necessary for salvation" (page 292, #1129)</p>
+                            <p>Seven sacraments: Baptism, Confirmation, Eucharist, Penance, Anointing of the sick, Holy orders, Matrimony</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> "By the deeds of the law there shall no flesh be justified in his sight" - Romans 3:20</p>
+                        <p>"All our righteousnesses are like filthy rags" - Isaiah 64:6</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">9. The Sin of Presumption</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> Believing you are assured of heaven is "the sin of presumption" (pg. 507, #2092)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> "These things I have written to you who believe...that you may KNOW that you have eternal life" - 1 John 5:13</p>
+                        <p>"He who believes in the Son HAS everlasting life" - John 3:36</p>
+                        <p>It is not presumptuous to take God at His word. That is called faith.</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">10. Infant Baptism</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "Children also have need of the new birth in Baptism...The church and parents would deny a child the priceless grace" (pg. 319 #1250)</p>
+                            <p>The Catechism admits: "There is explicit testimony to this practice from the second century on" (not from Scripture)</p>
+                        </div>
+                        <p><strong>Note:</strong> This doctrine is admittedly a man-made tradition, not based on Scripture.</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">11. Transubstantiation</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> Priests have power to turn bread and wine into the actual body and blood of Christ (Pg 347, #1276)</p>
+                        </div>
+                        <p><strong>Context of John 6:</strong> Jesus said "I am the bread of life" (John 6:35). This is spiritual language, not literal cannibalism.</p>
+                        <p>"Everyone who sees the Son and believes in Him may have everlasting life" - John 6:40</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">12. Eucharist: Preserves from Sin</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "The Eucharist cannot unite us to Christ without...cleansing us from past sins and preserving us from future sins" (pg. 351 #1393)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> "The blood of Jesus Christ His Son cleanses us from all sin" - 1 John 1:7</p>
+                        <p>To avoid future sins: "Your word I have hidden in my heart, That I might not sin against You" - Psalm 119:11</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">13. Eucharist: Helps the Dead</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "The Eucharistic sacrifice is also offered for the faithful departed" (pg. 345 #1371)</p>
+                        </div>
+                        <p><strong>Scripture:</strong> No biblical support for helping the dead through rituals.</p>
+                    </div>
+
+                    <h2 style="margin-top: 3rem; color: var(--primary);">Mary Doctrines</h2>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">14. Mary Saves</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> Mary "continues to bring us the gifts of eternal salvation" and "became the cause of salvation for herself and for the whole human race" (pg. 252 #969, pg. 125 #494)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong></p>
+                        <p><span class="highlight">"Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved"</span> - Acts 4:12</p>
+                        <p>"I am the way, the truth, and the life. No one comes to the Father except through Me" - John 14:6</p>
+                        <p>"I, even I, am the Lord, And besides Me there is no savior" - Isaiah 43:11</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">15. Mary: Saved from Birth</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "Mary remained free of every personal sin her whole life long" (pg. 124 #493)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> "All have sinned and fall short of the glory of God" - Romans 3:23</p>
+                        <p>Mary herself said: "My spirit has rejoiced in God my Savior" - Luke 1:47 (Why would she need a Savior if sinless?)</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">16. Mary Remained a Virgin</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "Mary remained a virgin...always a virgin" (pg. 128, #510)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> "Is not His mother called Mary? And His brothers James, Joses, Simon, and Judas?" - Matthew 13:55</p>
+                        <p>See also: Mark 6:3, Galatians 1:19 (James, the Lord's brother)</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">17. Mary: The Intercessor</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> Mary is "Advocate, Helper, Benefactress, and Mediatrix" (Pg.252, #969)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong></p>
+                        <ul style="line-height: 1.8;">
+                            <li><strong>Advocate:</strong> "We have an Advocate with the Father, Jesus Christ the righteous" - 1 John 2:1</li>
+                            <li><strong>Helper:</strong> "God is my helper" - Psalm 54:4</li>
+                            <li><strong>Mediator:</strong> "There is one God and one Mediator between God and men, the Man Christ Jesus" - 1 Tim 2:5</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">18. Mary: Recipient of Prayer</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "By asking Mary to pray for us, we acknowledge ourselves to be poor sinners" (Pg. 644, #2677)</p>
+                        </div>
+                        <p><strong>Scripture:</strong> No biblical example of praying to Mary or any deceased person.</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">19. Mary Queen Over All Things</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> Mary was "exalted by the Lord as Queen over all things" (Pg. 252, #966)</p>
+                        </div>
+                        <p><strong>Scripture Warns:</strong> Jeremiah 7:18 and 44:17 condemn worship of the "queen of heaven" as pagan practice that provokes God to anger.</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">20. The Mass</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "Christ...is contained and is offered in an unbloody manner" in every Mass (Pg. 344, #1367)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> Christ's sacrifice was ONE TIME:</p>
+                        <p>"He has appeared to put away sin by the sacrifice of Himself" - Hebrews 9:26</p>
+                        <p>"We have been sanctified through the offering of the body of Jesus Christ once for all" - Hebrews 10:10</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">21. Purgatory</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> After death, some undergo purification in purgatory (Pg. 268-269, #1030-1031)</p>
+                        </div>
+                        <p><strong>Scripture:</strong> No biblical support for purgatory. "To be absent from the body is to be present with the Lord" - 2 Cor 5:8</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">22. Praying to Saints</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "We can and should ask them to intercede for us" (Pg. 645, #2683)</p>
+                        </div>
+                        <p><strong>Scripture:</strong> We pray directly to God through Christ. No examples of praying to deceased saints.</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">23. Praying for the Dead</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "Our prayer for them is capable...of helping them" (Pg. 250, #958)</p>
+                        </div>
+                        <p><strong>Scripture:</strong> No biblical instruction to pray for the dead. Christians pray for the living.</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">24. Statues</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> Catholics must "venerate" statues or images (Pg. 307, #1192)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> "You shall not make for yourself a carved image" - Exodus 20:4</p>
+                        <p>"You shall not set up a sacred pillar, which the Lord your God hates" - Deuteronomy 16:22</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">25. Confirmation</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "Confirmation perfects Baptismal grace" and binds more perfectly to the church (Pg. 333, #1316)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> "If anyone is in Christ, he is a new creation" - 2 Cor 5:17</p>
+                        <p>"If the Son makes you free, you shall be free indeed" - John 8:36</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">26. Confessing Sins to a Priest</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "One must confess to a priest all the unconfessed grave sins" (Pg. 374, #1493)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> "If we confess our sins, He is faithful and just to forgive us" - 1 John 1:9</p>
+                        <p>Peter told Simon: "Repent...and pray God if perhaps the thought of your heart may be forgiven" - Acts 8:22</p>
+                        <p>"Who can forgive sins but God alone?" - Mark 2:7</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">27. Indulgences</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "Through indulgences the faithful can obtain the remission of temporal punishment" (Pg. 374, #1498)</p>
+                        </div>
+                        <p><strong>Scripture:</strong> Salvation and forgiveness cannot be earned or purchased.</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">28. Interpreting God's Word</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "The task of interpreting the word of God...has been entrusted solely to the magisterium" (Pg. 30, #100)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> The Bereans "searched the Scriptures daily" - Acts 17:11</p>
+                        <p>"The Holy Spirit...will teach you all things" - John 14:26</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">29. Penance</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "The sinner must still...make amends for the sin" (Pg. 366, #1459)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> "Their sins and their lawless deeds I will remember no more" - Hebrews 10:17</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">30. Celibacy</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> Ordained ministers must remain celibate (Pg. 395, #1579)</p>
+                        </div>
+                        <p><strong>Scripture Says:</strong> "A bishop then must be...the husband of one wife" - 1 Timothy 3:2</p>
+                        <p><strong>Warning:</strong> "In latter times some will...forbid to marry" - 1 Timothy 4:1-3</p>
+                        <p>Note: Peter, the "first pope," was married (Mark 1:30)</p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3 style="color: var(--accent);">31. Last Rites</h3>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <p><strong>Catholic Teaching:</strong> "The Eucharist should always be the last sacrament" (Pg. 379, #1517)</p>
+                        </div>
+                        <p><strong>Scripture:</strong> No biblical support for last rites. Salvation is by faith, not final rituals.</p>
+                    </div>
+
+                    <h2 style="margin-top: 3rem; color: var(--primary);">Historical Timeline: When Traditions Entered the Church</h2>
+                    
+                    <div style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.05) 0%, rgba(52, 73, 94, 0.05) 100%); padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                        <table style="width: 100%; line-height: 2;">
+                            <tr><td><strong>2nd century AD</strong></td><td>Leaders called Priests; sacrifices started</td></tr>
+                            <tr><td><strong>AD 300</strong></td><td>Prayer for the dead; cross established in church</td></tr>
+                            <tr><td><strong>AD 320</strong></td><td>Lighted candles in prayer</td></tr>
+                            <tr><td><strong>AD 350</strong></td><td>Christmas declared December 25th</td></tr>
+                            <tr><td><strong>AD 375</strong></td><td>Worshiping dead saints and figurines</td></tr>
+                            <tr><td><strong>AD 431</strong></td><td>Mary declared "Mother of God" (Ephesus Council)</td></tr>
+                            <tr><td><strong>AD 500</strong></td><td>Priests wear special robes</td></tr>
+                            <tr><td><strong>AD 526</strong></td><td>Last rites began</td></tr>
+                            <tr><td><strong>AD 610</strong></td><td>Boniface III called first "Pope"</td></tr>
+                            <tr><td><strong>AD 786</strong></td><td>Bowing before crosses and images approved</td></tr>
+                            <tr><td><strong>AD 1079</strong></td><td>Celibacy mandated for priests</td></tr>
+                            <tr><td><strong>AD 1090</strong></td><td>Rosary introduced</td></tr>
+                            <tr><td><strong>AD 1200</strong></td><td>Seven Holy Ceremonies instituted</td></tr>
+                            <tr><td><strong>AD 1215</strong></td><td>Confession ceremony; Transubstantiation doctrine</td></tr>
+                            <tr><td><strong>AD 1229</strong></td><td>Bible banned for laymen (Valencia Council)</td></tr>
+                            <tr><td><strong>AD 1414</strong></td><td>Wine banned for laymen</td></tr>
+                            <tr><td><strong>AD 1439</strong></td><td>Purgatory declared doctrine</td></tr>
+                            <tr><td><strong>AD 1545</strong></td><td>Apocrypha added to Bible</td></tr>
+                            <tr><td><strong>AD 1854</strong></td><td>Immaculate Conception of Mary</td></tr>
+                            <tr><td><strong>AD 1870</strong></td><td>Papal infallibility declared</td></tr>
+                            <tr><td><strong>AD 1950</strong></td><td>Bodily assumption of Mary</td></tr>
+                        </table>
+                    </div>
+
+                    <div style="background: rgba(230, 126, 34, 0.1); padding: 2rem; margin-top: 3rem; border-radius: 8px; text-align: center;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">The Choice Before You</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.8;">
+                            <span class="highlight">Will you believe the Word of God or the commandments of men?</span><br>
+                            "In vain they worship Me, Teaching as doctrines the commandments of men." - Matthew 15:9
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1rem; background: #fafbfc; border-radius: 4px;">
+                        <p style="font-size: 0.9rem; color: var(--text-light);">
+                            <strong>Sources:</strong> Understanding Roman Catholicism by Rick Jones | Conversations With Catholics by James G. McCarthy | Why I Am Not a Roman Catholic by C.V. Vadhana | The Catechism of the Catholic Church
+                        </p>
+                    </div>
+                `,
+                cta: {
+                    title: 'Study More Biblical Doctrine',
+                    text: 'Explore additional theological resources and biblical teachings.',
+                    buttonText: 'View More Resources',
+                    buttonLink: 'resources-page-redesign.html'
+                }
+            },
+            rapture: {
+                category: 'Prophecy',
+                title: 'The Origins of the Pre-Tribulation Rapture',
+                date: 'January 10, 2015',
+                readTime: '20 min read',
+                content: `
+                    <div style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.05) 0%, rgba(52, 73, 94, 0.05) 100%); padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin: 0;">
+                            <span class="highlight">The Pre-Tribulational Rapture ultimately finds its origins in the New Testament Revelation</span> concerning the mystery (1 Corinthians 15:51-54) that had always been part of God's overall plan for history (Ephesians 2-3), but had been hidden until Christ revealed it to His apostles in "The Upper Room Discourse" (John 13-17) shortly before His death (John 14:1-3).
+                        </p>
+                    </div>
+
+                    <h2>Biblical Foundation</h2>
+                    <p>The Pre-Tribulation Rapture has Biblical authority—it doesn't matter when it originated or what twists and turns made it clear. The pre-tribulational interpretation regards the coming of the Lord and the Translation of the church as preceding immediately the fulfillment of Daniel's prophecy of a final seven-year period before the Second Advent.</p>
+                    
+                    <div style="background: #fafbfc; padding: 1.5rem; border-left: 3px solid var(--accent); margin: 2rem 0;">
+                        <p>Based on a literal interpretation of Daniel's prophecy, it is held that there has been no fulfillment of Daniel 9:27 in history and that therefore it prophesies a future period, familiarly called <strong>"the tribulation."</strong> The seven years of Daniel, bringing to a close the program of Israel prior to the Second Advent, will therefore be fulfilled between the translation of the church and the Second Advent of Christ to establish His kingdom on earth.</p>
+                        <p style="margin-top: 1rem;">At the translation, before the seven years, Christ will return with His church from heaven to establish His millennial reign on earth.</p>
+                    </div>
+
+                    <h2>Different Theories of Origin</h2>
+                    <p>Many "historians" make bold claims about the original history of Pre-Tribulationism. Anti-Rapture advocates have claimed such tainted sources for Pre-Tribulationism as:</p>
+                    
+                    <ul style="line-height: 2; margin: 1.5rem 0;">
+                        <li>Jesuit Emanuel Lacunza in 1790</li>
+                        <li>Edward Irving</li>
+                        <li>Various other members of Irving's congregation</li>
+                        <li>A prophecy by an adult lady at Irvingite service in 1830</li>
+                        <li>Most famous false claim: supposedly given by a fifteen-year-old Scottish young woman named <strong>Margaret MacDonald</strong> in the spring of 1830</li>
+                    </ul>
+
+                    <div style="background: rgba(230, 126, 34, 0.05); padding: 1.5rem; margin: 2rem 0; border-radius: 8px;">
+                        <p><strong>Important Note:</strong> If any one of these were actually true, then the others would have to be false. Apparently none of these speculative theories were convincing enough to anti-rapturists, so they continued to produce new ones.</p>
+                    </div>
+
+                    <h3>Recent Attacks</h3>
+                    <p>Recently, a pre-wrath advocate <strong>Marvin Rosenthal</strong> wrote that the Pre-Tribulation Rapture was of satanic origin and unheard of before 1830. Rosenthal says, <em>"Satan the father of lies, gave to a fifteen-year-old girl named Margaret MacDonald a lengthy vision."</em> Without documentation or correct source, Rosenthal is relying upon the questionable work of Dave MacPherson.</p>
+
+                    <p>Over a quarter of a century, <strong>John Bray</strong> and <strong>Dave MacPherson</strong> have probably been the most outspoken disseminators of various origin of the Rapture propaganda. Apparently the longer one opposes Pre-Tribulationism, the more he appears to be attracted to the various "historical" theories being developed concerning the origins of the Pre-Tribulation Rapture.</p>
+
+                    <p>Dave MacPherson, the dean of anti-Rapture propaganda, has long argued that Pre-Tribulationism was invented through a prophecy of a fifteen-year-old girl—Margaret MacDonald—who attended Irving's church, and that J.N. Darby stole the idea from her in an underhanded fashion.</p>
+
+                    <h2>The Historical Argument</h2>
+                    <div style="background: #f8f9fa; padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+                        <p>One of the commonly repeated reasons for opposing pretrib is that it is a new and novel doctrine beginning no earlier than John Nelson Darby. <strong>Alexander Reese</strong>, an outstanding opponent of pre-tribulationism, stated that it is <em>"a series of doctrines that had never been heard of before"</em>—that is, before the nineteenth century.</p>
+                        
+                        <p style="margin-top: 1rem;">Reese charged that the followers of Darby <em>"sought to overthrow what, since the Apostolic Age, have been considered by all premillennialists as established results."</em></p>
+                    </div>
+
+                    <h3>The Development of Doctrine</h3>
+                    <p>The fact is that the development of most important doctrines took centuries, and it is not surprising that even in the twentieth century new light should be cast on our understanding of scripture.</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 2rem 0;">
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; border-radius: 4px;">
+                            <strong>Trinity:</strong> Did not receive permanent statement until the fourth century, beginning with the Council of Nicaea in 325 AD
+                        </div>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; border-radius: 4px;">
+                            <strong>Human Depravity:</strong> Not a settled issue of the church until the fifth century and after
+                        </div>
+                        <div style="background: rgba(52, 73, 94, 0.05); padding: 1rem; border-radius: 4px;">
+                            <strong>Sufficiency of Scripture & Priesthood of Believer:</strong> Not recognized until the Protestant Reformation
+                        </div>
+                    </div>
+
+                    <p>It is not to be wondered at that details of eschatology, always difficult, should unfold slowly. Many people believe that the antiquity of a doctrine gives credence and enhances truthfulness beyond that of a more recent doctrine.</p>
+
+                    <p style="background: rgba(230, 126, 34, 0.05); padding: 1.5rem; border-left: 3px solid var(--accent); margin: 2rem 0;">
+                        <strong>Key Principle:</strong> History of a doctrine is important, however its importance is mainly in discovering how people formulated it, discussed it, or perverted it. Whether it is old or new, to be true, a doctrine must be in the Bible, not simply in church history—past or recent. Some of the early church fathers taught baptismal regeneration, but that does not make it a true doctrine. The early church did not spell out a Pre-Tribulation Rapture—that scarcely makes it an untrue doctrine.
+                    </p>
+
+                    <p>Development in eschatology recently did not come to preeminence until the modern period of church history, which began after the reformation.</p>
+
+                    <h2>The Rise of Pre-Tribulationism</h2>
+                    <h3>George Eldon Ladd's Account</h3>
+                    <p>George Eldon Ladd, though an opponent of Pre-Tribulation Rapture, provides this historical account:</p>
+                    
+                    <div style="background: #fafbfc; padding: 1.5rem; margin: 1.5rem 0; border-radius: 8px;">
+                        <p><em>"A second outgrowth of the prophetic awakening of the early nineteenth century was Darbyism, or Dispensationalism, which had its birth within the Plymouth Brethren movement. A Pre-Tribulation Rapture is an essential element of this system."</em></p>
+                        
+                        <p style="margin-top: 1rem;">The Brethren movement had its beginnings in Dublin in <strong>1825</strong> when a small group of earnest men, dissatisfied with the spiritual condition of the Protestant church in Ireland, met for prayer and fellowship. In <strong>1827</strong>, J.N. Darby entered the fellowship.</p>
+                        
+                        <p style="margin-top: 1rem;">Although there was an interest from the start in prophetic truth, its center of emphasis was "the nature and unity of the church of Christ" (the title of Darby's first tract) in reaction to the deadness and formalism of the organized church and the ordained ministry.</p>
+                    </div>
+
+                    <h4>Key Figures in the Plymouth Brethren</h4>
+                    <p>Outstanding among the new groups which arose in Ireland and England was the fellowship in Plymouth from which the movement derived its name.</p>
+                    
+                    <ul style="line-height: 2; margin: 1.5rem 0;">
+                        <li><strong>B.W. Newton:</strong> Leader of the Plymouth fellowship for many years, a man of considerable learning and scholarship</li>
+                        <li><strong>S.P. Tregelles:</strong> Recognized by the entire world of Biblical Scholarship for his contribution to the study of the history of the Greek text of the New Testament</li>
+                        <li><strong>George Müller:</strong> The great man of prayer</li>
+                        <li><strong>J.N. Darby (1800-82):</strong> Saw the church as a special work of God, distinct from the program for Israel. This truth integrated with his pre-millennial eschatology, led him to believe that the rapture would occur before the tribulation and that, during the tribulation, God would turn again to deal specially with Israel</li>
+                    </ul>
+
+                    <h2>Edward Irving: Examining the Claims</h2>
+                    <p>Attempts have been made to discredit Darby's Pre-tribulation view by claiming that he did not get it from the Bible but from a heretic and a mystic.</p>
+                    
+                    <div style="background: rgba(52, 73, 94, 0.05); padding: 1.5rem; margin: 2rem 0; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 1rem;">About Edward Irving (1792-1834)</h4>
+                        <ul style="line-height: 1.8;">
+                            <li>Deposed in 1833 from the Church of Scotland on the charge that he held to the sinfulness of Christ's humanity</li>
+                            <li>Prior to this, manifestations of tongues and healing appeared in his church in London</li>
+                            <li>His congregation had become a rallying point for millennial expectations</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>Important Distinction:</strong> The Irvingite eschatology is unclear. The Irvingites did NOT teach:</p>
+                    <ul style="line-height: 1.8; margin: 1rem 0;">
+                        <li>Imminency</li>
+                        <li>That the seventieth week of Daniel would intervene between the Rapture and the Second Advent</li>
+                    </ul>
+                    
+                    <p>These were doctrines that Darby clearly taught in the Powerscourt conference of 1833.</p>
+
+                    <div style="background: #f8f9fa; padding: 1.5rem; margin: 2rem 0; border-left: 3px solid var(--primary);">
+                        <p><strong>A Historian's Verdict:</strong></p>
+                        <p style="font-style: italic; margin-top: 0.5rem;">
+                            "Darby's opponents claimed that the doctrine [of the rapture] originated in one of the outbursts of tongues in Edward Irving's church about 1832. This seems to be a groundless and pernicious charge. Neither Irving nor any member of the Albury group advocated any doctrine resembling the secret rapture. As we have seen, they were all historicists, looking for the fulfillment of one or another prophecy in the Revelation as the next step in the divine time table, anticipating the second coming of Christ soon but not immediately. There is no connection between Darby's Pre-Tribulationism and the Irvingite teaching."
+                        </p>
+                    </div>
+
+                    <h2>Margaret MacDonald: The Truth About Her "Vision"</h2>
+                    <p>This mystic was an adolescent named <strong>Margaret MacDonald (1815-40)</strong>, who lived in Port Glasgow, Scotland, and who, it is alleged, influenced both the Irvingites and Darby with regards to Pre-Tribulation rapture. That is the charge leveled by Dave MacPherson in "The Incredible Cover-Up."</p>
+
+                    <h3>Excerpts from Margaret MacDonald's 1830 Account</h3>
+                    <p>Let me quote excerpts from MacPherson's report of Margaret MacDonald's hand written account of her 1830 pre-tribulation revelation, that we may see if she in fact did teach a pre-tribulation rapture:</p>
+                    
+                    <div style="background: rgba(230, 126, 34, 0.05); padding: 1.5rem; margin: 2rem 0; border-radius: 8px; font-style: italic;">
+                        <p>"The spiritual temple must and shall be reared, and the fullness of Christ be poured into his body, and then shall we be caught up to meet him..."</p>
+                        <p>"The trial of the church is from Anti-Christ. It is by being filled with the spirit that we shall be kept..."</p>
+                        <p>"O it is not known what the sign of the son of man is—I saw it was just the Lord himself descending from Heaven with a shout..."</p>
+                        <p>"Now will The Wicked be revealed, with all power and signs and lying wonders, so that if it were possible the very elect will be deceived—This is the fiery trial which is to try us."</p>
+                    </div>
+
+                    <h3>Charles Ryrie's Analysis</h3>
+                    <p>Charles Ryrie explains this perfectly:</p>
+                    
+                    <div style="background: #fafbfc; padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+                        <ol style="line-height: 2;">
+                            <li><strong>Partial Rapture:</strong> This adolescent distinguished spiritual believers from other believers and saw only the spiritual ones participating in the rapture. MacPherson wrongly concluded from this that MacDonald meant to teach a Secret coming. In reality, she was teaching the partial-rapture view.</li>
+                            
+                            <li style="margin-top: 1rem;"><strong>Church Enduring Tribulation:</strong> She saw the Church ("us") being purged by Anti-Christ. MacPherson reads this to mean that the Church will be raptured before Anti-Christ arises, ignoring the "us." In reality, MacDonald saw the Church enduring Antichrist's persecution of the tribulation days.</li>
+                            
+                            <li style="margin-top: 1rem;"><strong>Confused Timing:</strong> MacDonald identified the sign of the coming of the son of man (Matt. 24:30), which clearly appears at the end of the tribulation, as being seen at the same time as the rapture. MacPherson says MacDonald either believed in a very short Tribulation period, or, more likely to him, she understood that only spirit-filled believers would see the sign before the wicked one was revealed. In reality, MacDonald reveals by this statement a complete confusion. Though taken at face value, her vision equated the sign at the end of the Tribulation with the rapture—hardly pre-Tribulationism.</li>
+                        </ol>
+                    </div>
+
+                    <h2>Darby's True Origins: The Evidence</h2>
+                    <p><span class="highlight">By Darby's own testimony, his ideas came from the Bible</span>, particularly his understanding of the distinctiveness of the church (1826-1828). His belief that the rapture would be a considerable time before the Second Coming was developed before 1830, and the concept of a parenthesis between the sixty-ninth and seventieth weeks of Daniel around 1830.</p>
+
+                    <div style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.05) 0%, rgba(52, 73, 94, 0.05) 100%); padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Roy A. Huebner's Documentation</h3>
+                        <p>Historian Roy A. Huebner documents the fact that J.N. Darby first began to believe in the pre-tribulation rapture and develop his dispensational thinking while <strong>convalescing from a riding accident during December 1826 and January 1827</strong>.</p>
+                        
+                        <p style="margin-top: 1rem; font-weight: 500;">If this is true, then all of the origins of the rapture conspiracy theories fall to the ground in a heap of speculative rubble.</p>
+                        
+                        <p style="margin-top: 1rem;">Huebner provides clarification and evidence that Margaret MacDonald, Lacunza, Edward Irving, or the Irvingites did not influence Darby. In fact, none of these even taught any form of pre-tribulationism. These are all said by the detractors of Darby and the pre-tribulation rapture to be bridges, which led to Darby's thought.</p>
+                    </div>
+
+                    <h3>Darby's Development Timeline</h3>
+                    <div style="background: #f8f9fa; padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+                        <h4>Darby's pre-tribulation and dispensational thoughts were developed from the following factors:</h4>
+                        
+                        <div style="margin-top: 1rem;">
+                            <p><strong>1. Distinction Between Israel and Church:</strong><br>
+                            He saw from Isaiah 32 that there was a different dispensation coming—that Israel and the church were distinct.</p>
+                            
+                            <p style="margin-top: 1rem;"><strong>2. Daily Expectation (1827):</strong><br>
+                            During his convalescence, J.N.D. learned that he ought daily to expect his Lord's return.</p>
+                            
+                            <p style="margin-top: 1rem;"><strong>3. Understanding the Church's Ruin (1827):</strong><br>
+                            In 1827, J.N.D. understood the fall of the church—"the ruin of the church."</p>
+                            
+                            <p style="margin-top: 1rem;"><strong>4. Gap Between Rapture and Second Coming:</strong><br>
+                            Darby also was beginning to see a gap of time between the rapture and the Second Coming by 1827.</p>
+                        </div>
+                        
+                        <p style="margin-top: 1.5rem; padding: 1rem; background: white; border-left: 3px solid var(--accent);">
+                            Darby said later that he first started understanding things relating to the pre-tribulation rapture <em>"Thirty years ago"</em>. With that fixed point of reference (Jan. 31, 1827), we can see that Darby had already understood those truths upon which the pre-tribulation rapture hinges.
+                        </p>
+                    </div>
+
+                    <h3>Why Darby Left the Church of England</h3>
+                    <p>Even opponents of dispensationalism realize that Darby's original dissatisfaction with the Church of England was not over teaching on prophecy. His dissent was for more intimate fellowship with Christ, which he felt was becoming increasingly impossible in the established system. In explaining why he left the Church of England, he said:</p>
+                    
+                    <div style="background: rgba(52, 73, 94, 0.05); padding: 1.5rem; margin: 2rem 0; border-radius: 8px;">
+                        <p style="font-style: italic;">
+                            "It was that I was looking for the body of Christ (which was not there, but perhaps in all the parish not one converted person); and collaterally, because I believe in a divinely appointed ministry. If Paul had come, he could not have preached (he had never been ordained); if a wicked ordained man, he had his title and must be recognized as a minister; the truest minister of Christ unordained could not. It was a system contrary to what I found in scripture."
+                        </p>
+                    </div>
+
+                    <h2>Scholarly Assessments</h2>
+                    
+                    <div style="margin: 2rem 0;">
+                        <h3>Max S. Weremchuk</h3>
+                        <p>German author Max S. Weremchuk has produced a major new biography on Darby. He agrees with Huebner's conclusions concerning the matter:</p>
+                        <p style="background: #fafbfc; padding: 1rem; margin: 1rem 0; border-left: 3px solid var(--primary); font-style: italic;">
+                            "Having read MacPherson's book, I find it impossible to make a just comparison between what Miss MacDonald 'prophesied' and what Darby taught. It appears that the wish was the father of the idea."
+                        </p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3>Dr. John Walvoord</h3>
+                        <p style="background: #fafbfc; padding: 1rem; margin: 1rem 0; border-left: 3px solid var(--primary); font-style: italic;">
+                            "The whole controversy as aroused by Dave MacPherson's claim has so little supporting evidence, despite his careful research, that one wonders how he can write his book with a straight face. Pre-tribulationists should be indebted to Dave MacPherson for exposing the fact, namely, that there is no proof that MacDonald or Irving originated the pre-tribulation rapture teaching."
+                        </p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3>F.F. Bruce</h3>
+                        <p>F.F. Bruce, who was one of the greatest Bible teachers of the twentieth century, was part of the Brethren movement but did not agree with the pre-tribulation rapture. He said the following when commenting on the validity of MacPherson's thesis:</p>
+                        <p style="background: #fafbfc; padding: 1rem; margin: 1rem 0; border-left: 3px solid var(--primary); font-style: italic;">
+                            "Where did he [Darby] get it? The reviewer's answer would be that it was in the air in the 1820s and 1830s among eager students of unfulfilled prophecy—direct dependence by Darby on Margaret MacDonald is unlikely."
+                        </p>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h3>Dr. Walvoord's Final Assessment</h3>
+                        <p style="background: #fafbfc; padding: 1rem; margin: 1rem 0; border-left: 3px solid var(--primary); font-style: italic;">
+                            "Any careful student of Darby soon discovers that he did not get his eschatological views from men, but rather from his doctrine of the church as the body of Christ, a concept no one claims was revealed supernaturally to Irving or MacDonald. Darby's views undoubtedly were gradually formed, but they were theologically and Biblically based rather than derived from Irving's pre-Pentecostal group."
+                        </p>
+                    </div>
+
+                    <h2>Conclusion</h2>
+                    <div style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.05) 0%, rgba(52, 73, 94, 0.05) 100%); padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+                        <p>Opponents of the pre-tribulation rapture should stick to a discussion of these matters based upon scriptures, as some do. <span class="highlight">The fact that so many anti-pre-tribulationists are preoccupied with finding some historical information to discredit the rapture must mean that they are weak when it comes to finding proof for their views from the Bible.</span></p>
+                        
+                        <p style="margin-top: 1rem;">Instead, so many feel a need to slander some godly men in their failed attempts to cover up their weak argument from the Bible.</p>
+                        
+                        <p style="margin-top: 1rem;">This writer believes that many anti-rapture theories are not logical because of the fact that the doctrine of the rapture is intertwined with many other doctrines such as dispensationalism, premillennialism, and the distinctiveness of the church from Israel. Darby and William Kelly taught that by the act of the baptism of the Holy Spirit, the present age began and the body of Christ was formed.</p>
+                        
+                        <p style="margin-top: 1rem;">An impartial study of various New Testament principles would reveal that Darby's teaching of rapture alone was not "borrowed" as some allege, but is formulated simultaneously with other aforesaid doctrines.</p>
+                    </div>
+
+                    <div style="background: rgba(230, 126, 34, 0.1); padding: 2rem; margin-top: 3rem; border-radius: 8px; text-align: center;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Current Acceptance</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.8;">
+                            Today <strong>100%</strong> of Pentecostals, <strong>98%</strong> of Plymouth Brethren, and <strong>95%</strong> of Southern Baptists accept the doctrine of pre-tribulation rapture.
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1rem; background: #fafbfc; border-radius: 4px;">
+                        <p style="font-size: 0.9rem; color: var(--text-light);">
+                            <strong>Compiled by:</strong> John Mathew Thekkel M.A., Ph.D. (Dr. Sunny Ezhumattoor)<br>
+                            © Copyright Author
+                        </p>
+                    </div>
+                `,
+                cta: {
+                    title: 'Explore More Prophetic Studies',
+                    text: 'Dive deeper into biblical prophecy and end-times theology with our comprehensive resources.',
+                    buttonText: 'View Prophecy Resources',
+                    buttonLink: 'resources-page-redesign.html'
+                }
+            },
+            jesus66: {
+                category: 'Biblical Studies',
+                title: 'Jesus in All 66 Books of the Bible',
+                date: 'September 12, 2014',
+                readTime: '20 min read',
+                content: `
+                    <div style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.05) 0%, rgba(52, 73, 94, 0.05) 100%); padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin: 0; text-align: center;">
+                            <span class="highlight">From Genesis to Revelation, every book of the Bible reveals Jesus Christ.</span><br>
+                            <span style="font-style: italic; color: var(--text-light); font-size: 1rem;">
+                                "And beginning at Moses and all the prophets, He expounded unto them in all the scriptures the things concerning Himself." - Luke 24:27
+                            </span>
+                        </p>
+                    </div>
+
+                    <div style="background: #fafbfc; padding: 1.5rem; border-left: 3px solid var(--accent); margin-bottom: 3rem;">
+                        <p style="margin: 0; font-size: 1.05rem; line-height: 1.8;">
+                            The entire Bible is about Jesus Christ. The Old Testament anticipates Him, the Gospels reveal Him, Acts proclaims Him, the Epistles explain Him, and Revelation exalts Him. Every book contributes to the portrait of our Savior.
+                        </p>
+                    </div>
+
+                    <style>
+                        @media (min-width: 768px) {
+                            .books-grid {
+                                display: grid;
+                                grid-template-columns: repeat(2, 1fr);
+                                gap: 1.5rem;
+                            }
+                        }
+                        @media (max-width: 767px) {
+                            .books-grid {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 1rem;
+                            }
+                        }
+                        .book-item {
+                            display: flex;
+                            align-items: baseline;
+                            padding: 0.75rem 1rem;
+                            background: white;
+                            border-left: 3px solid transparent;
+                            transition: all 0.3s ease;
+                            border-radius: 4px;
+                            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                        }
+                        .book-item:hover {
+                            border-left-color: var(--accent);
+                            background: linear-gradient(90deg, rgba(230, 126, 34, 0.05) 0%, transparent 100%);
+                            transform: translateX(5px);
+                        }
+                        .book-name {
+                            font-weight: 600;
+                            color: var(--primary);
+                            min-width: 120px;
+                            flex-shrink: 0;
+                            font-size: 0.95rem;
+                        }
+                        .book-description {
+                            color: var(--text-light);
+                            padding-left: 1rem;
+                            line-height: 1.5;
+                            font-size: 0.9rem;
+                        }
+                        @media (max-width: 480px) {
+                            .book-item {
+                                flex-direction: column;
+                                align-items: flex-start;
+                                padding: 1rem;
+                            }
+                            .book-name {
+                                margin-bottom: 0.5rem;
+                                font-size: 1rem;
+                            }
+                            .book-description {
+                                padding-left: 0;
+                                font-size: 0.95rem;
+                            }
+                        }
+                        .testament-header {
+                            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+                            color: white;
+                            padding: 1.5rem;
+                            margin: 3rem 0 2rem;
+                            border-radius: 8px;
+                            text-align: center;
+                            position: relative;
+                            overflow: hidden;
+                        }
+                        .testament-header::before {
+                            content: '';
+                            position: absolute;
+                            top: -50%;
+                            right: -10%;
+                            width: 200px;
+                            height: 200px;
+                            background: rgba(255,255,255,0.05);
+                            border-radius: 50%;
+                        }
+                        .testament-header h2 {
+                            margin: 0;
+                            font-size: 2rem;
+                            font-weight: 300;
+                            letter-spacing: 2px;
+                            position: relative;
+                            z-index: 1;
+                        }
+                        .testament-subtitle {
+                            font-size: 0.9rem;
+                            opacity: 0.9;
+                            margin-top: 0.5rem;
+                            letter-spacing: 1px;
+                            text-transform: uppercase;
+                        }
+                    </style>
+
+                    <div class="testament-header">
+                        <h2>OLD TESTAMENT</h2>
+                        <div class="testament-subtitle">39 Books • The Promise of Christ</div>
+                    </div>
+
+                    <div class="books-grid">
+                        <div class="book-item">
+                            <span class="book-name">Genesis</span>
+                            <span class="book-description">He is the Seed of Woman</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Exodus</span>
+                            <span class="book-description">He is the Passover Lamb, The Manna, The Rock, and The Ark</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Leviticus</span>
+                            <span class="book-description">He is our High Priest, Scapegoat</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Numbers</span>
+                            <span class="book-description">He is the Cloud by day and a Pillar of Fire by night, The Bronze Serpent</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Deuteronomy</span>
+                            <span class="book-description">He is the Prophet like unto Moses</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Joshua</span>
+                            <span class="book-description">He is the Captain of our Salvation</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Judges</span>
+                            <span class="book-description">He is the Deliverer of His own</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Ruth</span>
+                            <span class="book-description">He is our Kinsman and Redeemer</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Samuel</span>
+                            <span class="book-description">He is our Trusted Prophet</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Kings</span>
+                            <span class="book-description">He is the Lord our King</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Chronicles</span>
+                            <span class="book-description">He is our Reigning King, The Lion of Judah</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Ezra</span>
+                            <span class="book-description">He is our Faithful Scribe</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Nehemiah</span>
+                            <span class="book-description">He is the Builder of broken down walls</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Esther</span>
+                            <span class="book-description">He is our Mordecai</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Job</span>
+                            <span class="book-description">He is our Redeemer</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Psalms</span>
+                            <span class="book-description">He is the Lord our Shepherd</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Proverbs</span>
+                            <span class="book-description">He is our Wisdom</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Ecclesiastes</span>
+                            <span class="book-description">He is the forgotten Wise Man who saved the city</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Song of Solomon</span>
+                            <span class="book-description">He is the Shepherd who won the Shulamite's heart, The Rose of Sharon and the Lily of the valley, Fairest of Ten Thousand</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Isaiah</span>
+                            <span class="book-description">He is the Prince of Peace, Suffering Servant, Immanuel, The Lamb led to the slaughter</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Jeremiah</span>
+                            <span class="book-description">He is the Righteous Branch</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Lamentations</span>
+                            <span class="book-description">He is the Weeping Prophet</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Ezekiel</span>
+                            <span class="book-description">He is the Wonderful Four-faced Man</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Daniel</span>
+                            <span class="book-description">He is the Fourth Man in the Fiery Furnace, The Stone that smashes the kingdoms of the world</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Hosea</span>
+                            <span class="book-description">He is the Faithful Husband</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Joel</span>
+                            <span class="book-description">He is the Holy Ghost Baptizer</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Amos</span>
+                            <span class="book-description">He is the Burden Bearer</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Obadiah</span>
+                            <span class="book-description">He is The Mighty Savior</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Jonah</span>
+                            <span class="book-description">He is our Foreign Missionary</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Micah</span>
+                            <span class="book-description">He is the Messenger with Beautiful feet</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Nahum</span>
+                            <span class="book-description">The Avenger of God's Elect</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Habakkuk</span>
+                            <span class="book-description">He is God's Evangelist crying for revival</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Zephaniah</span>
+                            <span class="book-description">He is our Savior</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Haggai</span>
+                            <span class="book-description">He is the Cleansing Fountain</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Zechariah</span>
+                            <span class="book-description">He is the Pierced Son</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Malachi</span>
+                            <span class="book-description">He is the Son of Righteousness with healing in His wings</span>
+                        </div>
+                    </div>
+
+                    <div class="testament-header" style="background: linear-gradient(135deg, var(--accent) 0%, #d35400 100%); margin-top: 4rem;">
+                        <h2>NEW TESTAMENT</h2>
+                        <div class="testament-subtitle">27 Books • The Person of Christ</div>
+                    </div>
+
+                    <div class="books-grid">
+                        <div class="book-item">
+                            <span class="book-name">Matthew</span>
+                            <span class="book-description">He is The Messiah</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Mark</span>
+                            <span class="book-description">He is the Wonder Worker</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Luke</span>
+                            <span class="book-description">He is the Son of Man</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">John</span>
+                            <span class="book-description">He is The Son of God, The Word</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Acts</span>
+                            <span class="book-description">He is The Foundation of the Church</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Romans</span>
+                            <span class="book-description">He is our Justifier</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Corinthians</span>
+                            <span class="book-description">He is our Sanctifier, The Last Adam</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Galatians</span>
+                            <span class="book-description">He is The Redeemer from the curse of the Law</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Ephesians</span>
+                            <span class="book-description">He is The Christ with the unsearchable riches</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Philippians</span>
+                            <span class="book-description">He is The God that supplies all of our needs</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Colossians</span>
+                            <span class="book-description">He is The Fullness of the Godhead Bodily</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Thessalonians</span>
+                            <span class="book-description">He is our Soon Coming King</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Timothy</span>
+                            <span class="book-description">He is the Mediator between God the Father and man</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Titus</span>
+                            <span class="book-description">He is the Faithful Pastor</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Philemon</span>
+                            <span class="book-description">He is the Friend that sticks closer than a brother</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Hebrews</span>
+                            <span class="book-description">He is the Blood of the Everlasting Covenant</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">James</span>
+                            <span class="book-description">He is our Great Physician</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Peter</span>
+                            <span class="book-description">He is the Chief Shepherd</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1, 2 & 3 John</span>
+                            <span class="book-description">He is Love</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Jude</span>
+                            <span class="book-description">He is The Lord coming with 10,000 of His saints</span>
+                        </div>
+                        <div class="book-item" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(52, 73, 94, 0.1) 100%); border-left-color: var(--accent);">
+                            <span class="book-name">Revelation</span>
+                            <span class="book-description">He is the King of Kings and Lord of Lords, He is the Alpha and Omega, the First and the Last, The Lion of the tribe of Judah, The Bright and Morning Star, The Word of God</span>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.05) 0%, rgba(52, 73, 94, 0.05) 100%); padding: 3rem 2rem; margin-top: 4rem; border-radius: 8px; text-align: center;">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.8rem; font-weight: 300;">The Unified Message</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+                            <span class="highlight">Jesus Christ is the central theme of Scripture.</span> The Bible is not merely a collection of stories, moral teachings, prophecies, and inspirational sayings; it is the revelation of Jesus Christ. God has given us a written portrait of His Son, and this portrait fills the entire Bible from beginning to end.
+                        </p>
+                        
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <p style="font-style: italic; color: var(--text-light); margin: 0; font-size: 1rem;">
+                                "Search the scriptures; for in them ye think ye have eternal life: and they are they which testify of me." - John 5:39
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: #fafbfc; padding: 2rem; margin-top: 3rem; border-radius: 8px;">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem; text-align: center;">How to See Jesus in Scripture</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <div style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem;">📖</div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">In History</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">He is revealed in the historical accounts</p>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <div style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem;">🕊️</div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">In Prophecy</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">He is foretold in prophetic utterances</p>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <div style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem;">✨</div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">In Types</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">He is prefigured in symbols and shadows</p>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <div style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem;">👑</div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">In Person</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">He is manifested in the Gospels and glorified in Revelation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1rem; background: #fafbfc; border-radius: 4px;">
+                        <p style="font-size: 0.9rem; color: var(--text-light); text-align: center; margin: 0;">
+                            <strong>Compiled by:</strong> Dr. Sunny Ezhumattoor (John Mathew Thekkel)
+                        </p>
+                    </div>
+                `,
+                cta: {
+                    title: 'Deepen Your Biblical Understanding',
+                    text: 'Explore more comprehensive Bible studies and discover Christ throughout Scripture.',
+                    buttonText: 'View Bible Study Resources',
+                    buttonLink: 'resources-page-redesign.html'
+                }
+            },
+            // Add more article content as needed
+        };
+
+        // Page loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('pageLoader').classList.add('hidden');
+            }, 500);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const articleCards = document.querySelectorAll('.article-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter articles
+                articleCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(30px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        // Ensure elements exist before adding event listeners
+        if (mobileMenuBtn && mobileMenu && mobileMenuClose) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+            });
+
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        } else {
+            console.error('Mobile menu elements not found:', { mobileMenuBtn, mobileMenu, mobileMenuClose });
+        }
+
+        // Article reader functionality
+        const articleReader = document.getElementById('articleReader');
+        const closeReader = document.getElementById('closeReader');
+        const readerCategory = document.getElementById('readerCategory');
+        const readerTitle = document.getElementById('readerTitle');
+        const readerMeta = document.getElementById('readerMeta');
+        const readerBody = document.getElementById('readerBody');
+        const readerCTA = document.getElementById('readerCTA');
+        const progressFill = document.getElementById('progressFill');
+
+        // Mobile detection
+        const isMobile = () => window.innerWidth <= 768;
+
+        // Open article
+        document.querySelectorAll('.article-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const articleKey = card.dataset.article;
+                const article = articles[articleKey];
+                
+                if (article) {
+                    // Load article content
+                    readerCategory.textContent = article.category;
+                    readerTitle.textContent = article.title;
+                    readerMeta.innerHTML = `<span>${article.date}</span><span>${article.readTime}</span>`;
+                    readerBody.innerHTML = article.content;
+                    
+                    // Load CTA if available
+                    if (article.cta) {
+                        readerCTA.innerHTML = `
+                            <h3>${article.cta.title}</h3>
+                            <p>${article.cta.text}</p>
+                            <a href="${article.cta.buttonLink}" target="_blank" class="cta-button">${article.cta.buttonText}</a>
+                        `;
+                    }
+                    
+                    // Show reader
+                    articleReader.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Mobile-specific handling
+                    if (isMobile()) {
+                        // Ensure proper mobile scrolling
+                        articleReader.style.overflow = 'auto';
+                        articleReader.style.webkitOverflowScrolling = 'touch';
+                        
+                        // Reset scroll position for mobile
+                        setTimeout(() => {
+                            articleReader.scrollTop = 0;
+                            if (articleReader.querySelector('.reader-container')) {
+                                articleReader.querySelector('.reader-container').scrollTop = 0;
+                            }
+                        }, 100);
+                    } else {
+                        // Desktop behavior
+                        articleReader.scrollTop = 0;
+                    }
+                    
+                    // Reset scroll and progress
+                    updateProgress();
+                } else {
+                    // Placeholder for articles without content yet
+                    alert('Full article content coming soon! This article is being prepared for publication.');
+                }
+            });
+        });
+
+        // Close reader
+        closeReader.addEventListener('click', () => {
+            articleReader.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && articleReader.classList.contains('active')) {
+                articleReader.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Update reading progress
+        function updateProgress() {
+            const reader = articleReader;
+            const scrollHeight = reader.scrollHeight - reader.clientHeight;
+            const scrollPosition = reader.scrollTop;
+            const progress = (scrollPosition / scrollHeight) * 100;
+            progressFill.style.width = progress + '%';
+        }
+
+        articleReader.addEventListener('scroll', updateProgress);
+    </script>
+</body>
+</html>
