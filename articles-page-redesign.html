@@ -240,6 +240,10 @@
             z-index: 1;
         }
 
+        .page-hero h1 span {
+            color: var(--accent);
+        }
+
         .page-subtitle {
             font-size: clamp(1.1rem, 2.5vw, 1.4rem);
             color: var(--text-light);
@@ -771,7 +775,7 @@
 
     <!-- Page Hero -->
     <section class="page-hero">
-                        <h1>Theological Books & Essays</h1>
+                        <h1>Theological Books & <span>Essays</span></h1>
         <p class="page-subtitle">Exploring Biblical Truth Through Scholarly Writings</p>
     </section>
 
@@ -1555,6 +1559,9 @@
         </div>
     </footer>
 
+    <!-- Advanced Contact Protection System -->
+    <script src="contact-protection.min.js"></script>
+    
     <script>
         // Mobile Menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');

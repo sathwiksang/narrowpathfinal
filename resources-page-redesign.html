@@ -240,6 +240,10 @@
             z-index: 1;
         }
 
+        .page-hero h1 span {
+            color: var(--accent);
+        }
+
         .page-subtitle {
             font-size: clamp(1.1rem, 2.5vw, 1.4rem);
             color: var(--text-light);
@@ -676,7 +680,7 @@
 
     <!-- Page Hero -->
     <section class="page-hero">
-        <h1>Christian Resources</h1>
+        <h1>Christian <span>Resources</span></h1>
         <p class="page-subtitle">A curated collection of valuable Christian websites and ministries</p>
     </section>
 
@@ -1052,6 +1056,9 @@
         </div>
     </footer>
 
+    <!-- Advanced Contact Protection System -->
+    <script src="contact-protection.min.js"></script>
+    
     <script>
         // Mobile Menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
