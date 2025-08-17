@@ -1,449 +1,296 @@
 /**
- * Advanced Contact Information Protection System
- * Multi-layered encryption and anti-crawler protection
- * Protects phone numbers and email addresses from web scrapers and hackers
+ * Advanced Contact Protection System
+ * Real contact visible to users, encrypted data in inspect element
  */
 
-class ContactProtector {
-    constructor() {
-        // Dynamic encryption keys based on current time and user agent
-        this.timeKey = this.generateTimeKey();
-        this.userKey = this.generateUserKey();
-        this.isBot = this.detectBot();
-        
-        // Decoy data for bots
-        this.decoyEmails = [
-            'noreply@example.com',
-            'admin@localhost.com',
-            'test@test.com',
-            'fake@fake.com',
-            'spam@spam.com'
-        ];
-        
-        this.decoyPhones = [
-            '+1 (555) 000-0000',
-            '+1 (123) 456-7890',
-            '+1 (999) 999-9999',
-            '+1 (000) 000-0000'
-        ];
-        
-        this.initializeProtection();
-    }
+(function() {
+    'use strict';
     
-    // Generate time-based encryption key
-    generateTimeKey() {
-        const now = new Date();
-        const timeHash = now.getHours() * 3600 + now.getMinutes() * 60 + Math.floor(now.getSeconds() / 10) * 10;
-        return timeHash % 256;
-    }
+    // Encrypted data that will appear in inspect element
+    const encryptedDisplay = {
+        email: 'zQp8mX9kL3vN2wR7gB4hS6',
+        phone: 'aY5tU8oI1qE3rT6yP9sD2f'
+    };
     
-    // Generate user agent based key
-    generateUserKey() {
-        const ua = navigator.userAgent;
-        let hash = 0;
-        for (let i = 0; i < ua.length; i++) {
-            const char = ua.charCodeAt(i);
-            hash = ((hash << 5) - hash) + char;
-            hash = hash & hash; // Convert to 32-bit integer
-        }
-        return Math.abs(hash) % 256;
-    }
+    // Real contact data (hidden from DOM)
+    const realContacts = {
+        email: String.fromCharCode(116,104,101,107,107,101,108,52,53,64,103,109,97,105,108,46,99,111,109),
+        phone: String.fromCharCode(43,49,32,40,56,51,50,41,32,54,53,49,45,56,48,52,56)
+    };
     
-    // Advanced bot detection
-    detectBot() {
-        const botPatterns = [
-            /bot/i, /crawl/i, /spider/i, /scrape/i, /fetch/i,
-            /headless/i, /phantom/i, /selenium/i, /puppeteer/i,
-            /googlebot/i, /bingbot/i, /slurp/i, /duckduckbot/i,
-            /baiduspider/i, /yandexbot/i, /facebookexternalhit/i,
-            /twitterbot/i, /linkedinbot/i, /whatsapp/i, /telegram/i,
-            /curl/i, /wget/i, /python/i, /java/i, /go-http/i,
-            /postman/i, /insomnia/i, /httpie/i
-        ];
-        
-        const ua = navigator.userAgent.toLowerCase();
-        const isKnownBot = botPatterns.some(pattern => pattern.test(ua));
-        
-        // Additional checks
-        const hasWebdriver = navigator.webdriver === true;
-        const hasPhantom = window.callPhantom || window._phantom;
-        const hasSelenium = window.document.documentElement.getAttribute('webdriver') !== null;
-        const hasAutomation = navigator.webdriver || window.domAutomation || window.domAutomationController;
-        
-        // Check for missing properties that real browsers have
-        const missingProps = !navigator.languages || !navigator.plugins || navigator.plugins.length === 0;
-        
-        // Check screen properties
-        const suspiciousScreen = screen.width === 0 || screen.height === 0 || screen.colorDepth === 0;
-        
-        return isKnownBot || hasWebdriver || hasPhantom || hasSelenium || hasAutomation || missingProps || suspiciousScreen;
-    }
+    // Track protected elements
+    const protectedElements = new WeakMap();
     
-    // Multi-layer encryption
-    encrypt(text) {
-        // Layer 1: Custom Caesar cipher with dynamic shift
-        let step1 = this.caesarCipher(text, this.timeKey % 25 + 1);
+    // DOM manipulation protection
+    const domProtection = {
+        init() {
+            this.overrideInspectorMethods();
+            this.setupVisualOverlay();
+        },
         
-        // Layer 2: ROT13
-        let step2 = this.rot13(step1);
-        
-        // Layer 3: XOR with combined keys
-        let step3 = this.xorEncrypt(step2, this.timeKey ^ this.userKey);
-        
-        // Layer 4: Base64 encoding
-        let step4 = btoa(step3);
-        
-        // Layer 5: Reverse and add noise
-        let step5 = this.addNoise(step4.split('').reverse().join(''));
-        
-        return step5;
-    }
-    
-    // Multi-layer decryption
-    decrypt(encryptedText) {
-        try {
-            // Layer 5: Remove noise and reverse
-            let step5 = this.removeNoise(encryptedText).split('').reverse().join('');
-            
-            // Layer 4: Base64 decoding
-            let step4 = atob(step5);
-            
-            // Layer 3: XOR decrypt
-            let step3 = this.xorDecrypt(step4, this.timeKey ^ this.userKey);
-            
-            // Layer 2: ROT13 (self-inverse)
-            let step2 = this.rot13(step3);
-            
-            // Layer 1: Caesar cipher decrypt
-            let step1 = this.caesarCipher(step2, -(this.timeKey % 25 + 1));
-            
-            return step1;
-        } catch (e) {
-            return null;
-        }
-    }
-    
-    // Caesar cipher implementation
-    caesarCipher(text, shift) {
-        return text.replace(/[a-zA-Z]/g, function(char) {
-            const start = char <= 'Z' ? 65 : 97;
-            return String.fromCharCode(((char.charCodeAt(0) - start + shift + 26) % 26) + start);
-        });
-    }
-    
-    // ROT13 implementation
-    rot13(text) {
-        return text.replace(/[a-zA-Z]/g, function(char) {
-            const start = char <= 'Z' ? 65 : 97;
-            return String.fromCharCode(((char.charCodeAt(0) - start + 13) % 26) + start);
-        });
-    }
-    
-    // XOR encryption
-    xorEncrypt(text, key) {
-        let result = '';
-        for (let i = 0; i < text.length; i++) {
-            result += String.fromCharCode(text.charCodeAt(i) ^ (key + i) % 256);
-        }
-        return result;
-    }
-    
-    // XOR decryption
-    xorDecrypt(text, key) {
-        let result = '';
-        for (let i = 0; i < text.length; i++) {
-            result += String.fromCharCode(text.charCodeAt(i) ^ (key + i) % 256);
-        }
-        return result;
-    }
-    
-    // Add noise to obfuscate patterns
-    addNoise(text) {
-        let result = '';
-        const noise = 'xYzAbC123';
-        for (let i = 0; i < text.length; i++) {
-            result += text[i];
-            if (i % 3 === 0 && i > 0) {
-                result += noise[i % noise.length];
-            }
-        }
-        return result;
-    }
-    
-    // Remove noise
-    removeNoise(text) {
-        let result = '';
-        const noise = 'xYzAbC123';
-        for (let i = 0; i < text.length; i++) {
-            if (i % 4 === 3 && i > 2) {
-                // Skip noise character
-                continue;
-            }
-            result += text[i];
-        }
-        return result;
-    }
-    
-    // Initialize protection system
-    initializeProtection() {
-        if (this.isBot) {
-            this.deployDecoys();
-            return;
-        }
-        
-        // Wait for DOM to be ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.protectContacts());
-        } else {
-            this.protectContacts();
-        }
-    }
-    
-    // Deploy decoy information for bots
-    deployDecoys() {
-        const decoyEmail = this.decoyEmails[Math.floor(Math.random() * this.decoyEmails.length)];
-        const decoyPhone = this.decoyPhones[Math.floor(Math.random() * this.decoyPhones.length)];
-        
-        // Create hidden decoy elements
-        const decoyContainer = document.createElement('div');
-        decoyContainer.style.cssText = 'position:absolute;left:-9999px;visibility:hidden;opacity:0;';
-        decoyContainer.innerHTML = `
-            <span class="contact-email">${decoyEmail}</span>
-            <span class="contact-phone">${decoyPhone}</span>
-            <a href="mailto:${decoyEmail}">${decoyEmail}</a>
-            <a href="tel:${decoyPhone}">${decoyPhone}</a>
-        `;
-        document.body.appendChild(decoyContainer);
-        
-        // Also replace any existing contact info with decoys
-        this.replaceWithDecoys(decoyEmail, decoyPhone);
-    }
-    
-    // Replace contact info with decoys for bots
-    replaceWithDecoys(decoyEmail, decoyPhone) {
-        const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
-        const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-        
-        emailLinks.forEach(link => {
-            link.href = `mailto:${decoyEmail}`;
-            link.textContent = decoyEmail;
-        });
-        
-        phoneLinks.forEach(link => {
-            link.href = `tel:${decoyPhone}`;
-            link.textContent = decoyPhone;
-        });
-    }
-    
-    // Main contact protection function
-    protectContacts() {
-        // Real contact information (encrypted)
-        const realEmail = 'thekkel45@gmail.com';
-        const realPhone = '+1 (832) 651-8048';
-        
-        // Encrypt the real data
-        const encryptedEmail = this.encrypt(realEmail);
-        const encryptedPhone = this.encrypt(realPhone);
-        
-        // Store encrypted data in multiple hidden ways
-        this.storeEncryptedData(encryptedEmail, encryptedPhone);
-        
-        // Replace visible contact information
-        this.replaceContactInfo(realEmail, realPhone);
-        
-        // Set up dynamic decryption on user interaction
-        this.setupInteractionHandlers();
-    }
-    
-    // Store encrypted data in hidden attributes
-    storeEncryptedData(encryptedEmail, encryptedPhone) {
-        // Store in data attributes with misleading names
-        document.documentElement.setAttribute('data-theme-config', encryptedEmail);
-        document.documentElement.setAttribute('data-layout-settings', encryptedPhone);
-        
-        // Store in meta tags
-        const metaEmail = document.createElement('meta');
-        metaEmail.name = 'theme-color-scheme';
-        metaEmail.content = encryptedEmail;
-        document.head.appendChild(metaEmail);
-        
-        const metaPhone = document.createElement('meta');
-        metaPhone.name = 'viewport-settings';
-        metaPhone.content = encryptedPhone;
-        document.head.appendChild(metaPhone);
-    }
-    
-    // Replace contact information in DOM
-    replaceContactInfo(realEmail, realPhone) {
-        const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
-        const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-        
-        // Replace email links
-        emailLinks.forEach((link, index) => {
-            const placeholder = this.createPlaceholder('email', index);
-            link.parentNode.replaceChild(placeholder, link);
-        });
-        
-        // Replace phone links
-        phoneLinks.forEach((link, index) => {
-            const placeholder = this.createPlaceholder('phone', index);
-            link.parentNode.replaceChild(placeholder, link);
-        });
-        
-        // Replace text content
-        this.replaceTextContent(realEmail, realPhone);
-    }
-    
-    // Create placeholder elements
-    createPlaceholder(type, index) {
-        const span = document.createElement('span');
-        span.className = `protected-${type}-${index}`;
-        span.style.cssText = 'cursor:pointer;color:inherit;text-decoration:none;';
-        span.setAttribute('data-protected-type', type);
-        span.setAttribute('data-index', index);
-        
-        if (type === 'email') {
-            span.textContent = 'thekkel45@gmail.com';
-            span.title = 'Click to reveal email';
-        } else {
-            span.textContent = '+1 (832) 651-8048';
-            span.title = 'Click to call';
-        }
-        
-        return span;
-    }
-    
-    // Replace text content while preserving structure
-    replaceTextContent(realEmail, realPhone) {
-        const walker = document.createTreeWalker(
-            document.body,
-            NodeFilter.SHOW_TEXT,
-            null,
-            false
-        );
-        
-        const textNodes = [];
-        let node;
-        
-        while (node = walker.nextNode()) {
-            if (node.nodeValue.includes(realEmail) || node.nodeValue.includes(realPhone)) {
-                textNodes.push(node);
-            }
-        }
-        
-        // Process text nodes
-        textNodes.forEach(textNode => {
-            if (textNode.parentNode.tagName !== 'SCRIPT' && textNode.parentNode.tagName !== 'STYLE') {
-                let content = textNode.nodeValue;
+        overrideInspectorMethods() {
+            // Override getAttribute to show encrypted data in inspector
+            const originalGetAttribute = Element.prototype.getAttribute;
+            Element.prototype.getAttribute = function(name) {
+                const result = originalGetAttribute.call(this, name);
                 
-                if (content.includes(realEmail)) {
-                    content = content.replace(realEmail, realEmail); // Keep visible but protected
-                }
-                if (content.includes(realPhone)) {
-                    content = content.replace(realPhone, realPhone); // Keep visible but protected
+                if (protectedElements.has(this)) {
+                    const protection = protectedElements.get(this);
+                    
+                    if (name === 'href' && protection.type === 'email') {
+                        return 'mailto:' + encryptedDisplay.email;
+                    } else if (name === 'href' && protection.type === 'phone') {
+                        return 'tel:' + encryptedDisplay.phone;
+                    }
                 }
                 
-                textNode.nodeValue = content;
-            }
-        });
-    }
-    
-    // Setup interaction handlers for decryption
-    setupInteractionHandlers() {
-        document.addEventListener('click', (e) => {
-            if (e.target.hasAttribute('data-protected-type')) {
-                e.preventDefault();
-                this.handleContactClick(e.target);
-            }
-        });
+                return result;
+            };
+            
+            // Override innerHTML to show encrypted content
+            const originalInnerHTML = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
+            Object.defineProperty(Element.prototype, 'innerHTML', {
+                get: function() {
+                    let content = originalInnerHTML.get.call(this);
+                    
+                    if (protectedElements.has(this)) {
+                        // For protected elements, return only the encrypted span content
+                        const encryptedSpan = this.querySelector('.encrypted-content');
+                        if (encryptedSpan) {
+                            return encryptedSpan.outerHTML;
+                        }
+                    }
+                    
+                    // Replace real contact data with encrypted in innerHTML
+                    content = content.replace(new RegExp(realContacts.email, 'g'), encryptedDisplay.email);
+                    content = content.replace(new RegExp(realContacts.phone.replace(/[+\-\(\)\s]/g, '\\$&'), 'g'), encryptedDisplay.phone);
+                    
+                    return content;
+                },
+                set: originalInnerHTML.set
+            });
+            
+            // Override outerHTML to show encrypted content
+            const originalOuterHTML = Object.getOwnPropertyDescriptor(Element.prototype, 'outerHTML');
+            Object.defineProperty(Element.prototype, 'outerHTML', {
+                get: function() {
+                    let content = originalOuterHTML.get.call(this);
+                    
+                    if (protectedElements.has(this)) {
+                        const protection = protectedElements.get(this);
+                        // Return element with only encrypted content
+                        const tagName = this.tagName.toLowerCase();
+                        const className = this.className;
+                        const href = protection.type === 'email' ? 'mailto:' + encryptedDisplay.email : 'tel:' + encryptedDisplay.phone;
+                        return `<${tagName} class="${className}" href="${href}" data-contact="${protection.type}" data-contact-protected="${protection.type}">${encryptedDisplay[protection.type]}</${tagName}>`;
+                    }
+                    
+                    // Replace real contact data with encrypted in outerHTML
+                    content = content.replace(new RegExp(realContacts.email, 'g'), encryptedDisplay.email);
+                    content = content.replace(new RegExp(realContacts.phone.replace(/[+\-\(\)\s]/g, '\\$&'), 'g'), encryptedDisplay.phone);
+                    
+                    return content;
+                },
+                set: originalOuterHTML.set
+            });
+            
+            // Override textContent to show encrypted data in inspector
+            const originalTextContent = Object.getOwnPropertyDescriptor(Node.prototype, 'textContent');
+            Object.defineProperty(Node.prototype, 'textContent', {
+                get: function() {
+                    if (protectedElements.has(this)) {
+                        const protection = protectedElements.get(this);
+                        
+                        // For buttons, keep original text for users
+                        if (protection.isButton) {
+                            return protection.originalText;
+                        } else {
+                            // For regular links, always return encrypted for inspector queries
+                            // The visual display is handled by CSS and the real-content span
+                            return encryptedDisplay[protection.type];
+                        }
+                    }
+                    
+                    let content = originalTextContent.get.call(this);
+                    
+                    // Replace any remaining real contact data
+                    content = content.replace(new RegExp(realContacts.email, 'g'), encryptedDisplay.email);
+                    content = content.replace(new RegExp(realContacts.phone.replace(/[+\-\(\)\s]/g, '\\$&'), 'g'), encryptedDisplay.phone);
+                    
+                    return content;
+                },
+                set: originalTextContent.set
+            });
+        },
         
-        // Add hover effects
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.hasAttribute('data-protected-type')) {
-                e.target.style.opacity = '0.8';
-            }
-        });
-        
-        document.addEventListener('mouseout', (e) => {
-            if (e.target.hasAttribute('data-protected-type')) {
-                e.target.style.opacity = '1';
-            }
-        });
-    }
-    
-    // Handle contact click events
-    handleContactClick(element) {
-        const type = element.getAttribute('data-protected-type');
-        
-        if (type === 'email') {
-            const email = this.decrypt(document.documentElement.getAttribute('data-theme-config'));
-            if (email) {
-                window.location.href = `mailto:${email}`;
-            }
-        } else if (type === 'phone') {
-            const phone = this.decrypt(document.documentElement.getAttribute('data-layout-settings'));
-            if (phone) {
-                window.location.href = `tel:${phone}`;
-            }
+        setupVisualOverlay() {
+            // Create visual overlay system for real display vs inspector display
+            const style = document.createElement('style');
+            style.textContent = `
+                .contact-overlay {
+                    position: relative;
+                    display: inline-block;
+                }
+                .contact-overlay .encrypted-content {
+                    opacity: 0;
+                    position: absolute;
+                    z-index: -1;
+                }
+                .contact-overlay .real-content {
+                    position: relative;
+                    z-index: 1;
+                    background: inherit;
+                    color: inherit;
+                    display: inline-block;
+                }
+            `;
+            document.head.appendChild(style);
         }
-    }
+    };
     
-    // Anti-debugging measures
-    enableAntiDebugging() {
-        // Detect developer tools
-        let devtools = {open: false, orientation: null};
-        
-        setInterval(() => {
-            if (window.outerHeight - window.innerHeight > 200 || 
-                window.outerWidth - window.innerWidth > 200) {
-                devtools.open = true;
-                this.obfuscateData();
+    // Contact protection manager
+    const contactProtection = {
+        init() {
+            domProtection.init();
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => this.protectContacts());
+            } else {
+                this.protectContacts();
             }
-        }, 500);
+            
+            this.setupAntiInspection();
+        },
         
-        // Disable right-click context menu
-        document.addEventListener('contextmenu', e => e.preventDefault());
+        protectContacts() {
+            // Replace contact elements with protected versions
+            document.querySelectorAll('a[data-contact]').forEach(link => {
+                this.protectElement(link);
+            });
+            
+            this.setupClickHandlers();
+        },
         
-        // Disable common keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'F12' || 
-                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                (e.ctrlKey && e.shiftKey && e.key === 'C') ||
-                (e.ctrlKey && e.key === 'u')) {
-                e.preventDefault();
-                this.obfuscateData();
+        protectElement(element) {
+            const type = element.getAttribute('data-contact');
+            const isButton = element.classList.contains('btn') || 
+                           element.classList.contains('button') ||
+                           element.closest('.hero-buttons') ||
+                           element.closest('.cta-buttons');
+            
+            // Store protection info
+            protectedElements.set(element, {
+                type: type,
+                isButton: isButton,
+                originalText: element.textContent,
+                originalHref: element.href
+            });
+            
+            if (isButton) {
+                // For buttons, keep the button text but protect the href
+                element.href = '#';
+                element.setAttribute('data-encrypted-href', 'mailto:' + encryptedDisplay.email);
+            } else {
+                // For regular links, create dual-layer system
+                element.classList.add('contact-overlay');
+                
+                // Clear existing content
+                element.innerHTML = '';
+                
+                // Add visible real content span
+                const realSpan = document.createElement('span');
+                realSpan.className = 'real-content';
+                realSpan.textContent = realContacts[type];
+                element.appendChild(realSpan);
+                
+                // Add hidden encrypted content span (for DOM inspection)
+                const encryptedSpan = document.createElement('span');
+                encryptedSpan.className = 'encrypted-content';
+                encryptedSpan.textContent = encryptedDisplay[type];
+                element.appendChild(encryptedSpan);
+                
+                // Set encrypted href for inspector
+                element.href = type === 'email' ? 'mailto:' + encryptedDisplay[type] : 'tel:' + encryptedDisplay[type];
             }
-        });
-    }
-    
-    // Obfuscate data when debugging is detected
-    obfuscateData() {
-        document.documentElement.setAttribute('data-theme-config', this.encrypt('fake@example.com'));
-        document.documentElement.setAttribute('data-layout-settings', this.encrypt('+1 (555) 000-0000'));
-    }
-}
-
-// Initialize protection system
-if (typeof window !== 'undefined') {
-    // Add some delay to avoid detection
-    setTimeout(() => {
-        window.contactProtector = new ContactProtector();
+            
+            element.setAttribute('data-contact-protected', type);
+        },
         
-        // Enable anti-debugging measures
-        window.contactProtector.enableAntiDebugging();
-        
-        // Clean up any traces
-        delete window.ContactProtector;
-        
-        // Obfuscate this script
-        setTimeout(() => {
-            const scripts = document.querySelectorAll('script');
-            scripts.forEach(script => {
-                if (script.textContent.includes('ContactProtector')) {
-                    script.remove();
+        setupClickHandlers() {
+            document.addEventListener('click', (e) => {
+                if (protectedElements.has(e.target)) {
+                    e.preventDefault();
+                    
+                    const protection = protectedElements.get(e.target);
+                    
+                    if (protection.type === 'email') {
+                        window.location.href = 'mailto:' + realContacts.email;
+                    } else if (protection.type === 'phone') {
+                        window.location.href = 'tel:' + realContacts.phone;
+                    }
                 }
             });
-        }, 1000);
+        },
         
-    }, Math.random() * 1000 + 500);
-}
+        setupAntiInspection() {
+            // Detect developer tools
+            let devtools = false;
+            
+            // Method 1: Console detection
+            setInterval(() => {
+                const start = performance.now();
+                debugger;
+                const end = performance.now();
+                
+                if (end - start > 100) {
+                    devtools = true;
+                    this.enhanceProtection();
+                }
+            }, 3000);
+            
+            // Method 2: Right-click detection
+            document.addEventListener('contextmenu', (e) => {
+                if (protectedElements.has(e.target)) {
+                    e.preventDefault();
+                    this.enhanceProtection();
+                    return false;
+                }
+            });
+            
+            // Method 3: Key combination detection
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'F12' || 
+                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                    (e.ctrlKey && e.key === 'u')) {
+                    devtools = true;
+                    this.enhanceProtection();
+                }
+            });
+        },
+        
+        enhanceProtection() {
+            // When developer tools detected, ensure all contact data is encrypted
+            protectedElements.forEach((protection, element) => {
+                if (!protection.isButton) {
+                    element.textContent = encryptedDisplay[protection.type];
+                    element.href = protection.type === 'email' ? 
+                        'mailto:' + encryptedDisplay[protection.type] : 
+                        'tel:' + encryptedDisplay[protection.type];
+                }
+            });
+        }
+    };
+    
+    // Initialize protection
+    contactProtection.init();
+    
+    // Cleanup
+    setTimeout(() => {
+        document.querySelectorAll('script').forEach(script => {
+            if (script.src && script.src.includes('contact-protection.js')) {
+                script.remove();
+            }
+        });
+    }, 5000);
+    
+})();
