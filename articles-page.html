@@ -1329,7 +1329,7 @@
         <div class="stats-container">
             <div class="stats-left">
                 <div class="stat-item">
-                    <span class="stat-number">7</span>
+                    <span class="stat-number">8</span>
                     <span class="stat-label">Articles</span>
                 </div>
                 <div class="stat-item">
@@ -1354,7 +1354,46 @@
     <section class="articles-section">
         <div class="container">
             <div class="articles-grid" id="articlesGrid">
-                <!-- Article 1: New Darby Book -->
+                <!-- Article 1: Jerusalem Temple - Latest -->
+                <article class="article-card" id="jerusalem-temple" data-category="theology" data-article="jerusalem">
+                    <div class="article-header">
+                        <div class="article-category">Theology</div>
+                        <h2 class="article-title">Jerusalem Temple — A Fresh Look at Pentecost</h2>
+                    </div>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>January 15, 2025</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>12 min read</span>
+                        </div>
+                    </div>
+                    <div class="article-excerpt">
+                        For two millennia, most teachers have placed the birth of the New Testament Church in the Upper Room (Acts 2). Dr. Sunny Ezhumattoor offers a careful, Scripture-first re-examination that addresses the questions readers keep asking but rarely see answered: Where could thousands hear Peter at once? How were 3,000 baptized in a single day?
+                    </div>
+                    <div class="article-footer">
+                        <a href="#" class="read-article-btn">
+                            READ ARTICLE
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12,5 19,12 12,19"></polyline>
+                            </svg>
+                        </a>
+                        <span class="article-length">Full Article</span>
+                    </div>
+                </article>
+
+                <!-- Article 2: New Darby Book -->
                 <article class="article-card" id="darby-book" data-category="biography" data-article="darby">
                     <div class="article-header">
                         <div class="article-category">Biography</div>
@@ -1707,6 +1746,36 @@
     <script>
         // Article content database
         const articles = {
+            jerusalem: {
+                category: 'Theology',
+                title: 'Jerusalem Temple — A Fresh Look at Pentecost',
+                date: 'January 15, 2025',
+                readTime: '12 min read',
+                content: `
+                    <p><strong>by Dr. Sunny Ezhumattoor (John Mathew)</strong></p>
+                    
+                    <p>For two millennia, most teachers have placed the birth of the New Testament Church in the Upper Room (Acts 2). Dr. Sunny Ezhumattoor offers a careful, Scripture-first re-examination that addresses the questions readers keep asking but rarely see answered: Where could thousands hear Peter at once? How were 3,000 baptized in a single day? Without forcing new doctrine or division, this concise study brings clarity by pointing to the Jerusalem Temple as the most plausible setting of Pentecost.</p>
+
+                    <h2>What sets this work apart?</h2>
+                    
+                    <h3>Text that flows, not fragments</h3>
+                    <p>Reading Acts 1–2 as a continuous narrative keeps the focus on the apostles ("Peter with the eleven"), and fits naturally with Luke's note that the disciples were continually in the Temple after the Ascension.</p>
+
+                    <h3>"House" as God's House</h3>
+                    <p>The "house" that filled with the sound and the Spirit can naturally refer to the House of God (Temple), a common biblical usage that resolves the "Upper Room crowd size" problem.</p>
+
+                    <h3>Real capacity, real baptisms</h3>
+                    <p>The Temple complex—especially Solomon's Porch—could host enormous festival crowds, and the area around the Mount was ringed with mikva'ot (ritual immersion pools), making the baptism of 3,000 logistically credible.</p>
+
+                    <h3>Respectful, pastoral tone</h3>
+                    <p>Dr. Sunny's aim is not argument but illumination—offering readers satisfying, evidence-based answers on a question that is not a salvation issue, yet matters for understanding the Church's beginning.</p>
+
+                    <h2>Why read it now?</h2>
+                    <p>Because this booklet combines close exegesis, historical context, and archaeological insight in a way that's accessible and spiritually edifying. It invites believers to rejoice in what God did on Pentecost—in relationship with the Temple—and to anchor their confidence in Scripture.</p>
+                    
+                    <p><a href="https://www.narrowpathministries.net/articles-page.html" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 500;">Read more in Theological Books & Essays on Narrow Path Ministries.</a></p>
+                `
+            },
             darby: {
                 category: 'Biography',
                 title: 'A Portrait of John Nelson Darby',
