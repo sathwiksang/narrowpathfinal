@@ -1,0 +1,41 @@
+# robots.txt for Narrow Path Ministries
+# https://www.narrowpathministries.net/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin areas (if any in future)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.pdf$
+
+# Allow all crawlers to access resources
+Allow: /Images/
+Allow: /*.css$
+Allow: /*.js$
+
+# Sitemap location
+Sitemap: https://www.narrowpathministries.net/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
