@@ -1210,6 +1210,34 @@
                 margin-bottom: 0.5rem;
             }
         }
+
+        /* Video Container Styling */
+        .article-video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .article-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 12px;
+        }
+
+        .article-card:hover .article-video-container {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -1301,7 +1329,53 @@
     <section class="articles-section">
         <div class="container">
             <div class="articles-grid" id="articlesGrid">
-                <!-- Article 1: Jerusalem Temple - Latest -->
+                <!-- Article 1: Ireland Outreach International Headquarters Ribbon Cutting - Latest -->
+                <article class="article-card" id="ireland-outreach-hq" data-category="history" data-article="ireland-outreach">
+                    <div class="article-header">
+                        <div class="article-category">Ministry Milestone</div>
+                        <h2 class="article-title">Grand Opening of Ireland Outreach International Headquarters</h2>
+                    </div>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>November 10, 2017</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>3 min watch</span>
+                        </div>
+                    </div>
+                    <div class="article-video-container">
+                        <iframe src="https://www.youtube.com/embed/E56hMYQNMQ0"
+                                title="Ireland Outreach International Headquarters Ribbon Cutting Ceremony"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="article-excerpt">
+                        A historic moment as Jim Gillett, International Director, and Dr. Sunny Mathew celebrate the dedication of Ireland Outreach International's new headquarters in Houston, Texas. This milestone marks a new chapter in the ministry's global mission to demonstrate God's love while faithfully preaching His Word. While establishing this international hub in the United States, Ireland Outreach continues its vital presence in Ireland and expands its reach across nations.
+                    </div>
+                    <div class="article-footer">
+                        <a href="#" class="read-article-btn">
+                            WATCH VIDEO
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12,5 19,12 12,19"></polyline>
+                            </svg>
+                        </a>
+                        <span class="article-length">Video</span>
+                    </div>
+                </article>
+
+                <!-- Article 2: Jerusalem Temple -->
                 <article class="article-card" id="jerusalem-temple" data-category="theology" data-article="jerusalem">
                     <div class="article-header">
                         <div class="article-category">Theology</div>
@@ -1340,7 +1414,7 @@
                     </div>
                 </article>
 
-                <!-- Article 2: New Darby Book -->
+                <!-- Article 3: New Darby Book -->
                 <article class="article-card" id="darby-book" data-category="biography" data-article="darby">
                     <div class="article-header">
                         <div class="article-category">Biography</div>
@@ -1379,7 +1453,7 @@
                     </div>
                 </article>
 
-                <!-- Article 2: Law of Moses -->
+                <!-- Article 4: Law of Moses -->
                 <article class="article-card" id="moses-law" data-category="theology" data-article="moses">
                     <div class="article-header">
                         <div class="article-category">Theology</div>
@@ -1693,6 +1767,56 @@
     <script>
         // Article content database
         const articles = {
+            'ireland-outreach': {
+                category: 'Ministry Milestone',
+                title: 'Grand Opening of Ireland Outreach International Headquarters',
+                date: 'November 10, 2017',
+                readTime: '3 min watch',
+                content: `
+                    <div class="article-video-container" style="margin: 2rem 0;">
+                        <iframe src="https://www.youtube.com/embed/E56hMYQNMQ0"
+                                title="Ireland Outreach International Headquarters Ribbon Cutting Ceremony"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <h2>A Historic Milestone for Global Ministry</h2>
+                    <p>On November 10, 2017, a momentous occasion unfolded in Houston, Texas, as <span class="highlight">Jim Gillett, International Director, and Dr. Sunny Mathew performed the ribbon-cutting ceremony</span> at the new International Headquarters Building of Ireland Outreach International.</p>
+
+                    <p>This landmark event marked a significant expansion in the ministry's global reach while honoring its founding roots and mission. The establishment of the international headquarters in the United States represents a new chapter in Ireland Outreach's commitment to serve communities worldwide.</p>
+
+                    <h2>Continuing the Mission</h2>
+                    <p>While this Houston facility serves as the international hub, <strong>Ireland Outreach International maintains its vital presence in Ireland</strong>, staying true to its origins and the community that shaped its vision.</p>
+
+                    <div style="background: rgba(230, 126, 34, 0.05); padding: 1.5rem; border-left: 3px solid var(--accent); margin: 2rem 0; border-radius: 8px;">
+                        <h3 style="color: var(--accent); margin-bottom: 1rem;">Our Global Mission</h3>
+                        <p style="margin: 0; font-weight: 500;">Ireland Outreach International continues to:</p>
+                        <ul style="margin: 1rem 0 0 1.5rem; line-height: 2;">
+                            <li><strong>Demonstrate the love of God</strong> through compassionate action and service</li>
+                            <li><strong>Preach the Word of God</strong> with clarity and conviction</li>
+                            <li><strong>Expand our reach</strong> across nations and cultures</li>
+                            <li><strong>Maintain our roots</strong> in Ireland while serving globally</li>
+                        </ul>
+                    </div>
+
+                    <h2>A Testament to Faith and Vision</h2>
+                    <p>The opening of the International Headquarters Building stands as a testament to years of faithful ministry and God's provision. This facility enables Ireland Outreach to coordinate its global efforts more effectively, supporting missions and outreach programs around the world.</p>
+
+                    <p>From its humble beginnings to this significant milestone, Ireland Outreach International has remained steadfast in its dual commitment: <em>demonstrating God's love through action and proclaiming His Word with power</em>.</p>
+
+                    <div style="background: #fafbfc; padding: 2rem; border-radius: 8px; margin: 2.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Looking Forward</h3>
+                        <p>As we celebrate this achievement, we remain focused on the work ahead. With headquarters on two continents, Ireland Outreach International is better positioned than ever to fulfill its calling to reach the nations with the Gospel of Jesus Christ.</p>
+                    </div>
+                `,
+                cta: {
+                    title: 'Connect with Ireland Outreach International',
+                    text: 'Learn more about our global ministry and how you can partner with us in demonstrating God\'s love and preaching His Word around the world.',
+                    buttonText: 'Contact Us',
+                    buttonLink: 'mailto:contact@irelandoutreach.org'
+                }
+            },
             jerusalem: {
                 category: 'Theology',
                 title: 'Jerusalem Temple — A Fresh Look at Pentecost',
