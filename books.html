@@ -783,11 +783,11 @@
     <section class="stats-section">
         <div class="stats-grid">
             <div class="stat-card fade-in">
-                <span class="stat-number">58</span>
+                <span class="stat-number">59</span>
                 <span class="stat-label">Total Articles</span>
             </div>
             <div class="stat-card fade-in">
-                <span class="stat-number">34</span>
+                <span class="stat-number">35</span>
                 <span class="stat-label">English</span>
             </div>
             <div class="stat-card fade-in">
@@ -816,13 +816,13 @@
                 </div>
                 <div class="language-tabs">
                     <button class="tab-btn active" data-lang="all">
-                        All Languages <span class="tab-count">58</span>
+                        All Languages <span class="tab-count">59</span>
                     </button>
                     <button class="tab-btn" data-lang="ai-translation">
                         AI Translation <span class="tab-count">6</span>
                     </button>
                     <button class="tab-btn" data-lang="english">
-                        English <span class="tab-count">34</span>
+                        English <span class="tab-count">35</span>
                     </button>
                     <button class="tab-btn" data-lang="malayalam">
                         Malayalam <span class="tab-count">18</span>
@@ -839,6 +839,21 @@
     <section class="articles-section">
         <div class="articles-grid" id="articlesGrid">
             <!-- Latest Articles (Added January 2025) -->
+            <!-- Most recent English book -->
+            <div class="article-card fade-in" data-lang="english">
+                <div class="article-header">
+                    <span class="article-number">01</span>
+                    <span class="language-badge">English</span>
+                </div>
+                <div class="article-content">
+                    <h3 class="article-title">Christian and Vote</h3>
+                    <p class="article-description">A timely essay on Christian responsibility and civic participation.</p>
+                    <div class="article-actions">
+                        <button class="action-btn view-btn" onclick="openPDF('Christian and Vote', 'https://drive.google.com/file/d/1OrGghHc7wOBrAHbNnFLJBC1zPw022bLE/preview')">View PDF</button>
+                        <a href="https://drive.google.com/file/d/1OrGghHc7wOBrAHbNnFLJBC1zPw022bLE/view?usp=sharing" target="_blank" class="action-btn download-btn">Open in Drive</a>
+                    </div>
+                </div>
+            </div>
             <div class="article-card fade-in" data-lang="english">
                 <div class="article-header">
                     <span class="article-number">01</span>
@@ -1712,6 +1727,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!-- No Results Message -->
@@ -1933,6 +1949,18 @@
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
+
+        // Renumber tiles in display order so the newest item appears as 01
+        (function renumberArticleCards() {
+            const cards = Array.from(document.querySelectorAll('#articlesGrid .article-card'));
+            cards.forEach((card, idx) => {
+                const numEl = card.querySelector('.article-number');
+                if (numEl) {
+                    const n = idx + 1;
+                    numEl.textContent = n < 10 ? `0${n}` : String(n);
+                }
+            });
+        })();
     </script>
 </body>
 </html>
