@@ -526,12 +526,13 @@
         }
 
         .faculty-highlight {
-            max-width: 800px;
+            max-width: 1100px;
             margin: 3rem auto;
-            padding: 3rem;
+            padding: 4rem 4.5rem;
             background: var(--bg-light);
-            text-align: center;
+            text-align: left;
             position: relative;
+            border-radius: 8px;
         }
 
         .faculty-highlight::before {
@@ -546,12 +547,13 @@
         }
 
         .faculty-quote {
-            font-size: 1.3rem;
-            line-height: 1.8;
+            font-size: 1.2rem;
+            line-height: 1.9;
             color: var(--primary);
             font-style: italic;
             margin-bottom: 1.5rem;
             font-family: 'Georgia', serif;
+            text-align: left;
         }
 
         .faculty-author {
@@ -643,6 +645,63 @@
             background: rgba(255, 255, 255, 0.1);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
+        }
+
+        /* Read Materials Button */
+        .btn-read-materials {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--light-accent) 100%);
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-read-materials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-read-materials:hover::before {
+            left: 100%;
+        }
+
+        .btn-read-materials:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+            background: linear-gradient(135deg, var(--light-accent) 0%, var(--accent) 100%);
+        }
+
+        .btn-read-materials:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-read-materials svg {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-read-materials:hover svg {
+            transform: translateX(5px);
+        }
+
+        .btn-read-materials span {
+            position: relative;
+            z-index: 1;
         }
 
         /* Footer */
@@ -769,6 +828,21 @@
             .stats-container {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .btn-read-materials {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .faculty-highlight {
+                padding: 2.5rem 2rem;
+                max-width: 95%;
+            }
+
+            .faculty-quote {
+                font-size: 1.1rem;
+                text-align: left;
+            }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -800,7 +874,7 @@
                 <li><a href="bible-course.html">Bible Course</a></li>
                 <li><a href="resources.html">Resources</a></li>
                 <li><a href="sermons.html">Sermons</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="integrity-values.html">In-Reach</a></li>
             </ul>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -825,7 +899,7 @@
             <li><a href="bible-course.html">Bible Course</a></li>
             <li><a href="resources.html">Resources</a></li>
             <li><a href="sermons.html">Sermons</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="integrity-values.html">In-Reach</a></li>
         </ul>
     </div>
 
@@ -980,16 +1054,32 @@
     <section class="faculty-section">
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-label">Leadership</span>
-                <h2 class="section-title">Distinguished Faculty</h2>
-                <p class="section-subtitle">Learn from experienced theologians and biblical scholars</p>
+                <span class="section-label">Ministry Philosophy</span>
+                <h2 class="section-title">Finding the Balance: A Two-Pronged Approach</h2>
+                <p class="section-subtitle">Building a Church That Reaches Out and Grows Within</p>
             </div>
             
             <div class="faculty-highlight fade-in">
                 <p class="faculty-quote">
-                    "Our commitment is to provide theological education that bridges academic excellence with practical ministry application, preparing students to serve the Church with both intellectual rigor and spiritual devotion."
+                    Successful church ministry thrives on a sacred balance — between outreach and in-reach. We are called not only to go into the world and share the Gospel, but also to nurture and strengthen the faith of those already within our fellowship. Outreach is the hand of the Church extended to the world; in-reach is the heart of the Church beating for its members.
                 </p>
-                <p class="faculty-author">Dr. Sunny Ezhumattoor</p>
+                <p class="faculty-quote" style="margin-top: 1.5rem;">
+                    These two aspects are not in competition but in harmony. A church that reaches outward without caring inward may draw crowds but lose connection. One that looks only inward risks becoming isolated and ineffective. True ministry finds its strength where compassion for the lost meets care for the found — a rhythm of service that reflects the heart of Christ Himself.
+                </p>
+                <div style="margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid rgba(44, 62, 80, 0.1); text-align: left;">
+                    <p style="font-size: 1.1rem; color: var(--primary); margin-bottom: 1rem; font-weight: 500; font-style: normal;">Explore Further:</p>
+                    <p style="font-size: 1rem; color: var(--text-light); line-height: 1.7; margin-bottom: 2rem; font-style: normal; max-width: 900px;">
+                        Read the Bible Course Materials and Previous Session Notes to learn more about how in-reach ministry strengthens the Church community, deepens discipleship, and sustains lasting spiritual growth.
+                    </p>
+                    <div style="text-align: center;">
+                        <a href="integrity-values.html" class="btn-read-materials">
+                            <span>Read the materials here</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
