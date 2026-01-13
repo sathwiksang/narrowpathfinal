@@ -1,0 +1,28 @@
+# Claude Code files and directories
+.claude/
+*.claude-*
+tmpclaude-*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
