@@ -1,0 +1,44 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git rm:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git checkout:*)",
+      "Bash(ssh-keygen:*)",
+      "Bash(cat:*)",
+      "Bash(ssh:*)",
+      "Bash(git merge:*)",
+      "Bash(git pull:*)",
+      "Bash(rm:*)",
+      "Bash(uglifyjs:*)",
+      "Bash(python -m http.server:*)",
+      "Bash(node:*)",
+      "Bash(find:*)",
+      "Bash(git commit:*)",
+      "Bash(git mv:*)",
+      "Bash(powershell -Command \"Get-ChildItem -Filter ''*.html'' | ForEach-Object { (Get-Content $_FullName) -replace ''about-page-redesign\\.html'', ''about.html'' -replace ''articles-page-redesign\\.html'', ''books.html'' -replace ''articles-page\\.html'', ''articles.html'' -replace ''bible-college-redesign\\.html'', ''bible-course.html'' -replace ''resources-page-redesign\\.html'', ''resources.html'' -replace ''sermons-redesigned\\.html'', ''sermons.html'' | Set-Content $_FullName }\")",
+      "Bash(powershell -Command:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File update-links.ps1)",
+      "Bash(git log:*)",
+      "Bash(ssh-keyscan:*)",
+      "Bash(~/.ssh/known_hosts)",
+      "Bash(ssh-add:*)",
+      "Bash(git config:*)",
+      "Bash(git fetch:*)",
+      "Bash(ls:*)",
+      "Bash(dir:*)",
+      "Bash(gh repo view:*)",
+      "Bash(del tmpclaude-*-cwd)"
+    ],
+    "deny": [],
+    "ask": [],
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": [
+      "C:\\Users\\sange\\.ssh"
+    ]
+  }
+}
