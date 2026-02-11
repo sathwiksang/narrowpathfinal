@@ -1276,7 +1276,7 @@
         .dr-sunny-trigger-chat-icon { display: flex; align-items: center; justify-content: center; color: var(--accent); width: 22px; height: 22px; }
         .dr-sunny-trigger-chat-icon svg { width: 100%; height: 100%; }
         .dr-sunny-chat-popup { position: absolute; bottom: calc(100% + 12px); right: 0; width: 280px; padding: 1rem 1.25rem; background: #fff; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.06); opacity: 0; visibility: hidden; transform: translateY(8px) scale(0.96); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; text-align: left; }
-        .dr-sunny-chat-float:hover .dr-sunny-chat-popup, .dr-sunny-chat-float.is-open .dr-sunny-chat-popup { opacity: 1; visibility: visible; transform: translateY(0) scale(1); pointer-events: auto; }
+        .dr-sunny-chat-float.is-open .dr-sunny-chat-popup { opacity: 1; visibility: visible; transform: translateY(0) scale(1); pointer-events: auto; }
         .dr-sunny-chat-popup::after { content: ''; position: absolute; bottom: -8px; right: 20px; border: 8px solid transparent; border-top-color: #fff; }
         .dr-sunny-popup-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
         .dr-sunny-popup-ask { width: 40px; height: 40px; object-fit: contain; flex-shrink: 0; }
@@ -3728,8 +3728,18 @@
         (function() {
             function initDrSunnyFloat() {
                 var floatEl = document.querySelector('.dr-sunny-chat-float');
-                if (!floatEl) return;
+                var trigger = floatEl ? floatEl.querySelector('.dr-sunny-chat-trigger') : null;
+                if (!floatEl || !trigger) return;
                 setTimeout(function() { floatEl.classList.add('dr-sunny-chat-float-visible'); }, 1000);
+                trigger.addEventListener('click', function(e) {
+                    if (floatEl.classList.contains('is-open')) return;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    floatEl.classList.add('is-open');
+                });
+                document.addEventListener('click', function(e) {
+                    if (floatEl && !floatEl.contains(e.target)) floatEl.classList.remove('is-open');
+                });
             }
             if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initDrSunnyFloat);
             else initDrSunnyFloat();

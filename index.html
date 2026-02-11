@@ -606,7 +606,7 @@
             pointer-events: none;
             text-align: left;
         }
-        .dr-sunny-chat-float:hover .dr-sunny-chat-popup,
+        /* Popup shows only on click (.is-open), not hover - avoids disappearing when moving cursor */
         .dr-sunny-chat-float.is-open .dr-sunny-chat-popup {
             opacity: 1;
             visibility: visible;
@@ -2003,13 +2003,29 @@
             observer.observe(el);
         });
 
-        // Floating chatbot: animate in after 2 seconds (index page only)
+        // Floating chatbot: animate in after 1s, click-to-toggle popup (index page only)
         function initDrSunnyFloat() {
             var floatEl = document.querySelector('.dr-sunny-chat-float');
-            if (!floatEl) return;
+            var trigger = floatEl ? floatEl.querySelector('.dr-sunny-chat-trigger') : null;
+            if (!floatEl || !trigger) return;
             setTimeout(function() {
                 floatEl.classList.add('dr-sunny-chat-float-visible');
             }, 1000);
+            // Click on chat icon: first click = show popup, second click = go to link
+            trigger.addEventListener('click', function(e) {
+                if (floatEl.classList.contains('is-open')) {
+                    return; // let <a> navigate
+                }
+                e.preventDefault();
+                e.stopPropagation();
+                floatEl.classList.add('is-open');
+            });
+            // Click outside = close popup
+            document.addEventListener('click', function(e) {
+                if (floatEl && !floatEl.contains(e.target)) {
+                    floatEl.classList.remove('is-open');
+                }
+            });
         }
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initDrSunnyFloat);

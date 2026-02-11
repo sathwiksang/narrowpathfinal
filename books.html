@@ -827,7 +827,6 @@
             pointer-events: none;
             text-align: left;
         }
-        .dr-sunny-chat-float:hover .dr-sunny-chat-popup,
         .dr-sunny-chat-float.is-open .dr-sunny-chat-popup {
             opacity: 1;
             visibility: visible;
@@ -2344,8 +2343,18 @@
         (function() {
             function initDrSunnyFloat() {
                 var floatEl = document.querySelector('.dr-sunny-chat-float');
-                if (!floatEl) return;
+                var trigger = floatEl ? floatEl.querySelector('.dr-sunny-chat-trigger') : null;
+                if (!floatEl || !trigger) return;
                 setTimeout(function() { floatEl.classList.add('dr-sunny-chat-float-visible'); }, 1000);
+                trigger.addEventListener('click', function(e) {
+                    if (floatEl.classList.contains('is-open')) return;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    floatEl.classList.add('is-open');
+                });
+                document.addEventListener('click', function(e) {
+                    if (floatEl && !floatEl.contains(e.target)) floatEl.classList.remove('is-open');
+                });
             }
             if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initDrSunnyFloat);
             else initDrSunnyFloat();
