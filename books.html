@@ -832,6 +832,7 @@
             opacity: 1;
             visibility: visible;
             transform: translateY(0) scale(1);
+            pointer-events: auto;
         }
         .dr-sunny-chat-popup::after {
             content: '';
@@ -848,7 +849,9 @@
         .dr-sunny-popup-tagline { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; font-style: italic; }
         .dr-sunny-popup-via { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 4px; }
         .dr-sunny-popup-via span { color: #10a37f; font-weight: 600; }
-        .dr-sunny-popup-cta { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.85rem; font-weight: 500; color: var(--accent); }
+        .dr-sunny-popup-cta { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.85rem; font-weight: 500; color: var(--accent); text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; border-radius: 8px; padding: 0.4rem 0; transition: color 0.2s ease, opacity 0.2s ease; }
+        .dr-sunny-popup-cta:hover { color: #10a37f; opacity: 0.9; }
+        .dr-sunny-popup-cta:active { opacity: 0.85; }
         .dr-sunny-popup-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
         @media (max-width: 575.98px) {
             .dr-sunny-chat-float { bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); right: calc(1rem + env(safe-area-inset-right, 0px)); }
@@ -2317,9 +2320,9 @@
                     <span class="dr-sunny-popup-via">Powered by <span>ChatGPT</span></span>
                 </div>
             </div>
-            <span class="dr-sunny-popup-cta">Chat now — opens in new tab
+            <a href="https://chatgpt.com/g/g-697e8963d13481919d16c33647c1db89-ask-dr-sunny" target="_blank" rel="noopener noreferrer" class="dr-sunny-popup-cta" aria-label="Chat now — opens in new tab">Chat now — opens in new tab
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </span>
+            </a>
         </div>
         <div class="dr-sunny-trigger-wrap">
             <svg class="dr-sunny-circle-text dr-sunny-circle-text-desktop" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
