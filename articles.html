@@ -1664,7 +1664,7 @@
                 </article>
 
                 <!-- Article 5: History of India -->
-                <article class="article-card" data-category="history" data-article="india">
+                <article class="article-card" data-category="history" data-article="india" id="history-india-post">
                     <div class="article-header">
                         <div class="article-category">History</div>
                         <h2 class="article-title">History of India: A Christian Perspective</h2>
@@ -1691,8 +1691,8 @@
                         Exploring the rich tapestry of Indian history through a biblical lens, understanding God's work in the subcontinent and the growth of Christianity in this ancient land.
                     </div>
                     <div class="article-footer">
-                        <a href="#" class="read-article-btn">
-                            READ ARTICLE
+                        <a href="books.html#history-india" class="read-article-btn" onclick="event.stopPropagation();">
+                            READ BOOK
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -3160,6 +3160,32 @@
                     text: 'Explore more comprehensive Bible studies and discover Christ throughout Scripture.',
                     buttonText: 'View Bible Study Resources',
                     buttonLink: 'books.html'
+                }
+            },
+            india: {
+                category: 'History',
+                title: 'History of India: A Christian Perspective',
+                date: 'November 5, 2014',
+                readTime: '15 min read',
+                content: `
+                    <div style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.05) 0%, rgba(52, 73, 94, 0.05) 100%); padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin: 0;">
+                            <span class="highlight">A detailed overview of India's history, culture, religions, languages, social structure, and political development</span>, exploring the country's diverse traditions and the historical forces that shaped modern Indian society.
+                        </p>
+                    </div>
+
+                    <p>Exploring the rich tapestry of Indian history through a biblical lens, understanding God's work in the subcontinent and the growth of Christianity in this ancient land.</p>
+
+                    <div style="background: rgba(230, 126, 34, 0.08); padding: 2rem; margin: 2rem 0; border-radius: 8px; text-align: center; border: 1px solid rgba(230, 126, 34, 0.2);">
+                        <p style="margin-bottom: 1rem; font-weight: 500;">The full book is available as a PDF. Read the comprehensive study covering India's history from a Christian perspective.</p>
+                        <a href="books.html#history-india" class="cta-button" style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.3s ease;">Read Full Book</a>
+                    </div>
+                `,
+                cta: {
+                    title: 'History of India: A Christian Perspective',
+                    text: 'Read the full book—a comprehensive study of India\'s history, culture, religions, and the forces that shaped modern Indian society.',
+                    buttonText: 'Read Book',
+                    buttonLink: 'books.html#history-india'
                 }
             },
             antichrist: {
