@@ -1,0 +1,289 @@
+[
+  {
+    "id": "brethren-assemblies",
+    "filter": "brethren",
+    "title": "Brethren Assemblies",
+    "items": [
+      {
+        "title": "Bethesda Bible Chapel",
+        "description": "A Plymouth Brethren assembly dedicated to biblical teaching and fellowship",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Chicago Believer's Assembly",
+        "description": "Serving the Chicago area with sound biblical exposition",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Dallas Brethren Assembly",
+        "description": "Fellowship and worship in the Dallas metropolitan area",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Doha Brethren Assembly",
+        "description": "Christian fellowship for believers in Qatar",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Houston Kerala Brethren",
+        "description": "Malayalam-speaking assembly in Houston, Texas",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Philadelphia Brethren Assembly",
+        "description": "Historic assembly serving the Philadelphia region",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Toronto Brethren Assembly",
+        "description": "Canadian assembly focused on biblical truth",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Brethren Assembly Muscat",
+        "description": "Christian fellowship in Oman's capital city",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Long Island Assembly New York",
+        "description": "Serving believers in the Long Island area",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Oklahoma Brethren Assembly",
+        "description": "Fellowship and ministry in Oklahoma",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Mesquite Brethren Assembly",
+        "description": "Local assembly serving the Mesquite community",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Edmonds Lane Bible Chapel",
+        "description": "Traditional Plymouth Brethren assembly",
+        "url": null,
+        "label": "Visit Website"
+      }
+    ]
+  },
+  {
+    "id": "bible-study-resources",
+    "filter": "bible",
+    "title": "Bible Study Resources",
+    "items": [
+      {
+        "title": "Bible Gateway",
+        "description": "Comprehensive online Bible in multiple versions and languages",
+        "url": "https://www.biblegateway.com",
+        "label": "Visit BibleGateway.com"
+      },
+      {
+        "title": "KJV Bible PDF Format",
+        "description": "Downloadable King James Version in PDF format",
+        "url": null,
+        "label": "Download Resource"
+      },
+      {
+        "title": "Malayalam Bible",
+        "description": "Scripture resources in Malayalam language",
+        "url": null,
+        "label": "Access Resource"
+      },
+      {
+        "title": "Bible Reading Schedule",
+        "description": "One-year Bible reading plan and schedule",
+        "url": null,
+        "label": "View Schedule"
+      },
+      {
+        "title": "Nave's Topical Bible",
+        "description": "Comprehensive topical Bible reference tool",
+        "url": null,
+        "label": "Access Tool"
+      },
+      {
+        "title": "Scripture Memory System",
+        "description": "Tools and methods for memorizing Scripture",
+        "url": null,
+        "label": "Learn More"
+      },
+      {
+        "title": "Bible.org Links",
+        "description": "Extensive collection of biblical study resources",
+        "url": null,
+        "label": "Browse Resources"
+      },
+      {
+        "title": "The Bible Answers",
+        "description": "Answers to common biblical questions",
+        "url": null,
+        "label": "Find Answers"
+      }
+    ]
+  },
+  {
+    "id": "christian-ministries",
+    "filter": "ministries",
+    "title": "Christian Ministries",
+    "items": [
+      {
+        "title": "Billy Graham Evangelistic Association",
+        "description": "Continuing the legacy of evangelism worldwide",
+        "url": null,
+        "label": "Visit Ministry"
+      },
+      {
+        "title": "Focus on the Family",
+        "description": "Supporting families with biblical principles",
+        "url": null,
+        "label": "Visit Ministry"
+      },
+      {
+        "title": "In Touch Ministries",
+        "description": "Dr. Charles Stanley's teaching ministry",
+        "url": null,
+        "label": "Visit Ministry"
+      },
+      {
+        "title": "Promise Keepers",
+        "description": "Men's ministry focused on biblical manhood",
+        "url": null,
+        "label": "Visit Ministry"
+      },
+      {
+        "title": "Prison Fellowship International",
+        "description": "Ministry to prisoners and their families",
+        "url": null,
+        "label": "Visit Ministry"
+      },
+      {
+        "title": "The Berean Call",
+        "description": "Biblical discernment ministry",
+        "url": null,
+        "label": "Visit Ministry"
+      },
+      {
+        "title": "Good Shepherd Ministry",
+        "description": "Caring for the spiritual needs of believers",
+        "url": null,
+        "label": "Visit Ministry"
+      },
+      {
+        "title": "Peace Ministry",
+        "description": "Promoting reconciliation through Christ",
+        "url": null,
+        "label": "Visit Ministry"
+      }
+    ]
+  },
+  {
+    "id": "educational-resources",
+    "filter": "educational",
+    "title": "Educational Resources",
+    "items": [
+      {
+        "title": "Thekkel.com",
+        "description": "Dr. Sunny's theological education platform",
+        "url": "https://www.thekkel.com",
+        "label": "Visit Thekkel.com"
+      },
+      {
+        "title": "Dallas Theological Seminary",
+        "description": "Premier evangelical seminary education",
+        "url": null,
+        "label": "Visit Website"
+      },
+      {
+        "title": "Emmaus Bible Studies",
+        "description": "Correspondence courses for biblical education",
+        "url": null,
+        "label": "Learn More"
+      },
+      {
+        "title": "Precept Ministries",
+        "description": "Inductive Bible study resources",
+        "url": null,
+        "label": "Access Resources"
+      },
+      {
+        "title": "Gospel Folio Press",
+        "description": "Christian literature and publications",
+        "url": null,
+        "label": "Browse Publications"
+      },
+      {
+        "title": "Believer Bookshelf",
+        "description": "Quality Christian books and resources",
+        "url": null,
+        "label": "Shop Books"
+      }
+    ]
+  },
+  {
+    "id": "plymouth-brethren-resources",
+    "filter": "brethren",
+    "title": "Plymouth Brethren Resources",
+    "items": [
+      {
+        "title": "John Nelson Darby Archives",
+        "description": "Writings and teachings of J.N. Darby",
+        "url": null,
+        "label": "Access Archives"
+      },
+      {
+        "title": "F.W. Grant Resources",
+        "description": "Biblical expositions and theological works",
+        "url": null,
+        "label": "Browse Works"
+      },
+      {
+        "title": "The Plymouth Brethren",
+        "description": "Historical and doctrinal information",
+        "url": null,
+        "label": "Learn More"
+      },
+      {
+        "title": "Brethren Online",
+        "description": "Connecting brethren assemblies worldwide",
+        "url": null,
+        "label": "Connect"
+      },
+      {
+        "title": "Assembly Reflections",
+        "description": "Thoughts on assembly principles and practice",
+        "url": null,
+        "label": "Read Articles"
+      },
+      {
+        "title": "\"Chief Men\" Among the Brethren",
+        "description": "Biographical sketches of brethren leaders",
+        "url": null,
+        "label": "Read Biographies"
+      },
+      {
+        "title": "Milk & Honey",
+        "description": "Ministry magazine for assemblies",
+        "url": null,
+        "label": "Subscribe"
+      },
+      {
+        "title": "Precious Seed",
+        "description": "Magazine promoting biblical truth",
+        "url": null,
+        "label": "Read Magazine"
+      }
+    ]
+  }
+]

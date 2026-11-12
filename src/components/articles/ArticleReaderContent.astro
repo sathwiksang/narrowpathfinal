@@ -1,0 +1,35 @@
+---
+import type { Article } from '../../lib/data';
+import { formatDate } from '../../lib/format';
+
+interface Props {
+  article: Article;
+}
+const { article } = Astro.props;
+const { cta } = article;
+// Embedded players load only when scrolled into view.
+const body = article.body.replaceAll('<iframe ', '<iframe loading="lazy" ');
+const external = cta !== undefined && cta.href.startsWith('https://');
+---
+
+<div class="reader-category">{article.label}</div>
+<h1 class="reader-title">{article.title}</h1>
+<div class="reader-meta">
+  <span>{formatDate(article.date)}</span>
+  <span>{article.duration}</span>
+</div>
+<div class="reader-body" set:html={body} />
+{cta && (
+  <div class="reader-cta">
+    <h3>{cta.title}</h3>
+    <p>{cta.text}</p>
+    <a
+      href={cta.href}
+      class="cta-button"
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+    >
+      {cta.buttonText}
+    </a>
+  </div>
+)}

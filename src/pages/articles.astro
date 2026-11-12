@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/reader.css';
+import '../styles/pages/articles.css';
+import ArticleCard from '../components/articles/ArticleCard.astro';
+import ArticleReader from '../components/articles/ArticleReader.astro';
+import FilterTabs from '../components/filter/FilterTabs.astro';
+import Filterable from '../components/filter/Filterable.astro';
+import { ARTICLE_FILTERS, articlePath, articles } from '../lib/data';
+import { absoluteUrl } from '../lib/schema';
+
+const PATH = '/articles.html';
+const tabs = [
+  { value: 'all', label: 'All' },
+  ...Object.entries(ARTICLE_FILTERS).map(([value, label]) => ({ value, label })),
+];
+const stats = [
+  { value: String(articles.length), label: 'Articles' },
+  { value: '50+', label: 'Years of Study' },
+  { value: '1000s', label: 'Lives Touched' },
+];
+---
+
+<BaseLayout
+  title="Articles & Teachings by Dr. Sunny Ezhumattoor | Narrow Path Ministries"
+  description="In-depth articles by Dr. Sunny Ezhumattoor on the Law of Moses, the Pre-Tribulation Rapture, the Antichrist, Roman Catholicism, John Nelson Darby, Pentecost and Jesus in all 66 books of the Bible."
+  path={PATH}
+  crumbs={[{ name: 'Articles', path: PATH }]}
+  pageType="CollectionPage"
+  mainEntity={{
+    '@type': 'ItemList',
+    numberOfItems: articles.length,
+    itemListElement: articles.map((a, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: absoluteUrl(articlePath(a)),
+    })),
+  }}
+>
+  <section class="articles-hero">
+    <div class="hero-content">
+      <span class="hero-label">Theological Insights</span>
+      <h1>
+        Articles &amp; <span>Teachings</span>
+      </h1>
+      <p class="hero-subtitle">
+        Dive deep into biblical scholarship, prophetic understanding, and theological discourse that illuminates the
+        path of faith
+      </p>
+    </div>
+  </section>
+
+  <Filterable noun="article">
+    <div class="stats-bar">
+      <div class="stats-container">
+        <div class="stats-left">
+          {stats.map((s) => (
+            <div class="stat-item">
+              <span class="stat-number">{s.value}</span>
+              <span class="stat-label">{s.label}</span>
+            </div>
+          ))}
+        </div>
+        <FilterTabs tabs={tabs} label="Filter articles by topic" class="filter-buttons" buttonClass="filter-btn" />
+      </div>
+    </div>
+
+    <section class="articles-section">
+      <div class="container">
+        <div class="articles-grid" id="articlesGrid">
+          {articles.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </div>
+      </div>
+    </section>
+  </Filterable>
+
+  <ArticleReader />
+</BaseLayout>

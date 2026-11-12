@@ -1,0 +1,45 @@
+---
+import type { PdfDocument } from '../../lib/data';
+import { pad2 } from '../../lib/format';
+
+interface Props {
+  doc: PdfDocument;
+  /** 1-based position in the full list, shown as "01". */
+  position: number;
+  /** Language badge text (Books page only). */
+  badge?: string;
+  /** Category used by the filter tabs (Books page only). */
+  filterKey?: string;
+}
+const { doc, position, badge, filterKey } = Astro.props;
+const filterable = filterKey !== undefined;
+---
+
+<div class="article-card fade-in" id={doc.id} data-filter-item={filterable && ''} data-filter-key={filterKey}>
+  <div class="article-header">
+    <span class="article-number" aria-hidden="true">
+      {pad2(position)}
+    </span>
+    {badge && <span class="language-badge">{badge}</span>}
+  </div>
+  <div class="article-content">
+    <h3 class="article-title" data-filter-text={filterable && ''}>
+      {doc.title}
+    </h3>
+    <p class="article-description" data-filter-text={filterable && ''}>
+      {doc.description}
+    </p>
+    <div class="article-actions">
+      {doc.preview && (
+        <button type="button" class="action-btn view-btn" data-pdf-src={doc.preview} data-pdf-title={doc.title}>
+          View PDF
+        </button>
+      )}
+      {doc.view && (
+        <a href={doc.view} target="_blank" rel="noopener noreferrer" class="action-btn download-btn">
+          Open in Drive
+        </a>
+      )}
+    </div>
+  </div>
+</div>

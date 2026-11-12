@@ -1,0 +1,17 @@
+---
+interface Props {
+  /** Heading text before the accent-coloured word(s). */
+  title: string;
+  highlight: string;
+  subtitle: string;
+}
+const { title, highlight, subtitle } = Astro.props;
+---
+
+<section class="page-hero">
+  <slot />
+  <h1>
+    {title} <span>{highlight}</span>
+  </h1>
+  <p class="page-subtitle">{subtitle}</p>
+</section>

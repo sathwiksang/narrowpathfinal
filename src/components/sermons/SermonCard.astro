@@ -1,0 +1,48 @@
+---
+import { SERMON_CATEGORIES, type Sermon } from '../../lib/data';
+
+interface Props {
+  sermon: Sermon;
+}
+const { sermon } = Astro.props;
+const kicker = sermon.episode === undefined ? sermon.kicker : `Episode ${sermon.episode}`;
+const watchUrl = `https://www.youtube.com/watch?v=${sermon.id}`;
+---
+
+<div
+  class="sermon-card fade-in"
+  data-filter-item
+  data-filter-key={sermon.category}
+  data-video-id={sermon.id}
+  data-video-title={sermon.title}
+>
+  <div class="sermon-header">
+    <span class="sermon-category">{sermon.badge ?? SERMON_CATEGORIES[sermon.category].badge}</span>
+  </div>
+  <div class="sermon-thumbnail">
+    <img
+      src={`https://img.youtube.com/vi/${sermon.id}/hqdefault.jpg`}
+      alt={sermon.title}
+      width="480"
+      height="360"
+      loading="lazy"
+      decoding="async"
+    />
+    {sermon.duration && <span class="sermon-duration">{sermon.duration}</span>}
+    <div class="play-overlay" aria-hidden="true">
+      <div class="play-icon">▶</div>
+    </div>
+  </div>
+  <div class="sermon-content">
+    <div class="sermon-episode">{kicker}</div>
+    <h3 class="sermon-title" data-filter-text>
+      {sermon.title}
+    </h3>
+    <p class="sermon-description" data-filter-text>
+      {sermon.description}
+    </p>
+    <a href={watchUrl} class="watch-now" aria-label={`Watch now: ${sermon.title}`}>
+      Watch Now →
+    </a>
+  </div>
+</div>

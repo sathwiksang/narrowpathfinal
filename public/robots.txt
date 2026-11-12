@@ -1,0 +1,14 @@
+# robots.txt for Narrow Path Ministries
+# https://www.narrowpathministries.net/robots.txt
+
+User-agent: *
+Allow: /
+
+# Slow down aggressive SEO crawlers
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+Sitemap: https://www.narrowpathministries.net/sitemap.xml

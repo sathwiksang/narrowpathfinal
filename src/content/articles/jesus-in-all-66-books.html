@@ -1,0 +1,398 @@
+<div style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.05) 0%, rgba(52, 73, 94, 0.05) 100%); padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin: 0; text-align: center;">
+                            <span class="highlight">From Genesis to Revelation, every book of the Bible reveals Jesus Christ.</span><br>
+                            <span style="font-style: italic; color: var(--text-light); font-size: 1rem;">
+                                "And beginning at Moses and all the prophets, He expounded unto them in all the scriptures the things concerning Himself." - Luke 24:27
+                            </span>
+                        </p>
+                    </div>
+
+                    <div style="background: #fafbfc; padding: 1.5rem; border-left: 3px solid var(--accent); margin-bottom: 3rem;">
+                        <p style="margin: 0; font-size: 1.05rem; line-height: 1.8;">
+                            The entire Bible is about Jesus Christ. The Old Testament anticipates Him, the Gospels reveal Him, Acts proclaims Him, the Epistles explain Him, and Revelation exalts Him. Every book contributes to the portrait of our Savior.
+                        </p>
+                    </div>
+
+                    <style>
+                        @media (min-width: 768px) {
+                            .books-grid {
+                                display: grid;
+                                grid-template-columns: repeat(2, 1fr);
+                                gap: 1.5rem;
+                            }
+                        }
+                        @media (max-width: 767px) {
+                            .books-grid {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 1rem;
+                            }
+                        }
+                        .book-item {
+                            display: flex;
+                            align-items: baseline;
+                            padding: 0.75rem 1rem;
+                            background: white;
+                            border-left: 3px solid transparent;
+                            transition: all 0.3s ease;
+                            border-radius: 4px;
+                            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                        }
+                        .book-item:hover {
+                            border-left-color: var(--accent);
+                            background: linear-gradient(90deg, rgba(230, 126, 34, 0.05) 0%, transparent 100%);
+                            transform: translateX(5px);
+                        }
+                        .book-name {
+                            font-weight: 600;
+                            color: var(--primary);
+                            min-width: 120px;
+                            flex-shrink: 0;
+                            font-size: 0.95rem;
+                        }
+                        .book-description {
+                            color: var(--text-light);
+                            padding-left: 1rem;
+                            line-height: 1.5;
+                            font-size: 0.9rem;
+                        }
+                        @media (max-width: 480px) {
+                            .book-item {
+                                flex-direction: column;
+                                align-items: flex-start;
+                                padding: 1rem;
+                            }
+                            .book-name {
+                                margin-bottom: 0.5rem;
+                                font-size: 1rem;
+                            }
+                            .book-description {
+                                padding-left: 0;
+                                font-size: 0.95rem;
+                            }
+                        }
+                        .testament-header {
+                            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+                            color: white;
+                            padding: 1.5rem;
+                            margin: 3rem 0 2rem;
+                            border-radius: 8px;
+                            text-align: center;
+                            position: relative;
+                            overflow: hidden;
+                        }
+                        .testament-header::before {
+                            content: '';
+                            position: absolute;
+                            top: -50%;
+                            right: -10%;
+                            width: 200px;
+                            height: 200px;
+                            background: rgba(255,255,255,0.05);
+                            border-radius: 50%;
+                        }
+                        .testament-header h2 {
+                            margin: 0;
+                            font-size: 2rem;
+                            font-weight: 300;
+                            letter-spacing: 2px;
+                            position: relative;
+                            z-index: 1;
+                        }
+                        .testament-subtitle {
+                            font-size: 0.9rem;
+                            opacity: 0.9;
+                            margin-top: 0.5rem;
+                            letter-spacing: 1px;
+                            text-transform: uppercase;
+                        }
+                    </style>
+
+                    <div class="testament-header">
+                        <h2>OLD TESTAMENT</h2>
+                        <div class="testament-subtitle">39 Books • The Promise of Christ</div>
+                    </div>
+
+                    <div class="books-grid">
+                        <div class="book-item">
+                            <span class="book-name">Genesis</span>
+                            <span class="book-description">He is the Seed of Woman</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Exodus</span>
+                            <span class="book-description">He is the Passover Lamb, The Manna, The Rock, and The Ark</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Leviticus</span>
+                            <span class="book-description">He is our High Priest, Scapegoat</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Numbers</span>
+                            <span class="book-description">He is the Cloud by day and a Pillar of Fire by night, The Bronze Serpent</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Deuteronomy</span>
+                            <span class="book-description">He is the Prophet like unto Moses</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Joshua</span>
+                            <span class="book-description">He is the Captain of our Salvation</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Judges</span>
+                            <span class="book-description">He is the Deliverer of His own</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Ruth</span>
+                            <span class="book-description">He is our Kinsman and Redeemer</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Samuel</span>
+                            <span class="book-description">He is our Trusted Prophet</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Kings</span>
+                            <span class="book-description">He is the Lord our King</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Chronicles</span>
+                            <span class="book-description">He is our Reigning King, The Lion of Judah</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Ezra</span>
+                            <span class="book-description">He is our Faithful Scribe</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Nehemiah</span>
+                            <span class="book-description">He is the Builder of broken down walls</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Esther</span>
+                            <span class="book-description">He is our Mordecai</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Job</span>
+                            <span class="book-description">He is our Redeemer</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Psalms</span>
+                            <span class="book-description">He is the Lord our Shepherd</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Proverbs</span>
+                            <span class="book-description">He is our Wisdom</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Ecclesiastes</span>
+                            <span class="book-description">He is the forgotten Wise Man who saved the city</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Song of Solomon</span>
+                            <span class="book-description">He is the Shepherd who won the Shulamite's heart, The Rose of Sharon and the Lily of the valley, Fairest of Ten Thousand</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Isaiah</span>
+                            <span class="book-description">He is the Prince of Peace, Suffering Servant, Immanuel, The Lamb led to the slaughter</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Jeremiah</span>
+                            <span class="book-description">He is the Righteous Branch</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Lamentations</span>
+                            <span class="book-description">He is the Weeping Prophet</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Ezekiel</span>
+                            <span class="book-description">He is the Wonderful Four-faced Man</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Daniel</span>
+                            <span class="book-description">He is the Fourth Man in the Fiery Furnace, The Stone that smashes the kingdoms of the world</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Hosea</span>
+                            <span class="book-description">He is the Faithful Husband</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Joel</span>
+                            <span class="book-description">He is the Holy Ghost Baptizer</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Amos</span>
+                            <span class="book-description">He is the Burden Bearer</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Obadiah</span>
+                            <span class="book-description">He is The Mighty Savior</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Jonah</span>
+                            <span class="book-description">He is our Foreign Missionary</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Micah</span>
+                            <span class="book-description">He is the Messenger with Beautiful feet</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Nahum</span>
+                            <span class="book-description">The Avenger of God's Elect</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Habakkuk</span>
+                            <span class="book-description">He is God's Evangelist crying for revival</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Zephaniah</span>
+                            <span class="book-description">He is our Savior</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Haggai</span>
+                            <span class="book-description">He is the Cleansing Fountain</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Zechariah</span>
+                            <span class="book-description">He is the Pierced Son</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Malachi</span>
+                            <span class="book-description">He is the Son of Righteousness with healing in His wings</span>
+                        </div>
+                    </div>
+
+                    <div class="testament-header" style="background: linear-gradient(135deg, var(--accent) 0%, #d35400 100%); margin-top: 4rem;">
+                        <h2>NEW TESTAMENT</h2>
+                        <div class="testament-subtitle">27 Books • The Person of Christ</div>
+                    </div>
+
+                    <div class="books-grid">
+                        <div class="book-item">
+                            <span class="book-name">Matthew</span>
+                            <span class="book-description">He is The Messiah</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Mark</span>
+                            <span class="book-description">He is the Wonder Worker</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Luke</span>
+                            <span class="book-description">He is the Son of Man</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">John</span>
+                            <span class="book-description">He is The Son of God, The Word</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Acts</span>
+                            <span class="book-description">He is The Foundation of the Church</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Romans</span>
+                            <span class="book-description">He is our Justifier</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Corinthians</span>
+                            <span class="book-description">He is our Sanctifier, The Last Adam</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Galatians</span>
+                            <span class="book-description">He is The Redeemer from the curse of the Law</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Ephesians</span>
+                            <span class="book-description">He is The Christ with the unsearchable riches</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Philippians</span>
+                            <span class="book-description">He is The God that supplies all of our needs</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Colossians</span>
+                            <span class="book-description">He is The Fullness of the Godhead Bodily</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Thessalonians</span>
+                            <span class="book-description">He is our Soon Coming King</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Timothy</span>
+                            <span class="book-description">He is the Mediator between God the Father and man</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Titus</span>
+                            <span class="book-description">He is the Faithful Pastor</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Philemon</span>
+                            <span class="book-description">He is the Friend that sticks closer than a brother</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Hebrews</span>
+                            <span class="book-description">He is the Blood of the Everlasting Covenant</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">James</span>
+                            <span class="book-description">He is our Great Physician</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1 & 2 Peter</span>
+                            <span class="book-description">He is the Chief Shepherd</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">1, 2 & 3 John</span>
+                            <span class="book-description">He is Love</span>
+                        </div>
+                        <div class="book-item">
+                            <span class="book-name">Jude</span>
+                            <span class="book-description">He is The Lord coming with 10,000 of His saints</span>
+                        </div>
+                        <div class="book-item" style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(52, 73, 94, 0.1) 100%); border-left-color: var(--accent);">
+                            <span class="book-name">Revelation</span>
+                            <span class="book-description">He is the King of Kings and Lord of Lords, He is the Alpha and Omega, the First and the Last, The Lion of the tribe of Judah, The Bright and Morning Star, The Word of God</span>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.05) 0%, rgba(52, 73, 94, 0.05) 100%); padding: 3rem 2rem; margin-top: 4rem; border-radius: 8px; text-align: center;">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.8rem; font-weight: 300;">The Unified Message</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+                            <span class="highlight">Jesus Christ is the central theme of Scripture.</span> The Bible is not merely a collection of stories, moral teachings, prophecies, and inspirational sayings; it is the revelation of Jesus Christ. God has given us a written portrait of His Son, and this portrait fills the entire Bible from beginning to end.
+                        </p>
+                        
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <p style="font-style: italic; color: var(--text-light); margin: 0; font-size: 1rem;">
+                                "Search the scriptures; for in them ye think ye have eternal life: and they are they which testify of me." - John 5:39
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: #fafbfc; padding: 2rem; margin-top: 3rem; border-radius: 8px;">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem; text-align: center;">How to See Jesus in Scripture</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <div style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem;">📖</div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">In History</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">He is revealed in the historical accounts</p>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <div style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem;">🕊️</div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">In Prophecy</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">He is foretold in prophetic utterances</p>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <div style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem;">✨</div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">In Types</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">He is prefigured in symbols and shadows</p>
+                            </div>
+                            <div style="text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <div style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem;">👑</div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">In Person</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">He is manifested in the Gospels and glorified in Revelation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1rem; background: #fafbfc; border-radius: 4px;">
+                        <p style="font-size: 0.9rem; color: var(--text-light); text-align: center; margin: 0;">
+                            <strong>Compiled by:</strong> Dr. Sunny Ezhumattoor (John Mathew Thekkel)
+                        </p>
+                    </div>

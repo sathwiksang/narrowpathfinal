@@ -1,0 +1,244 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/subpage.css';
+import '../styles/pages/about.css';
+import CtaSection from '../components/ui/CtaSection.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import Portrait from '../components/ui/Portrait.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import { ID } from '../lib/schema';
+
+const STATS = [
+  { value: '57+', label: 'Books Published' },
+  { value: '350+', label: 'Essays Written' },
+  { value: '50+', label: 'Years of Ministry' },
+  { value: '1973', label: 'Established in Houston' },
+];
+
+const TIMELINE = [
+  {
+    date: '1973',
+    title: 'Relocation to Houston',
+    description: 'Established residence in Houston, Texas, beginning a new chapter of life and ministry in America',
+  },
+  {
+    date: '1973-2013',
+    title: 'Corporate Leadership',
+    description:
+      'Four decades of distinguished service in the corporate sector, including senior positions at JP Morgan Chase Bank',
+  },
+  {
+    date: '2013',
+    title: 'Full-Time Ministry',
+    description: 'Retired from banking to dedicate entirely to ministry, writing, mentoring, and theological education',
+  },
+  {
+    date: 'Present',
+    title: 'Continuing Legacy',
+    description:
+      'Leading Narrow Path Ministries and Thekkel Bible Course while authoring influential theological works',
+  },
+];
+
+const WORKS = [
+  {
+    genre: 'Prophetic Studies',
+    title: 'The Book of Revelation',
+    description:
+      'A comprehensive 432-page exploration connecting biblical prophecy with contemporary world events and their spiritual significance',
+  },
+  {
+    genre: 'Theological Doctrine',
+    title: 'The Mystery of the Trinity',
+    description:
+      "An in-depth theological examination of Christianity's most fundamental doctrine, exploring its biblical foundations and practical implications",
+  },
+  {
+    genre: 'Historical Analysis',
+    title: 'The Brethren Movement',
+    description:
+      'A scholarly examination of Plymouth Brethren history, distinctive practices, and theological contributions to evangelical Christianity',
+  },
+  {
+    genre: 'Biblical Prophecy',
+    title: 'Daniel Reveals the History',
+    description:
+      'Prophetic and historical analysis examining how biblical prophecy intersects with world history and future events',
+  },
+  {
+    genre: 'Contemporary Issues',
+    title: 'Christians and Politics',
+    description: 'Addressing the complex relationship between faith and political engagement in modern society',
+  },
+  {
+    genre: 'Theological Study',
+    title: 'Fallen Angels Vol. 2',
+    description:
+      'A scholarly examination of different interpretations of Genesis 6:1-4 and their theological implications',
+  },
+];
+
+const COURSE_AREAS = [
+  {
+    title: 'Biblical Interpretation',
+    description: 'Advanced skills in Old and New Testament exegesis and hermeneutics',
+  },
+  {
+    title: 'Theological Foundation',
+    description: 'Comprehensive understanding of systematic and dispensational theology',
+  },
+  {
+    title: 'Academic Excellence',
+    description: 'Philosophy, history, sociology, and psychology integrated with biblical truth',
+  },
+  {
+    title: 'Practical Ministry',
+    description: 'World missions, apologetics, and contemporary Christian engagement',
+  },
+];
+---
+
+<BaseLayout
+  title="About Dr. Sunny Ezhumattoor - Theologian, Author & Biblical Scholar"
+  description="Learn about Dr. Sunny Ezhumattoor, distinguished theologian and founder of Narrow Path Ministries. 57+ books published, 50+ years of ministry, and Thekkel Bible Course in Houston, TX."
+  path="/about.html"
+  crumbs={[{ name: 'About', path: '/about.html' }]}
+  pageType="ProfilePage"
+  ogType="profile"
+  socialTitle="About Dr. Sunny Ezhumattoor - Theologian & Biblical Scholar"
+  socialDescription="Learn about Dr. Sunny Ezhumattoor, distinguished theologian and founder of Narrow Path Ministries. 57+ books published, 50+ years of ministry."
+  mainEntity={{ '@id': ID.founder }}
+>
+  <PageHero title="Dr. Sunny" highlight="Ezhumattoor" subtitle="Distinguished Theologian, Author & Biblical Scholar" />
+
+  <section class="profile-section">
+    <div class="profile-container">
+      <div class="profile-image-wrapper fade-in">
+        <Portrait priority />
+      </div>
+      <div class="profile-content fade-in">
+        <div class="profile-header">
+          <h2 class="profile-name">Dr. John Mathew</h2>
+          <p class="profile-title">Founder of Narrow Path Ministries &amp; Thekkel Bible Course</p>
+        </div>
+        <p class="profile-intro">
+          A distinguished evangelical author and theologian who has dedicated over five decades to conservative
+          Christian scholarship and biblical education. With an extraordinary interdisciplinary background spanning
+          economics, sociology, political science, philosophy, and jurisprudence, Dr. Ezhumattoor brings unparalleled
+          depth and perspective to theological discourse.
+        </p>
+
+        <div class="stats-grid">
+          {STATS.map((s) => (
+            <div class="stat-card">
+              <span class="stat-number">{s.value}</span>
+              <span class="stat-label">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <SectionHeader
+        number="01"
+        title="Academic Excellence"
+        subtitle="A foundation built on rigorous scholarship and diverse disciplines"
+      />
+
+      <p class="content-text fade-in">
+        Dr. Ezhumattoor's educational journey reflects a commitment to comprehensive understanding. Holding
+        post-graduate degrees in Economics and History from Mar Thoma College, along with a Bachelor of Laws degree, his
+        academic foundation bridges secular scholarship with theological wisdom.
+      </p>
+
+      <p class="content-text fade-in">
+        His extensive knowledge encompasses economics, sociology, political science, philosophy, scientific humanism,
+        and jurisprudence. This remarkable breadth of learning enables him to address contemporary Christian challenges
+        through multiple intellectual lenses, offering insights that are both spiritually profound and academically
+        rigorous.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <SectionHeader
+        number="02"
+        title="Professional Journey"
+        subtitle="From corporate excellence to ministry leadership"
+      />
+
+      <div class="timeline fade-in">
+        {TIMELINE.map((t) => (
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-date">{t.date}</div>
+              <h3 class="timeline-title">{t.title}</h3>
+              <p class="timeline-description">{t.description}</p>
+            </div>
+            <div class="timeline-dot" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="books-showcase">
+    <div class="container">
+      <SectionHeader
+        number="03"
+        title="Literary Accomplishments"
+        subtitle="Over five decades of influential theological writing"
+      />
+
+      <div class="books-grid">
+        {WORKS.map((w) => (
+          <div class="book-card fade-in">
+            <div class="book-year">{w.genre}</div>
+            <h3 class="book-title">{w.title}</h3>
+            <p class="book-description">{w.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="achievements-section">
+    <div class="container">
+      <SectionHeader
+        number="04"
+        title="Thekkel Home Bible Course"
+        subtitle="Equipping the Church for the twenty-first century"
+      />
+
+      <div class="achievements-list">
+        {COURSE_AREAS.map((a, i) => (
+          <div class="achievement-item fade-in">
+            <div class="achievement-icon" aria-hidden="true">
+              {String.fromCharCode(65 + i)}
+            </div>
+            <h3 class="achievement-title">{a.title}</h3>
+            <p class="achievement-desc">{a.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    title="Connect with Dr. Sunny's Ministry"
+    text="Explore decades of theological wisdom and biblical scholarship that continues to impact lives worldwide."
+  >
+    <div>
+      <a href="/books.html" class="btn btn-white">
+        Explore Books
+      </a>
+      <a href="#contact" class="btn btn-secondary">
+        Get in Touch
+      </a>
+    </div>
+  </CtaSection>
+</BaseLayout>

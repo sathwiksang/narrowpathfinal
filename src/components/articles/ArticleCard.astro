@@ -1,0 +1,90 @@
+---
+import YouTubeFacade from '../media/YouTubeFacade.astro';
+import { articlePath, type Article } from '../../lib/data';
+import { formatDate } from '../../lib/format';
+
+interface Props {
+  article: Article;
+}
+const { article } = Astro.props;
+
+const footer =
+  article.kind === 'launch'
+    ? { text: article.actionText, href: article.href, external: true, length: article.lengthLabel }
+    : article.kind === 'video'
+      ? { text: 'WATCH VIDEO', href: articlePath(article), external: false, length: 'Video' }
+      : { text: 'READ ARTICLE', href: articlePath(article), external: false, length: 'Full Article' };
+---
+
+<article
+  class:list={['article-card', { 'article-card-launch': article.kind === 'launch' }]}
+  id={article.id}
+  data-filter-item
+  data-filter-key={article.filter}
+  data-article={article.id}
+>
+  <div class="article-header">
+    <div class="article-category">{article.label}</div>
+    <h2 class="article-title">{article.title}</h2>
+  </div>
+  <div class="article-meta">
+    <div class="meta-item">
+      <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      <span>{formatDate(article.date)}</span>
+    </div>
+    <div class="meta-item">
+      {article.kind === 'launch' ? (
+        <svg
+          class="meta-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+      ) : (
+        <svg
+          class="meta-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+      )}
+      <span>{article.kind === 'launch' ? article.metaText : article.duration}</span>
+    </div>
+  </div>
+  {article.kind === 'video' && (
+    <div class="article-video-container">
+      <YouTubeFacade id={article.video.id} title={article.video.title} />
+    </div>
+  )}
+  <div class="article-excerpt">{article.excerpt}</div>
+  <div class="article-footer">
+    <a
+      href={footer.href}
+      class="read-article-btn"
+      target={footer.external ? '_blank' : undefined}
+      rel={footer.external ? 'noopener noreferrer' : undefined}
+      data-external={footer.external && ''}
+    >
+      {footer.text}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </a>
+    <span class="article-length">{footer.length}</span>
+  </div>
+</article>

@@ -1,0 +1,43 @@
+<dialog class="video-modal" id="videoModal" aria-labelledby="videoModalTitle">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="videoModalTitle">Video Title</h3>
+      <button type="button" class="modal-close" data-modal-close aria-label="Close video">
+        ×
+      </button>
+    </div>
+    <div class="video-container">
+      <iframe
+        id="videoPlayer"
+        title="Video player"
+        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+      ></iframe>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import { createModal } from '../../scripts/modal';
+
+  const dialog = document.getElementById('videoModal');
+  const title = document.getElementById('videoModalTitle');
+  const player = document.getElementById('videoPlayer');
+
+  if (dialog instanceof HTMLDialogElement && title && player instanceof HTMLIFrameElement) {
+    const modal = createModal(dialog, {
+      closeOnBackdrop: true,
+      onClose: () => player.removeAttribute('src'),
+    });
+    // Any click on a sermon card (including its "Watch Now" link) plays the video in place.
+    document.addEventListener('click', (e) => {
+      const card = e.target instanceof Element ? e.target.closest<HTMLElement>('[data-video-id]') : null;
+      if (!card) return;
+      e.preventDefault();
+      const videoTitle = card.dataset['videoTitle'] ?? '';
+      title.textContent = videoTitle;
+      player.title = videoTitle;
+      player.src = `https://www.youtube-nocookie.com/embed/${card.dataset['videoId'] ?? ''}?autoplay=1`;
+      modal.open();
+    });
+  }
+</script>

@@ -1,0 +1,97 @@
+---
+import { NAV, SITE } from '../../config/site';
+
+interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+const current = (href: string) => (href === currentPath ? 'page' : undefined);
+---
+
+<nav class="navigation" id="navbar" aria-label="Main">
+  <div class="nav-container">
+    <a href="/" class="logo-section">
+      <span class="logo-main">{SITE.name}</span>
+      <span class="logo-divider" aria-hidden="true">
+        |
+      </span>
+      <span class="logo-sub">{SITE.founder}</span>
+    </a>
+
+    <ul class="nav-links">
+      {NAV.map((item) => (
+        <li>
+          <a href={item.href} aria-current={current(item.href)}>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <button
+      class="mobile-menu-btn"
+      id="mobileMenuBtn"
+      type="button"
+      aria-label="Open menu"
+      aria-controls="mobileMenu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu" inert>
+  <div class="mobile-menu-header">
+    <span class="mobile-menu-title">Menu</span>
+    <button class="mobile-menu-close" id="mobileMenuClose" type="button" aria-label="Close menu">
+      ×
+    </button>
+  </div>
+  <ul class="mobile-nav-links">
+    {NAV.map((item) => (
+      <li>
+        <a href={item.href} aria-current={current(item.href)}>
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  import { lockScroll, unlockScroll } from '../../scripts/scroll-lock';
+
+  const navbar = document.getElementById('navbar');
+  const menu = document.getElementById('mobileMenu');
+  const openBtn = document.getElementById('mobileMenuBtn');
+  const closeBtn = document.getElementById('mobileMenuClose');
+
+  if (navbar && menu && openBtn && closeBtn) {
+    const updateShadow = () => navbar.classList.toggle('scrolled', window.scrollY > 50);
+    updateShadow();
+    window.addEventListener('scroll', updateShadow, { passive: true });
+
+    const setOpen = (open: boolean) => {
+      menu.classList.toggle('active', open);
+      menu.inert = !open;
+      openBtn.setAttribute('aria-expanded', String(open));
+      if (open) {
+        lockScroll();
+        closeBtn.focus();
+      } else {
+        unlockScroll();
+        openBtn.focus();
+      }
+    };
+
+    openBtn.addEventListener('click', () => setOpen(true));
+    closeBtn.addEventListener('click', () => setOpen(false));
+    for (const link of menu.querySelectorAll('a')) link.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('active')) setOpen(false);
+    });
+  }
+</script>
