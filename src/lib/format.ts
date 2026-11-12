@@ -17,6 +17,20 @@ export const metaDescription = (text: string, max = 160): string => {
   return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,;:—-]+$/, '')}…`;
 };
 
+/** Video running time: 3379 → "56:19", 4095 → "1:08:15". */
+export const formatDuration = (seconds: number): string => {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = String(seconds % 60).padStart(2, '0');
+  return h ? `${h}:${String(m).padStart(2, '0')}:${s}` : `${m}:${s}`;
+};
+
+/** ISO 8601 duration for structured data: 3379 → "PT56M19S". */
+export const isoDuration = (seconds: number): string => {
+  const h = Math.floor(seconds / 3600);
+  return `PT${h ? `${h}H` : ''}${Math.floor((seconds % 3600) / 60)}M${seconds % 60}S`;
+};
+
 /** "07" style two-digit ordinal used on numbered cards. */
 export const pad2 = (n: number): string => String(n).padStart(2, '0');
 

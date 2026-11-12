@@ -27,7 +27,7 @@ const TYPES = {
 const isFile = async (path) => (await stat(path).catch(() => null))?.isFile() ?? false;
 
 const resolve = async (urlPath) => {
-  const clean = normalize(decodeURIComponent(urlPath)).replace(/^(\.\.[/\\])+/, '');
+  const clean = normalize(urlPath).replace(/^(\.\.[/\\])+/, '');
   const base = join(ROOT, clean);
   const candidates = clean.endsWith('/') ? [join(base, 'index.html')] : [base, `${base}.html`];
   for (const file of candidates) if (await isFile(file)) return file;
@@ -35,7 +35,14 @@ const resolve = async (urlPath) => {
 };
 
 createServer(async (req, res) => {
-  const file = await resolve(new URL(req.url ?? '/', 'http://localhost').pathname);
+  let path;
+  try {
+    path = decodeURIComponent(new URL(req.url ?? '/', 'http://localhost').pathname);
+  } catch {
+    res.writeHead(400).end('Bad Request'); // malformed percent-encoding
+    return;
+  }
+  const file = await resolve(path);
   const target = file ?? join(ROOT, '404.html');
   res.writeHead(file ? 200 : 404, { 'Content-Type': TYPES[extname(target)] ?? 'application/octet-stream' });
   res.end(await readFile(target));

@@ -67,8 +67,7 @@ body {
   }
 }
 @media (max-width: 575.98px) {
-  .dr-sunny-popup-ask,
-  .dr-sunny-popup-avatar {
+  .dr-sunny-popup-ask {
     width: 36px;
     height: 36px;
   }

@@ -1,5 +1,6 @@
 ---
 import { SERMON_CATEGORIES, type Sermon } from '../../lib/data';
+import { formatDuration } from '../../lib/format';
 
 interface Props {
   sermon: Sermon;
@@ -28,7 +29,7 @@ const watchUrl = `https://www.youtube.com/watch?v=${sermon.id}`;
       loading="lazy"
       decoding="async"
     />
-    {sermon.duration && <span class="sermon-duration">{sermon.duration}</span>}
+    <span class="sermon-duration">{formatDuration(sermon.seconds)}</span>
     <div class="play-overlay" aria-hidden="true">
       <div class="play-icon">▶</div>
     </div>

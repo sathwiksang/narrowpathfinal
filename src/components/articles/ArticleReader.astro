@@ -30,6 +30,7 @@ import { articles } from '../../lib/data';
 ))}
 
 <script>
+  import { isNativeLinkClick } from '../../scripts/events';
   import { createModal } from '../../scripts/modal';
 
   const dialog = document.getElementById('articleReader');
@@ -58,13 +59,20 @@ import { articles } from '../../lib/data';
     document.addEventListener('click', (e) => {
       if (!(e.target instanceof Element)) return;
       const card = e.target.closest<HTMLElement>('[data-article]');
-      // External links and the inline video player keep their own behaviour.
-      if (!card || e.target.closest('[data-external], .yt-facade')) return;
+      // External links, the inline video player and modified clicks (new tab) keep their native behaviour.
+      if (!card || e.target.closest('[data-external], .yt-facade') || isNativeLinkClick(e, e.target)) return;
       e.preventDefault();
       openArticle(card.dataset['article'] ?? '');
     });
 
     // Legacy deep links such as /articles.html#darby-book open that article directly.
-    if (location.hash.length > 1) openArticle(decodeURIComponent(location.hash.slice(1)));
+    const hashId = (() => {
+      try {
+        return decodeURIComponent(location.hash.slice(1));
+      } catch {
+        return ''; // malformed escape sequence in the URL
+      }
+    })();
+    if (hashId) openArticle(hashId);
   }
 </script>

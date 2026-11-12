@@ -17,6 +17,7 @@
 </dialog>
 
 <script>
+  import { isNativeLinkClick } from '../../scripts/events';
   import { createModal } from '../../scripts/modal';
 
   const dialog = document.getElementById('videoModal');
@@ -30,8 +31,10 @@
     });
     // Any click on a sermon card (including its "Watch Now" link) plays the video in place.
     document.addEventListener('click', (e) => {
-      const card = e.target instanceof Element ? e.target.closest<HTMLElement>('[data-video-id]') : null;
-      if (!card) return;
+      if (!(e.target instanceof Element)) return;
+      const card = e.target.closest<HTMLElement>('[data-video-id]');
+      // Modified clicks on "Watch Now" (new tab) open YouTube instead.
+      if (!card || isNativeLinkClick(e, e.target)) return;
       e.preventDefault();
       const videoTitle = card.dataset['videoTitle'] ?? '';
       title.textContent = videoTitle;

@@ -439,11 +439,6 @@ body {
     display: block;
   }
 
-  .mobile-menu-toggle:hover {
-    background: var(--bg-light);
-    transform: scale(1.05);
-  }
-
   .articles-hero {
     padding: 100px 15px 50px;
   }
@@ -617,8 +612,7 @@ body {
   transition: all 0.3s ease;
 }
 @media (max-width: 575.98px) {
-  .dr-sunny-popup-ask,
-  .dr-sunny-popup-avatar {
+  .dr-sunny-popup-ask {
     width: 36px;
     height: 36px;
   }

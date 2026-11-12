@@ -73,6 +73,21 @@ test('every internal link and asset resolves', async ({ page, request }) => {
   }
 });
 
+test('sermons expose complete VideoObject structured data', async ({ page }) => {
+  await page.goto('/sermons.html');
+  const graph = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent()) ?? '{}')['@graph'];
+  const list = graph.find((n: { '@type'?: string }) => n['@type'] === 'CollectionPage')?.mainEntity;
+  const videos = list.itemListElement.map((e: { item: Record<string, string> }) => e.item);
+  expect(videos.length).toBe(await page.locator('.sermon-card').count());
+  for (const v of videos) {
+    expect(v['@type']).toBe('VideoObject');
+    for (const key of ['name', 'description', 'thumbnailUrl', 'uploadDate', 'duration', 'embedUrl']) {
+      expect.soft(v[key], `${v['name']} ${key}`).toBeTruthy();
+    }
+    expect.soft(v['duration'], v['name']).toMatch(/^PT(\d+H)?\d+M\d+S$/);
+  }
+});
+
 test('legacy URLs keep working', async ({ request }) => {
   for (const path of ['/about', '/books', '/sermons.html', '/integrity-values.html']) {
     expect((await request.get(path)).status(), path).toBe(200);

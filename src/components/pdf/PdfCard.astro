@@ -15,7 +15,12 @@ const { doc, position, badge, filterKey } = Astro.props;
 const filterable = filterKey !== undefined;
 ---
 
-<div class="article-card fade-in" id={doc.id} data-filter-item={filterable && ''} data-filter-key={filterKey}>
+<div
+  class="article-card fade-in"
+  id={doc.id}
+  data-filter-item={filterable ? '' : undefined}
+  data-filter-key={filterKey}
+>
   <div class="article-header">
     <span class="article-number" aria-hidden="true">
       {pad2(position)}
@@ -23,10 +28,10 @@ const filterable = filterKey !== undefined;
     {badge && <span class="language-badge">{badge}</span>}
   </div>
   <div class="article-content">
-    <h3 class="article-title" data-filter-text={filterable && ''}>
+    <h3 class="article-title" data-filter-text={filterable ? '' : undefined}>
       {doc.title}
     </h3>
-    <p class="article-description" data-filter-text={filterable && ''}>
+    <p class="article-description" data-filter-text={filterable ? '' : undefined}>
       {doc.description}
     </p>
     <div class="article-actions">

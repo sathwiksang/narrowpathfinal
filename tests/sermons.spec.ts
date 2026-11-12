@@ -1,4 +1,6 @@
 import { expect, test } from '@playwright/test';
+import sermonData from '../src/data/sermons.json' with { type: 'json' };
+import { formatDuration } from '../src/lib/format';
 import { revealAll } from './helpers';
 
 test.beforeEach(async ({ page }) => {
@@ -10,6 +12,31 @@ const cards = '#sermonsGrid .sermon-card';
 
 test('episode statistic matches the videos listed', async ({ page }) => {
   await expect(page.locator('.stats-grid .stat-number').first()).toHaveText(String(await page.locator(cards).count()));
+});
+
+test('durations and teaching hours come from the real video lengths', async ({ page }) => {
+  for (const sermon of sermonData) {
+    await expect(page.locator(`${cards}[data-video-id="${sermon.id}"] .sermon-duration`)).toHaveText(
+      formatDuration(sermon.seconds),
+    );
+  }
+  const hours = Math.floor(sermonData.reduce((sum, s) => sum + s.seconds, 0) / 3600);
+  await expect(page.locator('.stats-grid .stat-card').nth(1).locator('.stat-number')).toHaveText(`${hours}+`);
+});
+
+test('a modified click on Watch Now opens YouTube instead of the in-page player', async ({
+  page,
+  context,
+  isMobile,
+}) => {
+  test.skip(isMobile, 'modifier clicks are a desktop interaction');
+  const card = page.locator(cards).first();
+  const [tab] = await Promise.all([
+    context.waitForEvent('page'),
+    card.locator('.watch-now').click({ modifiers: ['ControlOrMeta'] }),
+  ]);
+  await expect(tab).toHaveURL(/youtube\.com\/watch\?v=/);
+  await expect(page.locator('#videoModal')).toBeHidden();
 });
 
 test('category filter and search work together', async ({ page }) => {

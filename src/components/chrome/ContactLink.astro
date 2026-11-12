@@ -17,7 +17,7 @@ const placeholder = kind === 'email' ? 'Contact Email' : 'Contact Phone';
   class={className}
   data-contact={kind}
   data-contact-value={encodedContact(kind)}
-  data-keep-label={label && ''}
+  data-keep-label={label === undefined ? undefined : ''}
 >
   {label ?? placeholder}
 </a>

@@ -9,11 +9,14 @@ import SermonCard from '../components/sermons/SermonCard.astro';
 import VideoModal from '../components/sermons/VideoModal.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import { SERMON_CATEGORIES, sermons } from '../lib/data';
+import { isoDuration } from '../lib/format';
+import { ID } from '../lib/schema';
 
 const PATH = '/sermons.html';
+const totalSeconds = sermons.reduce((sum, s) => sum + s.seconds, 0);
 const stats = [
   { value: String(sermons.length), label: 'Episodes Available' },
-  { value: '40+', label: 'Hours of Teaching' },
+  { value: `${Math.floor(totalSeconds / 3600)}+`, label: 'Hours of Teaching' },
   { value: '1000+', label: 'Active Listeners' },
   { value: 'Q&A', label: 'Biblical Format' },
 ];
@@ -29,6 +32,25 @@ const tabs = [
   path={PATH}
   crumbs={[{ name: 'Sermons', path: PATH }]}
   pageType="CollectionPage"
+  mainEntity={{
+    '@type': 'ItemList',
+    numberOfItems: sermons.length,
+    itemListElement: sermons.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'VideoObject',
+        name: s.title,
+        description: s.description,
+        thumbnailUrl: `https://i.ytimg.com/vi/${s.id}/hqdefault.jpg`,
+        uploadDate: s.published,
+        duration: isoDuration(s.seconds),
+        embedUrl: `https://www.youtube-nocookie.com/embed/${s.id}`,
+        contentUrl: `https://www.youtube.com/watch?v=${s.id}`,
+        publisher: { '@id': ID.organization },
+      },
+    })),
+  }}
 >
   <section class="hero" id="home">
     <div class="hero-content">

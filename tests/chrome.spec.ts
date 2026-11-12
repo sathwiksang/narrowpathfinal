@@ -36,6 +36,24 @@ test.describe('navigation', () => {
     await expect(page).toHaveURL('/sermons.html');
   });
 
+  test('focus cannot leave the open mobile menu', async ({ page, isMobile }) => {
+    test.skip(!isMobile, 'mobile menu only');
+    await page.goto('/books.html');
+    await page.locator('#mobileMenuBtn').click();
+    await expect(page.locator('main')).toHaveAttribute('inert', '');
+    for (let i = 0; i < 12; i++) {
+      await page.keyboard.press(i % 2 ? 'Tab' : 'Shift+Tab');
+      const insideMenu = await page.evaluate(() => {
+        const active = document.activeElement;
+        return active === document.body || Boolean(active?.closest('#mobileMenu'));
+      });
+      expect(insideMenu).toBe(true);
+    }
+    await page.keyboard.press('Escape');
+    await expect(page.locator('main')).not.toHaveAttribute('inert', '');
+    expect(await page.evaluate(() => document.body.style.overflow)).toBe('');
+  });
+
   test('navigation bar gains its shadow once the page scrolls', async ({ page }) => {
     await page.goto('/books.html');
     const nav = page.locator('#navbar');

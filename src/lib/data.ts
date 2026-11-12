@@ -14,7 +14,7 @@ const text = z.string().trim().min(1);
 const driveUrl = z.url({ protocol: /^https$/, hostname: /^drive\.google\.com$/ });
 const youtubeId = z.string().regex(/^[\w-]{11}$/, { error: 'must be an 11-character YouTube id' });
 /** Internal root-relative path, absolute https URL, or mailto: link. */
-const href = z.union([z.string().regex(/^\/[\w./#-]*$/), z.url({ protocol: /^(https|mailto)$/ })]);
+const href = z.union([z.string().regex(/^\/(?!\/)[\w./#-]*$/), z.url({ protocol: /^(https|mailto)$/ })]);
 
 const uniqueIds = <T extends { id: string }>(items: T[]) => new Set(items.map((i) => i.id)).size === items.length;
 const list = <T extends z.ZodType<{ id: string }>>(item: T) =>
@@ -67,10 +67,10 @@ const sermon = z
     kicker: text.optional(),
     title: text,
     description: text,
-    duration: z
-      .string()
-      .regex(/^\d{1,2}:\d{2}$/)
-      .optional(),
+    /** Running time in seconds, as reported by YouTube. */
+    seconds: z.number().int().positive(),
+    /** YouTube upload timestamp (ISO 8601 with offset); required for video rich results. */
+    published: z.iso.datetime({ offset: true }),
   })
   .refine((s) => (s.episode === undefined) !== (s.kicker === undefined), {
     error: 'a sermon needs exactly one of `episode` or `kicker`',

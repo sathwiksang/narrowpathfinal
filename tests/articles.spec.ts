@@ -26,6 +26,42 @@ test.describe('articles listing', () => {
     await expect(dialog.locator('#readerContent')).toBeEmpty();
   });
 
+  test('the READ ARTICLE button opens the reader, and a modified click opens the article page', async ({
+    page,
+    context,
+    isMobile,
+  }) => {
+    await page.locator('#roman-catholicism .read-article-btn').click();
+    await expect(page.locator(reader)).toBeVisible();
+    await expect(page).toHaveURL('/articles.html');
+    await page.keyboard.press('Escape');
+
+    test.skip(isMobile, 'modifier clicks are a desktop interaction');
+    const [tab] = await Promise.all([
+      context.waitForEvent('page'),
+      page.locator('#roman-catholicism .read-article-btn').click({ modifiers: ['ControlOrMeta'] }),
+    ]);
+    await expect(tab).toHaveURL(/\/articles\/roman-catholicism\.html$/);
+    await expect(page.locator(reader)).toBeHidden();
+  });
+
+  test('a playing card video stops when filtered out or when an article opens', async ({ page }) => {
+    const card = page.locator('#ireland-outreach-hq');
+    await card.getByRole('button', { name: /^Play video/ }).click();
+    await expect(card.locator('iframe')).toHaveCount(1);
+
+    await page.getByRole('button', { name: 'Prophecy', exact: true }).click();
+    await expect(card).toBeHidden();
+    await expect(card.locator('iframe')).toHaveCount(0);
+    await page.getByRole('button', { name: 'All', exact: true }).click();
+    await expect(card.getByRole('button', { name: /^Play video/ })).toBeVisible();
+
+    await card.getByRole('button', { name: /^Play video/ }).click();
+    await page.locator('#moses-law .article-title').click();
+    await expect(page.locator(reader)).toBeVisible();
+    await expect(card.locator('iframe')).toHaveCount(0);
+  });
+
   test('an article without a call-to-action shows no leftover one', async ({ page }) => {
     await page.locator('#moses-law .article-title').click();
     await expect(page.locator(`${reader} .reader-cta`)).toBeVisible();

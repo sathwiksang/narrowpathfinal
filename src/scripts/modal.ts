@@ -1,3 +1,4 @@
+import { MODAL_OPEN } from './events';
 import { lockScroll, unlockScroll } from './scroll-lock';
 
 interface ModalOptions {
@@ -35,6 +36,7 @@ export const createModal = (dialog: HTMLDialogElement, { closeOnBackdrop, onClos
       dialog.classList.add('active');
       dialog.showModal();
       lockScroll();
+      dialog.dispatchEvent(new Event(MODAL_OPEN, { bubbles: true }));
     },
   };
 };

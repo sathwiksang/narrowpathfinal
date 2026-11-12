@@ -74,9 +74,13 @@ const current = (href: string) => (href === currentPath ? 'page' : undefined);
     updateShadow();
     window.addEventListener('scroll', updateShadow, { passive: true });
 
+    const isOpen = () => menu.classList.contains('active');
     const setOpen = (open: boolean) => {
+      if (open === isOpen()) return; // keeps the scroll lock balanced
       menu.classList.toggle('active', open);
       menu.inert = !open;
+      // Everything behind the open menu is inert, so keyboard focus and screen readers stay inside it.
+      for (const el of document.body.children) if (el !== menu && el instanceof HTMLElement) el.inert = open;
       openBtn.setAttribute('aria-expanded', String(open));
       if (open) {
         lockScroll();
@@ -91,7 +95,7 @@ const current = (href: string) => (href === currentPath ? 'page' : undefined);
     closeBtn.addEventListener('click', () => setOpen(false));
     for (const link of menu.querySelectorAll('a')) link.addEventListener('click', () => setOpen(false));
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu.classList.contains('active')) setOpen(false);
+      if (e.key === 'Escape') setOpen(false);
     });
   }
 </script>

@@ -77,7 +77,7 @@ const footer =
       class="read-article-btn"
       target={footer.external ? '_blank' : undefined}
       rel={footer.external ? 'noopener noreferrer' : undefined}
-      data-external={footer.external && ''}
+      data-external={footer.external ? '' : undefined}
     >
       {footer.text}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
