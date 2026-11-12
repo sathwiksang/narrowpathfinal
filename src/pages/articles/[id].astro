@@ -6,6 +6,7 @@ import '../../styles/article-page.css';
 import type { GetStaticPaths } from 'astro';
 import ArticleReaderContent from '../../components/articles/ArticleReaderContent.astro';
 import { articlePath, articles, type Article } from '../../lib/data';
+import { metaDescription } from '../../lib/format';
 import { ID, PORTRAIT_PATH, absoluteUrl } from '../../lib/schema';
 
 export const getStaticPaths = (() =>
@@ -23,7 +24,7 @@ const published = /^\d{4}-\d{2}-\d{2}$/.test(article.date) ? article.date : unde
 
 <BaseLayout
   title={`${article.title} | Narrow Path Ministries`}
-  description={article.excerpt}
+  description={metaDescription(article.excerpt)}
   {path}
   crumbs={[
     { name: 'Articles', path: '/articles.html' },
@@ -36,7 +37,7 @@ const published = /^\d{4}-\d{2}-\d{2}$/.test(article.date) ? article.date : unde
       '@type': 'Article',
       '@id': `${url}#article`,
       headline: article.title,
-      description: article.excerpt,
+      description: metaDescription(article.excerpt),
       articleSection: article.label,
       ...(published ? { datePublished: published } : {}),
       author: { '@id': ID.founder },

@@ -65,7 +65,7 @@ const TEASERS = [
 });
 
 const description =
-  'Narrow Path Ministries offers biblical teaching, online Bible courses, theological education, and spiritual resources. Founded by Dr. Sunny Ezhumattoor in Houston, TX.';
+  'Biblical teaching, online Bible courses, theological books and sermons from Narrow Path Ministries, founded by Dr. Sunny Ezhumattoor in Houston, Texas.';
 ---
 
 <BaseLayout
@@ -110,13 +110,7 @@ const description =
             <img src={chatgptLogo.src} alt="" width="36" height="36" />
           </span>
         </div>
-        <a
-          href={LINKS.askDrSunny}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hero-dr-sunny-card"
-          aria-label="Ask Dr. Sunny - Chatbot to ask from his writings (opens in a new tab)"
-        >
+        <a href={LINKS.askDrSunny} target="_blank" rel="noopener noreferrer" class="hero-dr-sunny-card">
           <span class="hero-dr-sunny-ai-icon" aria-hidden="true">
             <svg
               viewBox="0 0 24 24"
@@ -136,6 +130,7 @@ const description =
             <span class="hero-dr-sunny-via">
               Powered by <span>ChatGPT</span>
             </span>
+            <span class="visually-hidden">(opens in a new tab)</span>
           </span>
         </a>
       </div>

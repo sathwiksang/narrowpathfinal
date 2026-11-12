@@ -1,3 +1,22 @@
+/** Sentence ends, ignoring abbreviations such as "Dr." that appear throughout the content. */
+const SENTENCE_END = /(?<!\b(?:Dr|Mr|Mrs|Ms|St|Jr|Sr|Vol|vs|No))[.!?](?=\s+["“(]?[A-Z]|$)/g;
+
+/** Shortest whole-sentence description worth using; anything shorter says too little in a search result. */
+const MIN_SENTENCE_DESCRIPTION = 120;
+
+/**
+ * Meta description sized for search results (≤ `max` characters): whole sentences when they fill
+ * most of the space, otherwise the text cut at a word boundary with an ellipsis.
+ */
+export const metaDescription = (text: string, max = 160): string => {
+  if (text.length <= max) return text;
+  const ends = [...text.matchAll(SENTENCE_END)].map((m) => m.index + 1).filter((end) => end <= max);
+  const lastEnd = ends.at(-1);
+  if (lastEnd !== undefined && lastEnd >= MIN_SENTENCE_DESCRIPTION) return text.slice(0, lastEnd);
+  const cut = text.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,;:—-]+$/, '')}…`;
+};
+
 /** "07" style two-digit ordinal used on numbered cards. */
 export const pad2 = (n: number): string => String(n).padStart(2, '0');
 

@@ -16,7 +16,10 @@ import { NAV } from '../config/site';
     highlight="Not Found"
     subtitle="The page you were looking for may have moved. These sections may help."
   />
-  <nav class="not-found-links" aria-label="Site sections">
+  <nav class="not-found-links" aria-labelledby="not-found-sections">
+    <h2 id="not-found-sections" class="visually-hidden">
+      Site sections
+    </h2>
     {NAV.map((item) => (
       <a href={item.href}>{item.label}</a>
     ))}

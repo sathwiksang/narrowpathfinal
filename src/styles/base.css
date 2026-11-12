@@ -459,6 +459,12 @@ footer {
   opacity: 1;
 }
 
+/* Contact links sit inside same-coloured text, so they need a non-colour cue (WCAG 1.4.1). */
+.footer-section a[data-contact] {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .footer-section .footer-verse {
   font-style: italic;
   opacity: 0.7;

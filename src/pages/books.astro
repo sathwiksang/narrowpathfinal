@@ -28,7 +28,7 @@ const tabs = [
 ];
 
 const IN_LANGUAGE: Record<Language, string> = { 'ai-translation': 'en', english: 'en', malayalam: 'ml', spanish: 'es' };
-const description = `Read ${books.length} theological books and essays by Dr. Sunny Ezhumattoor in English, Malayalam and Spanish on prophecy, doctrine, church history, the Brethren movement and Christian living.`;
+const description = `${books.length} theological books and essays by Dr. Sunny Ezhumattoor in English, Malayalam and Spanish on prophecy, doctrine, church history and Christian living.`;
 ---
 
 <BaseLayout
@@ -88,6 +88,7 @@ const description = `Read ${books.length} theological books and essays by Dr. Su
     </section>
 
     <section class="articles-section">
+      <h2 class="visually-hidden">All books and essays</h2>
       <div class="articles-grid" id="articlesGrid">
         {books.map((book, i) => (
           <PdfCard doc={book} position={i + 1} badge={LANGUAGES[book.language]} filterKey={book.language} />
