@@ -1,0 +1,35 @@
+<dialog class="pdf-modal" id="pdfModal" aria-labelledby="pdfModalTitle">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="pdfModalTitle">
+        PDF Viewer
+      </h3>
+      <button type="button" class="close-modal" data-modal-close aria-label="Close PDF viewer">
+        ×
+      </button>
+    </div>
+    <iframe class="pdf-viewer" id="pdfViewer" title="PDF Viewer"></iframe>
+  </div>
+</dialog>
+
+<script>
+  import { createModal } from '../../scripts/modal';
+
+  const dialog = document.getElementById('pdfModal');
+  const title = document.getElementById('pdfModalTitle');
+  const viewer = document.getElementById('pdfViewer');
+
+  if (dialog instanceof HTMLDialogElement && title && viewer instanceof HTMLIFrameElement) {
+    const modal = createModal(dialog, {
+      closeOnBackdrop: true,
+      onClose: () => viewer.removeAttribute('src'),
+    });
+    document.addEventListener('click', (e) => {
+      const trigger = e.target instanceof Element ? e.target.closest<HTMLElement>('[data-pdf-src]') : null;
+      if (!trigger) return;
+      title.textContent = trigger.dataset['pdfTitle'] ?? 'PDF Viewer';
+      viewer.src = trigger.dataset['pdfSrc'] ?? '';
+      modal.open();
+    });
+  }
+</script>

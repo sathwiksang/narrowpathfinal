@@ -1,0 +1,68 @@
+---
+/**
+ * Click-to-load YouTube player: shows the video thumbnail and loads the real player only on demand,
+ * so pages don't download YouTube's ~1 MB of scripts up front.
+ */
+interface Props {
+  id: string;
+  title: string;
+}
+const { id, title } = Astro.props;
+---
+
+<button type="button" class="yt-facade" data-yt-id={id} data-yt-title={title} aria-label={`Play video: ${title}`}>
+  <img
+    src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+    alt=""
+    width="480"
+    height="360"
+    loading="lazy"
+    decoding="async"
+  />
+  <svg class="yt-facade-play" viewBox="0 0 68 48" aria-hidden="true">
+    <path
+      d="M66.5 7.7c-.8-2.9-2.5-5.4-5.4-6.2C55.8.1 34 0 34 0S12.2.1 6.9 1.6c-3 .7-4.6 3.2-5.4 6.1C.1 13 0 24 0 24s.1 11 1.5 16.3c.8 2.9 2.5 5.4 5.4 6.2C12.2 47.9 34 48 34 48s21.8-.1 27.1-1.6c3-.7 4.6-3.2 5.4-6.1C67.9 35 68 24 68 24s-.1-11-1.5-16.3z"
+      fill="#f00"
+    ></path>
+    <path d="M45 24 27 14v20" fill="#fff"></path>
+  </svg>
+</button>
+
+<style>
+  .yt-facade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: #000;
+    cursor: pointer;
+  }
+
+  .yt-facade img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .yt-facade-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 68px;
+    height: 48px;
+    transform: translate(-50%, -50%);
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+
+  .yt-facade:hover .yt-facade-play,
+  .yt-facade:focus-visible .yt-facade-play {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  import '../../scripts/youtube-facade';
+</script>

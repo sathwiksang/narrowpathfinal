@@ -1,0 +1,18 @@
+---
+interface Props {
+  /** Small uppercase eyebrow text above the title. */
+  label?: string;
+  /** Large ordinal shown instead of a label (About page style). */
+  number?: string;
+  title: string;
+  subtitle?: string;
+}
+const { label, number, title, subtitle } = Astro.props;
+---
+
+<div class="section-header fade-in">
+  {label && <span class="section-label">{label}</span>}
+  {number && <div class="section-number">{number}</div>}
+  <h2 class="section-title">{title}</h2>
+  {subtitle && <p class="section-subtitle">{subtitle}</p>}
+</div>

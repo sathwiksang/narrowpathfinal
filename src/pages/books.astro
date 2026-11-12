@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/subpage.css';
+import '../styles/pdf-library.css';
+import '../styles/pages/books.css';
+import FilterTabs from '../components/filter/FilterTabs.astro';
+import Filterable from '../components/filter/Filterable.astro';
+import SearchField from '../components/filter/SearchField.astro';
+import PdfCard from '../components/pdf/PdfCard.astro';
+import PdfModal from '../components/pdf/PdfModal.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import { LANGUAGES, books, type Language } from '../lib/data';
+import { ID, absoluteUrl } from '../lib/schema';
+
+const PATH = '/books.html';
+const countOf = (lang: Language) => books.filter((b) => b.language === lang).length;
+const languages = Object.entries(LANGUAGES) as [Language, string][];
+
+const stats = [
+  { value: books.length, label: 'Total Articles' },
+  { value: countOf('english'), label: 'English' },
+  { value: countOf('malayalam'), label: 'Malayalam' },
+  { value: countOf('spanish'), label: 'Spanish' },
+];
+const tabs = [
+  { value: 'all', label: 'All Languages', count: books.length },
+  ...languages.map(([value, label]) => ({ value, label, count: countOf(value) })),
+];
+
+const IN_LANGUAGE: Record<Language, string> = { 'ai-translation': 'en', english: 'en', malayalam: 'ml', spanish: 'es' };
+const description = `${books.length} theological books and essays by Dr. Sunny Ezhumattoor in English, Malayalam and Spanish on prophecy, doctrine, church history and Christian living.`;
+---
+
+<BaseLayout
+  title="Books & Essays by Dr. Sunny Ezhumattoor | Narrow Path Ministries"
+  {description}
+  path={PATH}
+  crumbs={[{ name: 'Books', path: PATH }]}
+  pageType="CollectionPage"
+  mainEntity={{
+    '@type': 'ItemList',
+    numberOfItems: books.length,
+    itemListElement: books.map((book, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Book',
+        name: book.title,
+        description: book.description,
+        inLanguage: IN_LANGUAGE[book.language],
+        author: { '@id': ID.founder },
+        url: absoluteUrl(`${PATH}#${book.id}`),
+        ...(book.view ? { sameAs: book.view } : {}),
+      },
+    })),
+  }}
+>
+  <PageHero
+    title="Theological Books &"
+    highlight="Essays"
+    subtitle="Exploring Biblical Truth Through Scholarly Writings"
+  />
+
+  <section class="stats-section">
+    <div class="stats-grid">
+      {stats.map((s) => (
+        <div class="stat-card fade-in">
+          <span class="stat-number">{s.value}</span>
+          <span class="stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <Filterable noun="book">
+    <section class="filter-section">
+      <div class="container">
+        <div class="filter-header">
+          <span class="filter-label">Browse Collection</span>
+          <SearchField
+            class="search-container"
+            placeholder="Search articles by title or topic..."
+            label="Search books by title or topic"
+          />
+          <FilterTabs tabs={tabs} label="Filter by language" class="language-tabs" buttonClass="tab-btn" />
+        </div>
+      </div>
+    </section>
+
+    <section class="articles-section">
+      <h2 class="visually-hidden">All books and essays</h2>
+      <div class="articles-grid" id="articlesGrid">
+        {books.map((book, i) => (
+          <PdfCard doc={book} position={i + 1} badge={LANGUAGES[book.language]} filterKey={book.language} />
+        ))}
+      </div>
+      <div class="no-results" data-filter-empty hidden>
+        No articles found matching your search criteria.
+      </div>
+    </section>
+  </Filterable>
+
+  <PdfModal />
+</BaseLayout>

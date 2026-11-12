@@ -1,0 +1,20 @@
+---
+interface Props {
+  /** Singular noun for the screen-reader result count, e.g. "book" → "12 books shown". */
+  noun: string;
+}
+const { noun } = Astro.props;
+---
+
+<div data-filterable={noun}>
+  <slot />
+  <p class="visually-hidden" role="status" data-filter-status></p>
+</div>
+
+<script>
+  import { initFilterable } from '../../scripts/filterable';
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-filterable]')) {
+    initFilterable(root, root.dataset['filterable'] ?? 'item');
+  }
+</script>

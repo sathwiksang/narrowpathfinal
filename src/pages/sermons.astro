@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/subpage.css';
+import '../styles/pages/sermons.css';
+import FilterTabs from '../components/filter/FilterTabs.astro';
+import Filterable from '../components/filter/Filterable.astro';
+import SearchField from '../components/filter/SearchField.astro';
+import SermonCard from '../components/sermons/SermonCard.astro';
+import VideoModal from '../components/sermons/VideoModal.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import { SERMON_CATEGORIES, sermons } from '../lib/data';
+import { isoDuration } from '../lib/format';
+import { ID } from '../lib/schema';
+
+const PATH = '/sermons.html';
+const totalSeconds = sermons.reduce((sum, s) => sum + s.seconds, 0);
+const stats = [
+  { value: String(sermons.length), label: 'Episodes Available' },
+  { value: `${Math.floor(totalSeconds / 3600)}+`, label: 'Hours of Teaching' },
+  { value: '1000+', label: 'Active Listeners' },
+  { value: 'Q&A', label: 'Biblical Format' },
+];
+const tabs = [
+  { value: 'all', label: 'All Episodes' },
+  ...Object.entries(SERMON_CATEGORIES).map(([value, c]) => ({ value, label: c.filter })),
+];
+---
+
+<BaseLayout
+  title="Light from the Word: Sermons & Biblical Q&A | Narrow Path Ministries"
+  description={`Watch ${sermons.length} sermons and Biblical Q&A episodes with Dr. Sunny Ezhumattoor on prophecy, doctrine, the Rapture, Dispensationalism and Christian living.`}
+  path={PATH}
+  crumbs={[{ name: 'Sermons', path: PATH }]}
+  pageType="CollectionPage"
+  mainEntity={{
+    '@type': 'ItemList',
+    numberOfItems: sermons.length,
+    itemListElement: sermons.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'VideoObject',
+        name: s.title,
+        description: s.description,
+        thumbnailUrl: `https://i.ytimg.com/vi/${s.id}/hqdefault.jpg`,
+        uploadDate: s.published,
+        duration: isoDuration(s.seconds),
+        embedUrl: `https://www.youtube-nocookie.com/embed/${s.id}`,
+        contentUrl: `https://www.youtube.com/watch?v=${s.id}`,
+        publisher: { '@id': ID.organization },
+      },
+    })),
+  }}
+>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>
+        Light from the <span>Word</span>
+      </h1>
+      <p class="hero-subtitle">Biblical Q&amp;A Series - Answering your questions with scriptural wisdom and clarity</p>
+    </div>
+  </section>
+
+  <section class="stats-section">
+    <div class="container">
+      <SectionHeader
+        label="Our Collection"
+        title="Sermon Statistics"
+        subtitle="A comprehensive library of biblical teaching and spiritual guidance"
+      />
+
+      <div class="stats-grid">
+        {stats.map((s) => (
+          <div class="stat-card fade-in">
+            <div class="stat-number">{s.value}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Filterable noun="sermon">
+    <section class="filter-section">
+      <div class="container">
+        <SearchField
+          class="search-box"
+          placeholder="Search sermons by title or topic..."
+          label="Search sermons by title or topic"
+        />
+        <FilterTabs tabs={tabs} label="Filter by category" class="category-filters" buttonClass="btn-filter" />
+      </div>
+    </section>
+
+    <section class="sermons-section">
+      <div class="container">
+        <SectionHeader
+          label="Watch & Listen"
+          title="Recent Sermons"
+          subtitle="Explore our complete collection of biblical teachings and Q&A sessions"
+        />
+
+        <div class="sermons-grid" id="sermonsGrid">
+          {sermons.map((sermon) => (
+            <SermonCard sermon={sermon} />
+          ))}
+        </div>
+
+        <div class="no-results" data-filter-empty hidden>
+          No sermons found matching your search criteria. Please try different keywords.
+        </div>
+      </div>
+    </section>
+  </Filterable>
+
+  <VideoModal />
+</BaseLayout>

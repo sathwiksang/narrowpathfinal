@@ -1,0 +1,64 @@
+---
+import ContactLink from './ContactLink.astro';
+import { FOOTER_LINKS, LINKS, SITE } from '../../config/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer id="contact">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>{SITE.name}</h3>
+      <p>
+        A ministry dedicated to biblical teaching, theological education, and spiritual growth. We guide believers on
+        the narrow path that leads to life through Jesus Christ our Lord.
+      </p>
+      <p class="footer-verse">"The gift of God is eternal life through Jesus Christ our Lord" - Romans 6:23</p>
+    </div>
+
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        {FOOTER_LINKS.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Contact Information</h3>
+      <p>
+        {SITE.address.locality}, {SITE.address.region} {SITE.address.postalCode}
+      </p>
+      <p>
+        Email: <ContactLink kind="email" />
+      </p>
+      <p>
+        Phone: <ContactLink kind="phone" />
+      </p>
+      <p class="footer-spaced">
+        Website:{' '}
+        <a href={LINKS.thekkel} class="footer-link-accent">
+          www.thekkel.com
+        </a>
+      </p>
+      <p class="footer-spaced">
+        Follow us on{' '}
+        <a href={LINKS.facebook} target="_blank" rel="noopener noreferrer" class="footer-facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+          </svg>
+          Facebook
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      &copy; {year} {SITE.legalName} All rights reserved.
+    </p>
+  </div>
+</footer>

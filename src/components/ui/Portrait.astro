@@ -1,0 +1,20 @@
+---
+import { Picture } from 'astro:assets';
+import portrait from '../../assets/images/dr-sunny-ezhumattoor.jpg';
+
+interface Props {
+  /** Load eagerly with high priority when the portrait is above the fold (LCP candidate). */
+  priority?: boolean;
+}
+const { priority = false } = Astro.props;
+---
+
+<Picture
+  src={portrait}
+  formats={['avif', 'webp']}
+  widths={[400, 800]}
+  sizes="(max-width: 575.98px) 100vw, 400px"
+  alt="Dr. John Mathew"
+  loading={priority ? 'eager' : 'lazy'}
+  fetchpriority={priority ? 'high' : 'auto'}
+/>

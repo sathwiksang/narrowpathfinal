@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/subpage.css';
+import '../styles/pdf-library.css';
+import '../styles/pages/integrity-values.css';
+import PdfCard from '../components/pdf/PdfCard.astro';
+import PdfModal from '../components/pdf/PdfModal.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import { inreach } from '../lib/data';
+
+const PATH = '/integrity-values.html';
+---
+
+<BaseLayout
+  title="Integrity and Values of Christianity | Narrow Path Ministries"
+  description={`In-Reach materials from the Thekkel Bible Course: a ${inreach.length}-part study by Dr. Sunny Ezhumattoor on Christian integrity, biblical values and discipleship.`}
+  path={PATH}
+  crumbs={[{ name: 'In-Reach', path: PATH }]}
+  pageType="CollectionPage"
+>
+  <PageHero
+    title="Integrity and Values of"
+    highlight="Christianity"
+    subtitle="Exploring Biblical Principles for Christian Living"
+  />
+
+  <section class="articles-section">
+    <div class="container">
+      <SectionHeader
+        label="Bible Course Materials"
+        title="In-Reach Ministry Resources"
+        subtitle="Strengthen the Church community, deepen discipleship, and sustain lasting spiritual growth"
+      />
+
+      <div class="articles-grid" id="articlesGrid">
+        {inreach.map((doc, i) => (
+          <PdfCard doc={doc} position={i + 1} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <PdfModal />
+</BaseLayout>

@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/subpage.css';
+import '../styles/pages/resources.css';
+import FilterTabs from '../components/filter/FilterTabs.astro';
+import Filterable from '../components/filter/Filterable.astro';
+import SearchField from '../components/filter/SearchField.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import { RESOURCE_FILTERS, resourceCategories } from '../lib/data';
+import { pad2 } from '../lib/format';
+
+const PATH = '/resources.html';
+const tabs = [
+  { value: 'all', label: 'All Resources' },
+  ...Object.entries(RESOURCE_FILTERS).map(([value, label]) => ({ value, label })),
+];
+---
+
+<BaseLayout
+  title="Christian Resources & Brethren Assemblies | Narrow Path Ministries"
+  description="A curated directory of Plymouth Brethren assemblies, Bible study tools, Christian ministries and educational resources recommended by Narrow Path Ministries."
+  path={PATH}
+  crumbs={[{ name: 'Resources', path: PATH }]}
+  pageType="CollectionPage"
+>
+  <PageHero
+    title="Christian"
+    highlight="Resources"
+    subtitle="A curated collection of valuable Christian websites and ministries"
+  />
+
+  <Filterable noun="resource">
+    <section class="search-section">
+      <div class="container">
+        <SearchField
+          class="search-container"
+          placeholder="Search resources by name or description..."
+          label="Search resources by name or description"
+        />
+      </div>
+    </section>
+
+    <section class="tabs-section">
+      <div class="container">
+        <FilterTabs tabs={tabs} label="Filter by category" class="category-tabs" buttonClass="tab-btn" />
+      </div>
+    </section>
+
+    <section class="disclaimer-section">
+      <div class="container">
+        <div class="disclaimer-content">
+          <h2 class="disclaimer-title">External Links Disclaimer</h2>
+          <p class="disclaimer-text">
+            The only domain covered by our privacy policy is narrowpathministries.net. We provide these links as a
+            service but are not responsible for the content or practices of external sites. Please glean with care,
+            remembering there are sometimes treasures hidden where you least expect them.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="resources-section">
+      <div class="container">
+        {resourceCategories.map((category, i) => (
+          <div class="resource-category" id={category.id} data-filter-group data-filter-key={category.filter}>
+            <div class="category-header">
+              <div class="category-info">
+                <div class="category-title-wrapper">
+                  <span class="category-number" aria-hidden="true">
+                    {pad2(i + 1)}
+                  </span>
+                  <h2 class="category-title">{category.title}</h2>
+                </div>
+                <span class="category-count">
+                  {category.items.length} {category.items.length === 1 ? 'Resource' : 'Resources'}
+                </span>
+              </div>
+            </div>
+            <div class="resources-grid">
+              {category.items.map((item) => (
+                <div class="resource-card" data-filter-item>
+                  <h3 class="resource-title" data-filter-text>
+                    {item.title}
+                  </h3>
+                  <p class="resource-description" data-filter-text>
+                    {item.description}
+                  </p>
+                  {item.url ? (
+                    <a href={item.url} class="resource-link">
+                      {item.label} →
+                    </a>
+                  ) : (
+                    <span class="resource-link">{item.label} →</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+        <div class="no-results" data-filter-empty hidden>
+          No resources found matching your search criteria.
+        </div>
+      </div>
+    </section>
+  </Filterable>
+</BaseLayout>

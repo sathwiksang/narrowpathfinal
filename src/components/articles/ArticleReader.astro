@@ -1,0 +1,78 @@
+---
+import ArticleReaderContent from './ArticleReaderContent.astro';
+import { articles } from '../../lib/data';
+---
+
+<dialog class="article-reader" id="articleReader" aria-label="Article reader">
+  <div class="reader-container">
+    <div class="reader-header">
+      <button type="button" class="reader-close" data-modal-close aria-label="Close article">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="reader-progress" aria-hidden="true">
+        <div class="progress-bar">
+          <div class="progress-fill" id="readerProgress"></div>
+        </div>
+      </div>
+      <div class="reader-header-spacer"></div>
+    </div>
+    <div class="reader-content" id="readerContent"></div>
+  </div>
+</dialog>
+
+{articles.map((article) => (
+  <template id={`reader-${article.id}`}>
+    <ArticleReaderContent article={article} />
+  </template>
+))}
+
+<script>
+  import { isNativeLinkClick } from '../../scripts/events';
+  import { createModal } from '../../scripts/modal';
+
+  const dialog = document.getElementById('articleReader');
+  const content = document.getElementById('readerContent');
+  const progress = document.getElementById('readerProgress');
+
+  if (dialog instanceof HTMLDialogElement && content && progress) {
+    const updateProgress = () => {
+      const max = dialog.scrollHeight - dialog.clientHeight;
+      progress.style.width = `${max > 0 ? (dialog.scrollTop / max) * 100 : 0}%`;
+    };
+    // Clearing the content also stops any video playing inside the article.
+    const modal = createModal(dialog, { closeOnBackdrop: false, onClose: () => content.replaceChildren() });
+
+    const openArticle = (id: string) => {
+      const template = document.getElementById(`reader-${id}`);
+      if (!(template instanceof HTMLTemplateElement)) return;
+      content.replaceChildren(template.content.cloneNode(true));
+      dialog.setAttribute('aria-label', content.querySelector('.reader-title')?.textContent ?? 'Article');
+      modal.open();
+      dialog.scrollTop = 0;
+      updateProgress();
+    };
+
+    dialog.addEventListener('scroll', updateProgress, { passive: true });
+    document.addEventListener('click', (e) => {
+      if (!(e.target instanceof Element)) return;
+      const card = e.target.closest<HTMLElement>('[data-article]');
+      // External links, the inline video player and modified clicks (new tab) keep their native behaviour.
+      if (!card || e.target.closest('[data-external], .yt-facade') || isNativeLinkClick(e, e.target)) return;
+      e.preventDefault();
+      openArticle(card.dataset['article'] ?? '');
+    });
+
+    // Legacy deep links such as /articles.html#darby-book open that article directly.
+    const hashId = (() => {
+      try {
+        return decodeURIComponent(location.hash.slice(1));
+      } catch {
+        return ''; // malformed escape sequence in the URL
+      }
+    })();
+    if (hashId) openArticle(hashId);
+  }
+</script>

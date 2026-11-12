@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/reader.css';
+import '../../styles/pages/articles.css';
+import '../../styles/article-page.css';
+import type { GetStaticPaths } from 'astro';
+import ArticleReaderContent from '../../components/articles/ArticleReaderContent.astro';
+import { articlePath, articles, type Article } from '../../lib/data';
+import { metaDescription } from '../../lib/format';
+import { ID, PORTRAIT_PATH, absoluteUrl } from '../../lib/schema';
+
+export const getStaticPaths = (() =>
+  articles.map((article) => ({ params: { id: article.id }, props: { article } }))) satisfies GetStaticPaths;
+
+interface Props {
+  article: Article;
+}
+const { article } = Astro.props;
+const path = articlePath(article);
+const url = absoluteUrl(path);
+// Month-only dates (e.g. 2025-02) are not valid schema.org/Open Graph datetimes, so they are omitted.
+const published = /^\d{4}-\d{2}-\d{2}$/.test(article.date) ? article.date : undefined;
+---
+
+<BaseLayout
+  title={`${article.title} | Narrow Path Ministries`}
+  description={metaDescription(article.excerpt)}
+  {path}
+  crumbs={[
+    { name: 'Articles', path: '/articles.html' },
+    { name: article.title, path },
+  ]}
+  ogType="article"
+  {...(published ? { publishedTime: published } : {})}
+  extraNodes={[
+    {
+      '@type': 'Article',
+      '@id': `${url}#article`,
+      headline: article.title,
+      description: metaDescription(article.excerpt),
+      articleSection: article.label,
+      ...(published ? { datePublished: published } : {}),
+      author: { '@id': ID.founder },
+      publisher: { '@id': ID.organization },
+      image: absoluteUrl(PORTRAIT_PATH),
+      mainEntityOfPage: { '@id': `${url}#webpage` },
+      inLanguage: 'en',
+    },
+  ]}
+>
+  <div class="reading-progress" aria-hidden="true">
+    <div class="progress-fill" data-reading-progress></div>
+  </div>
+  <div class="article-page">
+    <article class="reader-container">
+      <div class="reader-content">
+        <a class="article-back" href="/articles.html">
+          ← All Articles
+        </a>
+        <ArticleReaderContent {article} />
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<script>
+  const fill = document.querySelector<HTMLElement>('[data-reading-progress]');
+  if (fill) {
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      fill.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>

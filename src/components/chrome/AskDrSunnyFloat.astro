@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import askIcon from '../../assets/images/ask-dr-sunny.png';
+import { LINKS } from '../../config/site';
+
+const ring = (copies: number) => 'Ask Dr. Sunny • '.repeat(copies);
+const CIRCLE = 'M 50,50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0';
+---
+
+<div class="dr-sunny-chat-float" role="complementary" aria-label="Ask Dr. Sunny chatbot">
+  <div class="dr-sunny-chat-popup" id="drSunnyPopup">
+    <div class="dr-sunny-popup-header">
+      <Image src={askIcon} alt="" width={40} height={40} densities={[1, 2]} class="dr-sunny-popup-ask" />
+      <div class="dr-sunny-popup-title-wrap">
+        <span class="dr-sunny-popup-title">Ask Dr. Sunny</span>
+        <span class="dr-sunny-popup-tagline">Chatbot—ask from his writings.</span>
+        <span class="dr-sunny-popup-via">
+          Powered by <span>ChatGPT</span>
+        </span>
+      </div>
+    </div>
+    <a href={LINKS.askDrSunny} target="_blank" rel="noopener noreferrer" class="dr-sunny-popup-cta">
+      Chat now — opens in new tab
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
+      </svg>
+    </a>
+  </div>
+  <div class="dr-sunny-trigger-wrap">
+    <svg
+      class="dr-sunny-circle-text dr-sunny-circle-text-desktop"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden="true"
+    >
+      <defs>
+        <path id="dr-sunny-text-path" d={CIRCLE}></path>
+      </defs>
+      <text>
+        <textPath href="#dr-sunny-text-path" startOffset="0">
+          {ring(3)}
+        </textPath>
+      </text>
+    </svg>
+    <svg
+      class="dr-sunny-circle-text dr-sunny-circle-text-mobile"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden="true"
+    >
+      <defs>
+        <path id="dr-sunny-text-path-mobile" d={CIRCLE}></path>
+      </defs>
+      <text>
+        <textPath href="#dr-sunny-text-path-mobile" startOffset="0">
+          {ring(4)}
+        </textPath>
+      </text>
+    </svg>
+    <a
+      href={LINKS.askDrSunny}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="dr-sunny-chat-trigger"
+      aria-label="Ask Dr. Sunny chatbot"
+      aria-controls="drSunnyPopup"
+      aria-expanded="false"
+    >
+      <span class="dr-sunny-trigger-chat-icon" aria-hidden="true">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </span>
+    </a>
+  </div>
+</div>
+
+<script>
+  // Appears 1s after load. First activation opens the popup; the next one follows the link.
+  const float = document.querySelector<HTMLElement>('.dr-sunny-chat-float');
+  const trigger = float?.querySelector<HTMLAnchorElement>('.dr-sunny-chat-trigger');
+
+  if (float && trigger) {
+    const setOpen = (open: boolean) => {
+      float.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+    };
+    setTimeout(() => float.classList.add('dr-sunny-chat-float-visible'), 1000);
+    trigger.addEventListener('click', (e) => {
+      if (float.classList.contains('is-open')) return;
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(true);
+    });
+    document.addEventListener('click', (e) => {
+      if (e.target instanceof Node && !float.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && float.classList.contains('is-open')) {
+        setOpen(false);
+        trigger.focus();
+      }
+    });
+  }
+</script>

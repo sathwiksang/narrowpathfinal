@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/pages/index.css';
+import { Image } from 'astro:assets';
+import ContactLink from '../components/chrome/ContactLink.astro';
+import CtaSection from '../components/ui/CtaSection.astro';
+import Portrait from '../components/ui/Portrait.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import askIcon from '../assets/images/ask-dr-sunny.png';
+import chatgptLogo from '../assets/images/chatgpt-logo.svg';
+import { LINKS } from '../config/site';
+import { articlePath, articles } from '../lib/data';
+import { formatDate, pad2 } from '../lib/format';
+
+const FEATURES = [
+  {
+    title: 'Biblical Teaching',
+    description:
+      "In-depth verse-by-verse exposition of Scripture, helping believers understand God's Word in its full context and practical application for daily living.",
+  },
+  {
+    title: 'Online Bible Course',
+    href: '/bible-course.html',
+    description:
+      "Comprehensive biblical education delivered through personalized online instruction, deepening students' understanding of Scripture, doctrine, and biblical interpretation principles.",
+  },
+  {
+    title: 'Published Resources',
+    description:
+      'Carefully crafted books, study guides, and written materials designed to support your spiritual journey and provide lasting reference for biblical truths.',
+  },
+  {
+    title: 'Digital Sermons',
+    description:
+      'Access our extensive library of recorded sermons and teachings, available anytime to feed your soul and strengthen your faith wherever you are.',
+  },
+];
+
+const TEASERS = [
+  {
+    article: 'darby-book',
+    category: 'New Release',
+    title: 'New Darby Book Released',
+    excerpt:
+      "Exciting news about our latest publication exploring the theological insights and historical context of Darby's influential work on biblical interpretation...",
+  },
+  {
+    article: 'moses-law',
+    category: 'Theology',
+    title: 'The Law of Moses and the Law of Christ',
+    excerpt:
+      'An in-depth exploration of the relationship between the Old and New Covenants and their application for believers living under grace today...',
+  },
+  {
+    article: 'roman-catholicism',
+    category: 'Doctrine',
+    title: 'Understanding Roman Catholicism',
+    excerpt:
+      'A biblical perspective on Catholic doctrine and practice, examining key differences and similarities with Protestant faith through a scriptural lens...',
+  },
+].map((t) => {
+  const article = articles.find((a) => a.id === t.article);
+  if (!article) throw new Error(`Homepage teaser references unknown article "${t.article}"`);
+  return { ...t, href: articlePath(article), date: formatDate(article.date) };
+});
+
+const description =
+  'Biblical teaching, online Bible courses, theological books and sermons from Narrow Path Ministries, founded by Dr. Sunny Ezhumattoor in Houston, Texas.';
+---
+
+<BaseLayout
+  title="Narrow Path Ministries - Walking in Truth | Dr. Sunny Ezhumattoor"
+  {description}
+  path="/"
+  socialTitle="Narrow Path Ministries - Walking in Truth"
+>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>
+        Walking the <span>Narrow Path</span>
+      </h1>
+      <p class="scripture-quote">
+        "Enter through the narrow gate. For wide is the gate and broad is the road that leads to destruction, and many
+        enter through it. But small is the gate and narrow the road that leads to life, and only a few find it."
+        <span class="scripture-reference">Matthew 7:13-14</span>
+      </p>
+      <div class="hero-buttons">
+        <a href="/books.html" class="btn btn-primary">
+          Explore Our Books
+        </a>
+        <a href="/sermons.html" class="btn btn-secondary">
+          Listen to Sermons
+        </a>
+      </div>
+      <div class="hero-dr-sunny-wrap">
+        <div class="hero-dr-sunny-collab" aria-hidden="true">
+          <span class="hero-dr-sunny-collab-ask">
+            <Image
+              src={askIcon}
+              alt=""
+              width={52}
+              height={52}
+              densities={[1, 2]}
+              loading="eager"
+              class="hero-dr-sunny-collab-ask-img"
+            />
+          </span>
+          <span class="hero-dr-sunny-collab-plus">+</span>
+          <span class="hero-dr-sunny-collab-chatgpt">
+            <img src={chatgptLogo.src} alt="" width="36" height="36" />
+          </span>
+        </div>
+        <a href={LINKS.askDrSunny} target="_blank" rel="noopener noreferrer" class="hero-dr-sunny-card">
+          <span class="hero-dr-sunny-ai-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </span>
+          <span class="hero-dr-sunny-text">
+            <span class="hero-dr-sunny-title">Ask Dr. Sunny</span>
+            <span class="hero-dr-sunny-tagline">Chatbot—ask from his writings.</span>
+            <span class="hero-dr-sunny-via">
+              Powered by <span>ChatGPT</span>
+            </span>
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section" id="about">
+    <div class="container">
+      <SectionHeader
+        label="Welcome"
+        title="About Our Ministry"
+        subtitle="Dedicated to proclaiming God's truth and equipping believers for a life of faith"
+      />
+
+      <div class="about-content">
+        <div class="about-text fade-in">
+          <p>
+            Welcome to Narrow Path Ministries, where we are committed to helping believers navigate the profound journey
+            of faith with wisdom, understanding, and biblical truth. Founded by Dr. Sunny Ezhumattoor, our ministry has
+            served as a source of spiritual guidance since 2010.
+          </p>
+
+          <div class="about-highlight">
+            "Our mission is to guide seekers and believers alike onto the narrow path that leads to eternal life,
+            through deep biblical teaching and practical application of God's Word."
+          </div>
+
+          <p>
+            Through our comprehensive programs including online biblical education, published theological resources, and
+            digital teachings, we strive to equip disciples who will impact their communities for Christ. We believe in
+            the transformative power of Scripture and its ability to change lives when properly understood and applied.
+          </p>
+
+          <p>
+            Join us as we explore the depths of God's Word together, growing in faith, wisdom, and spiritual maturity.
+            Our commitment is to provide solid biblical teaching through personalized instruction, scholarly
+            publications, and accessible online resources that equip you for every good work.
+          </p>
+
+          <p>
+            Whether through Dr. Ezhumattoor's extensive collection of theological books or structured online biblical
+            courses, Narrow Path Ministries offers multiple pathways for spiritual growth and biblical understanding. We
+            invite you to discover how sound biblical teaching can transform your walk with Christ.
+          </p>
+        </div>
+
+        <div class="about-image fade-in">
+          <div class="about-image-wrapper">
+            <Portrait />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section" id="ministries">
+    <div class="container">
+      <SectionHeader
+        label="What We Offer"
+        title="Our Core Ministries"
+        subtitle="Serving the Body of Christ through multiple channels of biblical education and spiritual growth"
+      />
+
+      <div class="features-grid">
+        {FEATURES.map((f, i) => {
+          const Tag = f.href ? 'a' : 'div';
+          return (
+            <Tag class:list={['feature-card', 'fade-in', f.href && 'feature-card-link']} href={f.href}>
+              <div class="feature-number">{pad2(i + 1)}</div>
+              <h3 class="feature-title">{f.title}</h3>
+              <p class="feature-description">{f.description}</p>
+            </Tag>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-section" id="blog">
+    <div class="container">
+      <SectionHeader
+        label="Latest Insights"
+        title="Recent Articles & Teachings"
+        subtitle="Fresh perspectives on timeless biblical truths"
+      />
+
+      <div class="blog-grid">
+        {TEASERS.map((t) => (
+          <article class="blog-card fade-in">
+            <div class="blog-header">
+              <span class="blog-category">{t.category}</span>
+            </div>
+            <div class="blog-content">
+              <div class="blog-date">{t.date}</div>
+              <h3 class="blog-title">{t.title}</h3>
+              <p class="blog-excerpt">{t.excerpt}</p>
+              <a href={t.href} class="read-more">
+                Continue Reading →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    title="Begin Your Journey on the Narrow Path"
+    text="Join us in discovering the transformative power of God's Word and walking in His truth with purpose and clarity."
+  >
+    <div class="hero-buttons">
+      <ContactLink kind="email" class="btn btn-white" label="Connect With Us" />
+      <a href="/books.html" class="btn btn-secondary btn-on-dark">
+        Explore Resources
+      </a>
+    </div>
+  </CtaSection>
+</BaseLayout>

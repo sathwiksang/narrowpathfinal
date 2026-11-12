@@ -1,0 +1,29 @@
+---
+interface Tab {
+  value: string;
+  label: string;
+  count?: number;
+}
+interface Props {
+  tabs: readonly Tab[];
+  /** Accessible name of the tab group. */
+  label: string;
+  class: string;
+  buttonClass: string;
+}
+const { tabs, label, class: className, buttonClass } = Astro.props;
+---
+
+<div class={className} role="group" aria-label={label}>
+  {tabs.map((tab, i) => (
+    <button
+      type="button"
+      class:list={[buttonClass, { active: i === 0 }]}
+      data-filter-value={tab.value}
+      aria-pressed={i === 0 ? 'true' : 'false'}
+    >
+      {tab.label}
+      {tab.count !== undefined && <span class="tab-count">{tab.count}</span>}
+    </button>
+  ))}
+</div>

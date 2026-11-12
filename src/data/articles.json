@@ -1,0 +1,140 @@
+[
+  {
+    "id": "ask-dr-sunny",
+    "filter": "theology",
+    "label": "Launch",
+    "title": "Ask Dr. Sunny — Now Live",
+    "date": "2025-02",
+    "excerpt": "A biblically grounded theological assistant trained on the complete writings of Dr. John Mathew (Sunny Ezhumattoor). Get clear answers on Christian doctrine, theology, church practice, and spiritual living—when you need them, without reading the full book.",
+    "cta": {
+      "title": "Open Ask Dr. Sunny",
+      "text": "Chat with the theological assistant powered by GPT-5.2 and trained on Dr. Sunny's complete writings. Opens in a new tab.",
+      "buttonText": "Open in ChatGPT",
+      "href": "https://chatgpt.com/g/g-697e8963d13481919d16c33647c1db89-ask-dr-sunny"
+    },
+    "kind": "launch",
+    "href": "https://chatgpt.com/g/g-697e8963d13481919d16c33647c1db89-ask-dr-sunny",
+    "actionText": "Try Ask Dr. Sunny",
+    "metaText": "Chatbot",
+    "lengthLabel": "Powered by GPT-5.2"
+  },
+  {
+    "id": "ireland-outreach-hq",
+    "filter": "history",
+    "label": "Ministry Milestone",
+    "title": "Grand Opening of Ireland Outreach International Headquarters",
+    "date": "2017-11-10",
+    "excerpt": "A historic moment as Jim Gillett, International Director, and Dr. Sunny Mathew celebrate the dedication of Ireland Outreach International's new headquarters in Houston, Texas. This milestone marks a new chapter in the ministry's global mission to demonstrate God's love while faithfully preaching His Word. While establishing this international hub in the United States, Ireland Outreach continues its vital presence in Ireland and expands its reach across nations.",
+    "cta": {
+      "title": "Connect with Ireland Outreach International",
+      "text": "Learn more about our global ministry and how you can partner with us in demonstrating God's love and preaching His Word around the world.",
+      "buttonText": "Contact Us",
+      "href": "mailto:contact@irelandoutreach.org"
+    },
+    "kind": "video",
+    "video": {
+      "id": "E56hMYQNMQ0",
+      "title": "Ireland Outreach International Headquarters Ribbon Cutting Ceremony"
+    },
+    "watchMinutes": 3
+  },
+  {
+    "id": "jerusalem-temple",
+    "filter": "theology",
+    "label": "Theology",
+    "title": "Jerusalem Temple — A Fresh Look at Pentecost",
+    "date": "2025-01-15",
+    "excerpt": "For two millennia, most teachers have placed the birth of the New Testament Church in the Upper Room (Acts 2). Dr. Sunny Ezhumattoor offers a careful, Scripture-first re-examination that addresses the questions readers keep asking but rarely see answered: Where could thousands hear Peter at once? How were 3,000 baptized in a single day?",
+    "kind": "article"
+  },
+  {
+    "id": "darby-book",
+    "filter": "biography",
+    "label": "Biography",
+    "title": "New Darby Book: A Portrait of John Nelson Darby",
+    "date": "2016-07-06",
+    "excerpt": "Darby is the first and only theologian who systematically explained the prophetical events in Daniel and Revelation, predicting Israel's founding, Middle East conflicts, and end-time events. This biography offers unprecedented insights into American history and Darby's influence on conservative Christianity.",
+    "cta": {
+      "title": "Get Your Copy of \"A Portrait of John Nelson Darby\"",
+      "text": "Available on Amazon in both paperback and Kindle formats. Search for \"A Portrait of John Nelson Darby\" on Amazon.com.",
+      "buttonText": "Order on Amazon - $19.95",
+      "href": "https://a.co/d/he7wPNd"
+    },
+    "kind": "article"
+  },
+  {
+    "id": "moses-law",
+    "filter": "theology",
+    "label": "Theology",
+    "title": "The Law of Moses and the Law of Christ",
+    "date": "2015-05-28",
+    "excerpt": "For most Christians, the Law of Moses is a riddle wrapped in mystery. This comprehensive study examines whether Christians are under the Law, exploring Covenant vs. Dispensational theology, the true meaning of tithing, and why Sunday is not the Christian Sabbath.",
+    "cta": {
+      "title": "Deepen Your Biblical Understanding",
+      "text": "Explore more theological insights and dispensational truths in our comprehensive study materials.",
+      "buttonText": "View More Resources",
+      "href": "/books.html"
+    },
+    "kind": "article"
+  },
+  {
+    "id": "roman-catholicism",
+    "filter": "theology",
+    "label": "Doctrine",
+    "title": "Roman Catholicism: A Biblical Examination",
+    "date": "2015-02-16",
+    "excerpt": "A comprehensive biblical examination of 31 key Roman Catholic doctrines compared with Scripture. Topics include salvation, Mary, the Pope, sacraments, purgatory, and the historical timeline of when these traditions entered the church.",
+    "cta": {
+      "title": "Study More Biblical Doctrine",
+      "text": "Explore additional theological resources and biblical teachings.",
+      "buttonText": "View More Resources",
+      "href": "/books.html"
+    },
+    "kind": "article"
+  },
+  {
+    "id": "pre-tribulation-rapture",
+    "filter": "prophecy",
+    "label": "Prophecy",
+    "title": "The Origins of the Pre-Tribulation Rapture",
+    "date": "2015-01-10",
+    "excerpt": "A comprehensive historical examination of the Pre-Tribulation Rapture doctrine, addressing various origin theories including Irving, Margaret MacDonald, and the pivotal role of J.N. Darby. Explores biblical foundations and responds to historical criticisms with documented evidence.",
+    "cta": {
+      "title": "Explore More Prophetic Studies",
+      "text": "Dive deeper into biblical prophecy and end-times theology with our comprehensive resources.",
+      "buttonText": "View Prophecy Resources",
+      "href": "/books.html"
+    },
+    "kind": "article"
+  },
+  {
+    "id": "jesus-in-all-66-books",
+    "filter": "theology",
+    "label": "Biblical Studies",
+    "title": "Jesus in All 66 Books of the Bible",
+    "date": "2014-09-12",
+    "excerpt": "A comprehensive journey through Scripture revealing Christ's presence from Genesis to Revelation, showing how every book points to our Savior and His redemptive work.",
+    "cta": {
+      "title": "Deepen Your Biblical Understanding",
+      "text": "Explore more comprehensive Bible studies and discover Christ throughout Scripture.",
+      "buttonText": "View Bible Study Resources",
+      "href": "/books.html"
+    },
+    "kind": "article"
+  },
+  {
+    "id": "antichrist-world-government",
+    "filter": "prophecy",
+    "label": "End Times",
+    "title": "Anti-Christ and the World Government",
+    "date": "2014-06-08",
+    "excerpt": "Understanding biblical prophecy concerning the end times, the rise of the Anti-Christ, and the formation of a one-world government as revealed in Daniel and Revelation.",
+    "cta": {
+      "title": "Explore More Prophecy Resources",
+      "text": "Dive deeper into biblical prophecy, the end times, and the hope of Christ's return with our books and studies.",
+      "buttonText": "View Prophecy Resources",
+      "href": "/books.html"
+    },
+    "kind": "article"
+  }
+]

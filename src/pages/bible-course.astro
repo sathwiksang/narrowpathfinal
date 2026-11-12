@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/subpage.css';
+import '../styles/pages/bible-course.css';
+import { Image } from 'astro:assets';
+import CtaSection from '../components/ui/CtaSection.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import logo from '../assets/images/thekkel-bible-course-logo.jpg';
+import { ID } from '../lib/schema';
+import { pad2 } from '../lib/format';
+
+const STATS = [
+  { value: '15+', label: 'Years of Excellence' },
+  { value: '500+', label: 'Graduates Worldwide' },
+  { value: '8', label: 'Core Disciplines' },
+  { value: '100%', label: 'Online Available' },
+];
+
+const PROGRAMS = [
+  {
+    title: 'Old Testament Studies',
+    description:
+      "Comprehensive exploration of the Hebrew Scriptures with emphasis on interpretational skills, historical context, and prophetic literature. Students develop proficiency in understanding the continuity of God's redemptive plan.",
+  },
+  {
+    title: 'New Testament Studies',
+    description:
+      'In-depth analysis of the New Testament writings with focus on apostolic teachings, Greek text interpretation, and the establishment of the early church. Special emphasis on Pauline epistles and prophetic books.',
+  },
+  {
+    title: 'Systematic Theology',
+    description:
+      "Dispensational theology with special emphasis on the distinctives of the Plymouth Brethren Movement. Students examine major doctrines through a biblical framework, understanding God's progressive revelation.",
+  },
+];
+
+const COURSES = [
+  {
+    title: 'Philosophy',
+    description: 'Christian philosophical thought and worldview development through biblical lens',
+  },
+  { title: 'Church History', description: 'Historical development of Christianity from apostolic age to modern times' },
+  {
+    title: 'Sociology & Psychology',
+    description: 'Understanding human behavior and society from a biblical perspective',
+  },
+  { title: 'World Missions', description: 'Biblical foundations and contemporary strategies for global evangelism' },
+  { title: 'Economics', description: 'Biblical principles of stewardship and understanding economic systems' },
+  { title: 'World Religions', description: 'Comparative study of major world religions from a Christian perspective' },
+  { title: 'Apologetics', description: 'Defending the Christian faith in contemporary intellectual contexts' },
+  { title: 'Biblical Languages', description: 'Introduction to Hebrew and Greek for enhanced biblical exegesis' },
+];
+
+const description =
+  'The Thekkel Online Bible Course with Dr. Sunny Ezhumattoor: Old and New Testament, dispensational theology, apologetics and church history, fully online.';
+---
+
+<BaseLayout
+  title="Thekkel Online Bible Course | Narrow Path Ministries"
+  {description}
+  path="/bible-course.html"
+  crumbs={[{ name: 'Bible Course', path: '/bible-course.html' }]}
+  mainEntity={{
+    '@type': 'Course',
+    name: 'Thekkel Online Bible Course',
+    description,
+    provider: { '@id': ID.organization },
+    instructor: { '@id': ID.founder },
+    inLanguage: 'en',
+  }}
+>
+  <PageHero
+    title="Thekkel Online"
+    highlight="Bible Course"
+    subtitle="Comprehensive Theological Education for the Twenty-First Century"
+  >
+    <div class="hero-logo">
+      <!-- Served at its native 320×282 so the rendered height (176.25px at 200px wide) matches exactly. -->
+      <Image src={logo} alt="Thekkel Home Bible Course Logo" loading="eager" fetchpriority="high" />
+    </div>
+  </PageHero>
+
+  <section class="college-intro">
+    <div class="container">
+      <div class="college-badge fade-in">
+        <div class="college-name">THEKKEL</div>
+        <div class="college-motto">Rightly Dividing the Word of Truth</div>
+      </div>
+
+      <p class="intro-text fade-in">
+        The Online Bible Course with Dr. Sunny Ezhumattoor exists to serve and equip the Church for the twenty-first
+        century. We provide students with exceptional interpretational skills in Old and New Testament studies,
+        alongside fundamental knowledge in philosophy, history, sociology, psychology, world missions, theology,
+        economics, world religions, and apologetics.
+      </p>
+
+      <p class="intro-text fade-in">
+        Our holistic curriculum challenges and prepares students to display sound reasoning, communicate clearly, and
+        demonstrate effective research skills while developing their complete Christian character. Dr. Ezhumattoor's
+        teaching approach encompasses not only biblical knowledge but also personality development, spiritual formation,
+        moral character building, and practical life skills essential for effective Christian living.
+      </p>
+
+      <p class="intro-text fade-in">
+        The goal of all instruction is to foster intellectual, spiritual, and personal growth as students engage deeply
+        with Scripture and seek to glorify God in all aspects of life. Through comprehensive mentorship, students
+        receive guidance in developing Christ-like character, effective communication, leadership qualities, and the
+        practical wisdom needed to navigate life's challenges as mature believers.
+      </p>
+
+      <p class="intro-text fade-in">
+        Through personalized online learning, students receive comprehensive biblical education that combines academic
+        rigor with complete character development, preparing them to serve effectively in their communities and callings
+        as well-rounded Christian leaders and disciples.
+      </p>
+    </div>
+  </section>
+
+  <section class="stats-bar">
+    <div class="stats-container">
+      {STATS.map((s) => (
+        <div class="stat-item fade-in">
+          <span class="stat-value">{s.value}</span>
+          <span class="stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="programs-section">
+    <div class="container">
+      <SectionHeader
+        label="Academic Programs"
+        title="Areas of Study"
+        subtitle="Comprehensive biblical and theological education rooted in dispensational theology"
+      />
+
+      <div class="programs-grid">
+        {PROGRAMS.map((p, i) => (
+          <div class="program-card fade-in">
+            <div class="program-number">{pad2(i + 1)}</div>
+            <h3 class="program-title">{p.title}</h3>
+            <p class="program-description">{p.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="curriculum-section">
+    <div class="container">
+      <SectionHeader
+        label="Core Curriculum"
+        title="Foundational Courses"
+        subtitle="Interdisciplinary approach to theological education"
+      />
+
+      <div class="curriculum-grid">
+        {COURSES.map((c) => (
+          <div class="course-card fade-in">
+            <h3 class="course-title">{c.title}</h3>
+            <p class="course-description">{c.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="faculty-section">
+    <div class="container">
+      <SectionHeader
+        label="Ministry Philosophy"
+        title="Finding the Balance: A Two-Pronged Approach"
+        subtitle="Building a Church That Reaches Out and Grows Within"
+      />
+
+      <div class="faculty-highlight fade-in">
+        <p class="faculty-quote">
+          Successful church ministry thrives on a sacred balance — between outreach and in-reach. We are called not only
+          to go into the world and share the Gospel, but also to nurture and strengthen the faith of those already
+          within our fellowship. Outreach is the hand of the Church extended to the world; in-reach is the heart of the
+          Church beating for its members.
+        </p>
+        <p class="faculty-quote faculty-quote-follow">
+          These two aspects are not in competition but in harmony. A church that reaches outward without caring inward
+          may draw crowds but lose connection. One that looks only inward risks becoming isolated and ineffective. True
+          ministry finds its strength where compassion for the lost meets care for the found — a rhythm of service that
+          reflects the heart of Christ Himself.
+        </p>
+        <div class="explore-further">
+          <p class="explore-further-title">Explore Further:</p>
+          <p class="explore-further-text">
+            Read the Bible Course Materials and Previous Session Notes to learn more about how in-reach ministry
+            strengthens the Church community, deepens discipleship, and sustains lasting spiritual growth.
+          </p>
+          <div class="explore-further-action">
+            <a href="/integrity-values.html" class="btn-read-materials">
+              <span>Read the materials here</span>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    title="Begin Your Theological Journey"
+    text="Join students worldwide who are being equipped for effective ministry through comprehensive biblical education."
+  >
+    <p class="cta-note">For online study visit: www.thekkel.com</p>
+    <div class="cta-actions">
+      <a href="#contact" class="btn btn-white">
+        Apply Now
+      </a>
+      <a href="/about.html" class="btn btn-secondary">
+        Learn More About Dr. Sunny
+      </a>
+    </div>
+  </CtaSection>
+</BaseLayout>
