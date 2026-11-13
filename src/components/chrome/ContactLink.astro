@@ -26,12 +26,13 @@ const placeholder = kind === 'email' ? 'Show email address' : 'Show phone number
   import { unseal } from '../../lib/contact-seal';
 
   /*
-   * Addresses are unsealed only after the first genuine user input (pointer, touch, wheel or key). Search-engine
-   * renderers and harvesting bots run the page but produce no trusted input, so the address never enters the DOM they
-   * read; events a script dispatches are untrusted and ignored too.
+   * Addresses are unsealed only after the first deliberate user input: a press, touch, wheel scroll or key. Search-engine
+   * renderers and harvesting bots run the page but produce none of these, so the address never enters the DOM they
+   * read; events a script dispatches are untrusted and ignored. Pointer *movement* is not used: browsers synthesise
+   * trusted mouse-move events by themselves when layout shifts under a resting cursor.
    */
   const links = [...document.querySelectorAll<HTMLAnchorElement>('a[data-sealed]')];
-  const INPUT_EVENTS = ['pointerdown', 'pointermove', 'touchstart', 'wheel', 'keydown'] as const;
+  const INPUT_EVENTS = ['pointerdown', 'touchstart', 'wheel', 'keydown'] as const;
 
   const onInput = (e: Event) => {
     if (e.isTrusted) reveal();

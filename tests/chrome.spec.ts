@@ -165,14 +165,17 @@ test.describe('layout regressions', () => {
       ['/sermons.html', '.sermon-card'],
     ] as const) {
       await page.goto(path);
+      // Instant scrolling, so the card cannot drift out from under the pointer while a smooth scroll finishes.
+      await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
       const card = page.locator(selector).first();
       await card.scrollIntoViewIfNeeded();
       await expect(card).toHaveClass(/visible/);
       await page.waitForTimeout(700); // reveal transition
-      // Page coordinates, so any scrolling Playwright does to reach the card does not count as movement.
+      // Page coordinates, so any scrolling does not count as movement.
       const top = () => card.evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
       const resting = await top();
-      await card.hover();
+      const box = await card.boundingBox();
+      await page.mouse.move((box?.x ?? 0) + (box?.width ?? 0) / 2, (box?.y ?? 0) + 30);
       await expect.poll(async () => resting - (await top()), { message: path }).toBeGreaterThan(2);
     }
   });
