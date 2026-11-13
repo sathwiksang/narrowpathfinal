@@ -168,14 +168,15 @@ test.describe('layout regressions', () => {
       // Instant scrolling, so the card cannot drift out from under the pointer while a smooth scroll finishes.
       await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
       const card = page.locator(selector).first();
-      await card.scrollIntoViewIfNeeded();
+      // Centre the card in the window so the pointer is never over the fixed navigation bar.
+      await card.evaluate((el) => el.scrollIntoView({ block: 'center' }));
       await expect(card).toHaveClass(/visible/);
       await page.waitForTimeout(700); // reveal transition
       // Page coordinates, so any scrolling does not count as movement.
       const top = () => card.evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
       const resting = await top();
       const box = await card.boundingBox();
-      await page.mouse.move((box?.x ?? 0) + (box?.width ?? 0) / 2, (box?.y ?? 0) + 30);
+      await page.mouse.move((box?.x ?? 0) + (box?.width ?? 0) / 2, (box?.y ?? 0) + (box?.height ?? 0) / 2);
       await expect.poll(async () => resting - (await top()), { message: path }).toBeGreaterThan(2);
     }
   });
