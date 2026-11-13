@@ -52,7 +52,8 @@ dialog::backdrop {
   padding: 0.75rem 1.25rem;
   background: var(--primary);
   color: #fff;
-  transform: translateY(-100%);
+  /* Past -100% so the anti-aliased bottom edge never shows as a line at the top of the page. */
+  transform: translateY(-110%);
 }
 
 .skip-link:focus {
@@ -145,6 +146,17 @@ h6 {
   border: none;
   cursor: pointer;
   padding: 0.5rem;
+}
+
+/* Below 1250px the logo and eight links no longer fit on one line, so the menu button takes over. */
+@media (max-width: 1249.98px) {
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
 }
 
 .mobile-menu-btn span {

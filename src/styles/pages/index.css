@@ -431,7 +431,7 @@ body {
 
 .feature-card:hover {
   box-shadow: var(--shadow-xl);
-  transform: translateY(-5px);
+  translate: 0 -5px;
   border-color: var(--bg-light);
 }
 
@@ -485,7 +485,7 @@ body {
 
 .blog-card:hover {
   box-shadow: var(--shadow-xl);
-  transform: translateY(-5px);
+  translate: 0 -5px;
 }
 
 .blog-header {
@@ -626,14 +626,6 @@ body {
 @media (max-width: 575.98px) {
   .nav-container {
     padding: 1rem 1rem;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .mobile-menu-btn {
-    display: block;
   }
 
   .logo-main {
@@ -779,14 +771,6 @@ body {
   }
 }
 @media (min-width: 576px) and (max-width: 767.98px) {
-  .nav-links {
-    display: none;
-  }
-
-  .mobile-menu-btn {
-    display: block;
-  }
-
   .logo-main {
     font-size: 1.3rem;
   }
@@ -829,24 +813,12 @@ body {
   }
 }
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .nav-links {
-    gap: 1.5rem;
-  }
-
-  .nav-links a {
-    font-size: 0.9rem;
-  }
-
   .logo-main {
     font-size: 1.4rem;
   }
 
   .logo-sub {
     font-size: 0.9rem;
-  }
-
-  .mobile-menu-btn {
-    display: none;
   }
 
   .hero {
@@ -878,10 +850,6 @@ body {
   }
 }
 @media (min-width: 992px) and (max-width: 1199.98px) {
-  .nav-links {
-    gap: 2rem;
-  }
-
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;

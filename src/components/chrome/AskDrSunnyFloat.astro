@@ -4,7 +4,10 @@ import askIcon from '../../assets/images/ask-dr-sunny.png';
 import { LINKS } from '../../config/site';
 
 const ring = (copies: number) => 'Ask Dr. Sunny • '.repeat(copies);
-const CIRCLE = 'M 50,50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0';
+const RADIUS = 42;
+const CIRCLE = `M 50,50 m -${RADIUS}, 0 a ${RADIUS},${RADIUS} 0 1,1 ${2 * RADIUS},0 a ${RADIUS},${RADIUS} 0 1,1 -${2 * RADIUS},0`;
+/** The ring text is stretched or squeezed to exactly one turn, so its ends meet without overlapping or leaving a gap. */
+const ringLength = (2 * Math.PI * RADIUS).toFixed(2);
 ---
 
 <div class="dr-sunny-chat-float" role="complementary" aria-label="Ask Dr. Sunny chatbot">
@@ -47,7 +50,7 @@ const CIRCLE = 'M 50,50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0';
         <path id="dr-sunny-text-path" d={CIRCLE}></path>
       </defs>
       <text>
-        <textPath href="#dr-sunny-text-path" startOffset="0">
+        <textPath href="#dr-sunny-text-path" startOffset="0" textLength={ringLength} lengthAdjust="spacing">
           {ring(3)}
         </textPath>
       </text>
@@ -62,7 +65,7 @@ const CIRCLE = 'M 50,50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0';
         <path id="dr-sunny-text-path-mobile" d={CIRCLE}></path>
       </defs>
       <text>
-        <textPath href="#dr-sunny-text-path-mobile" startOffset="0">
+        <textPath href="#dr-sunny-text-path-mobile" startOffset="0" textLength={ringLength} lengthAdjust="spacing">
           {ring(4)}
         </textPath>
       </text>
