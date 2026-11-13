@@ -176,7 +176,11 @@ test.describe('layout regressions', () => {
       const top = () => card.evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
       const resting = await top();
       const box = await card.boundingBox();
-      await page.mouse.move((box?.x ?? 0) + (box?.width ?? 0) / 2, (box?.y ?? 0) + (box?.height ?? 0) / 2);
+      // Start from outside the card: Firefox only re-evaluates :hover when the pointer actually moves.
+      await page.mouse.move(1, 1);
+      await page.mouse.move((box?.x ?? 0) + (box?.width ?? 0) / 2, (box?.y ?? 0) + (box?.height ?? 0) / 2, {
+        steps: 5,
+      });
       await expect.poll(async () => resting - (await top()), { message: path }).toBeGreaterThan(2);
     }
   });
