@@ -41,20 +41,33 @@ Counts shown on the site (books per language, episodes, resources, read times) a
 - **Add an article:** add its metadata to `articles.json` and its body to `src/content/articles/<id>.html`.
   It automatically gets its own page at `/articles/<id>.html`, a sitemap entry and structured data.
 - **Resource without a website yet:** set `"url": null`; it is listed but not linked.
+- **Change the email or phone number:** run `npm run contact:seal -- "new value"` and paste the printed string into
+  `CONTACT_SEALED` in `src/config/site.ts`. Never write the plain value anywhere in the code.
+
+### How the email and phone are protected
+
+- They are stored only in sealed form (`src/lib/contact-seal.ts`), never in plain text in this repository or the
+  built site. The tests scan every built file for the address and the number in all common formats.
+- The page reveals them only after a person's first real input (moving the mouse, touching, scrolling with the wheel
+  or pressing a key). Search-engine renderers and harvesting bots run the page's scripts but never produce such input,
+  and events a script fabricates are ignored, so the contact details never appear in what they read. A tested check
+  renders every page like a crawler does and confirms neither value is present.
+- The contact areas carry `data-nosnippet`, so Google may not quote them even if they were ever seen.
 
 ## Project structure
 
 ```
 src/
-  config/site.ts        site identity, navigation, external links, contact details
+  config/site.ts        site identity, navigation, external links, sealed contact details
   data/*.json           content records (validated by src/lib/data.ts)
   content/articles/     article bodies
-  lib/                  data validation, formatting, structured data, contact encoding
+  lib/                  data validation, formatting, structured data, contact sealing
   layouts/BaseLayout    <head> (SEO, Open Graph, JSON-LD), navigation, footer, chatbot
   components/           chrome/, ui/, filter/, pdf/, sermons/, articles/, media/
   scripts/              shared browser modules: modal, filter/search, scroll lock
   styles/               base.css (all pages) → subpage/pdf-library/reader → pages/<page>.css
   pages/                one file per URL; articles/[id].astro generates article pages
+scripts/seal-contact.ts  seals a new email or phone value (npm run contact:seal)
 public/                 CNAME, robots.txt, icons, web manifest
 tests/                  Playwright suites + a static server that mimics GitHub Pages
 ```

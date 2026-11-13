@@ -17,11 +17,15 @@ export const LINKS = {
   thekkel: 'https://www.thekkel.com',
 } as const;
 
-/** Rendered into pages only in encoded form (see src/lib/contact.ts) to deter address harvesters. */
-export const CONTACT = {
-  email: 'thekkel45@gmail.com',
-  phone: '+1 (832) 651-8048',
+/**
+ * Email and phone, sealed (src/lib/contact-seal.ts): the plain values exist nowhere in this repository or the built
+ * site. To change one, run `npm run contact:seal -- "<new value>"` and paste the output here.
+ */
+export const CONTACT_SEALED = {
+  email: 'GgkXGQQSQURUNA9CDAgYWgsKGg==',
+  phone: 'RVBSWldEH1lBQl0eQFlEQFA=',
 } as const;
+export type ContactKind = keyof typeof CONTACT_SEALED;
 
 export interface NavItem {
   readonly href: string;

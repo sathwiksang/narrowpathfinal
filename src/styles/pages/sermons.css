@@ -132,7 +132,7 @@
 
 .stat-card:hover {
   box-shadow: var(--shadow-xl);
-  transform: translateY(-5px);
+  translate: 0 -5px;
   border-color: var(--bg-light);
 }
 
@@ -251,7 +251,7 @@
 
 .sermon-card:hover {
   box-shadow: var(--shadow-xl);
-  transform: translateY(-5px);
+  translate: 0 -5px;
 }
 
 .sermon-header {

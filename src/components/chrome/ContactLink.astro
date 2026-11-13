@@ -1,32 +1,59 @@
 ---
-import { encodedContact, type ContactKind } from '../../lib/contact';
+import { CONTACT_SEALED, type ContactKind } from '../../config/site';
 
 interface Props {
   kind: ContactKind;
   class?: string;
-  /** Fixed visible text (e.g. "Connect With Us"); by default the decoded address is shown. */
+  /** Fixed visible text (e.g. "Connect With Us"); by default the address itself is shown once revealed. */
   label?: string;
 }
 const { kind, class: className, label } = Astro.props;
-const placeholder = kind === 'email' ? 'Contact Email' : 'Contact Phone';
+const placeholder = kind === 'email' ? 'Show email address' : 'Show phone number';
 ---
 
-<!-- Without JavaScript the link falls back to the footer's contact section. -->
+{/* Until a person interacts with the page the link only points to the footer's contact section. */}
 <a
   href="#contact"
   class={className}
   data-contact={kind}
-  data-contact-value={encodedContact(kind)}
+  data-sealed={CONTACT_SEALED[kind]}
   data-keep-label={label === undefined ? undefined : ''}
 >
   {label ?? placeholder}
 </a>
 
 <script>
-  // Decode build-time-encoded contact details into real mailto:/tel: links.
-  for (const link of document.querySelectorAll<HTMLAnchorElement>('a[data-contact-value]')) {
-    const value = [...atob(link.dataset['contactValue'] ?? '')].reverse().join('');
-    link.href = link.dataset['contact'] === 'email' ? `mailto:${value}` : `tel:${value.replace(/[^\d+]/g, '')}`;
-    if (link.dataset['keepLabel'] === undefined) link.textContent = value;
+  import { unseal } from '../../lib/contact-seal';
+
+  /*
+   * Addresses are unsealed only after the first genuine user input (pointer, touch, wheel or key). Search-engine
+   * renderers and harvesting bots run the page but produce no trusted input, so the address never enters the DOM they
+   * read; events a script dispatches are untrusted and ignored too.
+   */
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('a[data-sealed]')];
+  const INPUT_EVENTS = ['pointerdown', 'pointermove', 'touchstart', 'wheel', 'keydown'] as const;
+
+  const onInput = (e: Event) => {
+    if (e.isTrusted) reveal();
+  };
+
+  const reveal = () => {
+    for (const type of INPUT_EVENTS) window.removeEventListener(type, onInput);
+    for (const link of links) {
+      const value = unseal(link.dataset['sealed'] ?? '');
+      link.href = link.dataset['contact'] === 'email' ? `mailto:${value}` : `tel:${value.replace(/[^\d+]/g, '')}`;
+      if (link.dataset['keepLabel'] === undefined) link.textContent = value;
+      delete link.dataset['sealed'];
+    }
+  };
+
+  if (links.length > 0) {
+    for (const type of INPUT_EVENTS) window.addEventListener(type, onInput, { passive: true });
+    // Assistive technology can activate a link with no other input first; that click is trusted, so reveal and follow.
+    for (const link of links) {
+      link.addEventListener('click', (e) => {
+        if (e.isTrusted && link.dataset['sealed'] !== undefined) reveal();
+      });
+    }
   }
 </script>

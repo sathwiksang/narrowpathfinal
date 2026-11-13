@@ -300,7 +300,7 @@ body {
 }
 
 .article-card:hover {
-  transform: translateY(-10px);
+  translate: 0 -10px;
   box-shadow: var(--shadow-2xl);
   border-color: transparent;
 }
@@ -431,14 +431,6 @@ body {
   }
 }
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .mobile-menu-btn {
-    display: block;
-  }
-
   .articles-hero {
     padding: 100px 15px 50px;
   }
@@ -454,7 +446,9 @@ body {
 
   .stats-left {
     width: 100%;
+    flex-wrap: wrap;
     justify-content: space-around;
+    gap: 1rem 1.5rem;
   }
 
   .filter-buttons {

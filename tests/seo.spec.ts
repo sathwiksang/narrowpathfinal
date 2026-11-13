@@ -1,5 +1,8 @@
 import { expect, test } from '@playwright/test';
-import { CONTACT, NAV, SITE } from '../src/config/site';
+import { readdir, readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { CONTACT_SEALED, NAV, SITE } from '../src/config/site';
+import { unseal } from '../src/lib/contact-seal';
 import { sitemapPaths } from './helpers';
 
 // Markup checks are browser-independent; run them once.
@@ -104,10 +107,44 @@ test('unknown pages return a noindex 404', async ({ page }) => {
   await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
 });
 
-test('contact details never appear in plain text in the HTML', async ({ request }) => {
-  for (const path of await sitemapPaths(request)) {
-    const html = await (await request.get(path)).text();
-    expect(html, path).not.toContain(CONTACT.email);
-    expect(html, path).not.toContain(CONTACT.phone);
+/** The email and the phone number in every form a harvester's pattern might match. */
+const contactForms = (): string[] => {
+  const email = unseal(CONTACT_SEALED.email);
+  const phone = unseal(CONTACT_SEALED.phone);
+  const digits = phone.replace(/\D/g, '');
+  const local = digits.slice(-10);
+  return [
+    email,
+    email.replace('@', ' at '),
+    email.replace('@', '&#64;'),
+    phone,
+    digits,
+    local,
+    `${local.slice(0, 3)}-${local.slice(3, 6)}-${local.slice(6)}`,
+    `${local.slice(0, 3)}.${local.slice(3, 6)}.${local.slice(6)}`,
+    `(${local.slice(0, 3)}) ${local.slice(3, 6)}-${local.slice(6)}`,
+  ];
+};
+
+test('no built file contains the email or phone number in any plain form', async () => {
+  const dist = join(import.meta.dirname, '..', 'dist');
+  const files = (await readdir(dist, { recursive: true, withFileTypes: true })).filter((f) => f.isFile());
+  expect(files.length).toBeGreaterThan(20);
+  for (const file of files) {
+    if (/\.(png|jpe?g|webp|avif|ico|woff2?)$/.test(file.name)) continue;
+    const text = await readFile(join(file.parentPath, file.name), 'utf8');
+    for (const form of contactForms()) expect.soft(text, `${file.name} contains "${form}"`).not.toContain(form);
+  }
+});
+
+test('pages a crawler renders (scripts run, no user input) never show the email or phone', async ({
+  page,
+  request,
+}) => {
+  for (const path of [...(await sitemapPaths(request)), '/404.html']) {
+    await page.goto(path, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(300);
+    const rendered = await page.content();
+    for (const form of contactForms()) expect.soft(rendered, `${path} rendered "${form}"`).not.toContain(form);
   }
 });

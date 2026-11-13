@@ -27,7 +27,8 @@ const year = new Date().getFullYear();
       </ul>
     </div>
 
-    <div class="footer-section">
+    {/* data-nosnippet: even if a crawler ever saw the revealed address, Google may not quote it. */}
+    <div class="footer-section" data-nosnippet>
       <h3>Contact Information</h3>
       <p>
         {SITE.address.locality}, {SITE.address.region} {SITE.address.postalCode}
