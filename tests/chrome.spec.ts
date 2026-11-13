@@ -171,14 +171,15 @@ test.describe('layout regressions', () => {
       // Centre the card in the window so the pointer is never over the fixed navigation bar.
       await card.evaluate((el) => el.scrollIntoView({ block: 'center' }));
       await expect(card).toHaveClass(/visible/);
-      await page.waitForTimeout(700); // reveal transition
+      // Park the pointer outside the card first: Firefox re-applies :hover when a page scrolls under a resting
+      // pointer, which would otherwise lift the card before its resting position is measured.
+      await page.mouse.move(1, 1);
+      await page.waitForTimeout(700); // reveal and un-hover transitions
       // Offset from the card's container, so scrolling (or Firefox's scroll anchoring) cannot mask the lift.
       const top = () =>
         card.evaluate((el) => el.getBoundingClientRect().top - (el.parentElement?.getBoundingClientRect().top ?? 0));
       const resting = await top();
       const box = await card.boundingBox();
-      // Start from outside the card: Firefox only re-evaluates :hover when the pointer actually moves.
-      await page.mouse.move(1, 1);
       await page.mouse.move((box?.x ?? 0) + (box?.width ?? 0) / 2, (box?.y ?? 0) + (box?.height ?? 0) / 2, {
         steps: 5,
       });
