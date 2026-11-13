@@ -172,8 +172,9 @@ test.describe('layout regressions', () => {
       await card.evaluate((el) => el.scrollIntoView({ block: 'center' }));
       await expect(card).toHaveClass(/visible/);
       await page.waitForTimeout(700); // reveal transition
-      // Page coordinates, so any scrolling does not count as movement.
-      const top = () => card.evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+      // Offset from the card's container, so scrolling (or Firefox's scroll anchoring) cannot mask the lift.
+      const top = () =>
+        card.evaluate((el) => el.getBoundingClientRect().top - (el.parentElement?.getBoundingClientRect().top ?? 0));
       const resting = await top();
       const box = await card.boundingBox();
       // Start from outside the card: Firefox only re-evaluates :hover when the pointer actually moves.
@@ -181,29 +182,6 @@ test.describe('layout regressions', () => {
       await page.mouse.move((box?.x ?? 0) + (box?.width ?? 0) / 2, (box?.y ?? 0) + (box?.height ?? 0) / 2, {
         steps: 5,
       });
-      await page.waitForTimeout(800);
-      console.log(
-        'HOVER-DIAG',
-        path,
-        JSON.stringify(
-          await card.evaluate((el) => {
-            const r = el.getBoundingClientRect();
-            const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
-            const cs = getComputedStyle(el);
-            return {
-              hover: el.matches(':hover'),
-              translate: cs.translate,
-              transform: cs.transform,
-              transition: cs.transition,
-              animation: cs.animationName,
-              hit: hit ? `${hit.tagName}.${hit.className}` : null,
-              hitInside: hit ? el.contains(hit) : false,
-              rect: [r.top, r.height],
-              scrollY: window.scrollY,
-            };
-          }),
-        ),
-      );
       await expect.poll(async () => resting - (await top()), { message: path }).toBeGreaterThan(2);
     }
   });
